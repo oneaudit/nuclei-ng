@@ -1,15 +1,19 @@
 package runner
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/oneaudit/nuclei-ng/internal/nuclei"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
 	"github.com/projectdiscovery/gologger"
+	"github.com/projectdiscovery/nuclei/v3/pkg/output"
 	errorutil "github.com/projectdiscovery/utils/errors"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 	"os/exec"
+	"sort"
 	"strings"
 )
 
@@ -40,6 +44,8 @@ func Execute(options *types.Options) error {
 		//entries["images"].Set(path, item)
 		//}
 	}
+
+	writer := nuclei.NewNGStandardWriter()
 
 	for category, paths := range entries {
 		if paths.Len() == 0 {
@@ -84,12 +90,64 @@ func Execute(options *types.Options) error {
 			"-update-template-dir", "../nuclei-dast-templates/",
 
 			"-tags", strings.Join(tags, " "),
+
+			"-follow-redirects", "-no-mhe",
+			//"-fuzz-param-frequency", "100",
+
+			"-j", "-silent", "-omit-raw", "-omit-template", "-no-color",
 		)
-		output, err := cmd.CombinedOutput()
+		cmdOutput, err := cmd.CombinedOutput()
 		if err != nil {
 			log.Fatalf("Error executing command: %v", err)
 		}
-		fmt.Println(string(output))
+		lines := strings.Split(string(cmdOutput), "\n")
+
+		countMap := make(map[string]int)
+		dataMap := make(map[string]*output.ResultEvent)
+		for _, line := range lines {
+			if line == "" {
+				continue
+			}
+			var result output.ResultEvent
+			err := json.Unmarshal([]byte(line), &result)
+			if err != nil {
+				log.Printf("Error unmarshaling JSON: %v", err)
+				continue
+			}
+
+			// Create the key in the format [template-id:matcher-name]
+			extracted := result.ExtractedResults
+			if len(extracted) == 0 {
+				extracted = append(extracted, "")
+			}
+
+			for _, v := range extracted {
+				key := fmt.Sprintf("[%s:%s:%s]", result.TemplateID, result.MatcherName, v)
+				countMap[key]++
+				dataMap[key] = &result
+			}
+		}
+
+		keys := make([]string, 0, len(countMap))
+		for key := range countMap {
+			keys = append(keys, key)
+		}
+		sort.Strings(keys)
+
+		for _, key := range keys {
+			result := dataMap[key]
+			count := countMap[key]
+			// Change message shown
+			result.Matched = ""
+			result.Host = fmt.Sprintf("Found on %d URLs", count)
+			// Do not display fake fuzzing information
+			if !strings.Contains(result.Info.Tags.String(), "fuzzing") {
+				result.IsFuzzingResult = false
+			}
+			// Print to stdout
+			_, _ = os.Stdout.Write(writer.FormatScreen(result))
+			_, _ = os.Stdout.Write([]byte("\n"))
+		}
 	}
 
 	return nil
