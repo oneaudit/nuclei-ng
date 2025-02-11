@@ -9,5 +9,8 @@ import (
 func validateOptions(_ *types.Options) error {
 	cmd := exec.Command("nuclei", "-version")
 	err := cmd.Run()
-	return errorutil.NewWithErr(err).Msgf("could not execute nuclei")
+	if err != nil {
+		return errorutil.NewWithErr(err).Msgf("could not execute nuclei")
+	}
+	return nil
 }

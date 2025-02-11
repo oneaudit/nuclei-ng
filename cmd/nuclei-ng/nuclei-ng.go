@@ -31,6 +31,10 @@ func readFlags() (*goflags.FlagSet, error) {
 	flagSet := goflags.NewFlagSet()
 	flagSet.SetDescription(`nuclei-ng ...`)
 
+	flagSet.CreateGroup("input", "Target",
+		flagSet.StringVarP(&options.InputFile, "input", "i", "", "openapi input file"),
+	)
+
 	flagSet.CreateGroup("output", "Output",
 		flagSet.BoolVar(&options.Silent, "silent", false, "display output only"),
 		flagSet.BoolVarP(&options.Verbose, "verbose", "v", false, "display verbose output"),

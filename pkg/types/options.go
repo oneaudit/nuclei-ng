@@ -7,6 +7,8 @@ import (
 )
 
 type Options struct {
+	// InputFile openapi input file
+	InputFile string
 	// Silent shows only output
 	Silent bool
 	// Verbose specifies showing verbose output
