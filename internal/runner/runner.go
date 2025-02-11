@@ -11,6 +11,7 @@ import (
 	errorutil "github.com/projectdiscovery/utils/errors"
 	"gopkg.in/yaml.v3"
 	"log"
+	"net/url"
 	"os"
 	"os/exec"
 	"sort"
@@ -104,6 +105,7 @@ func Execute(options *types.Options) error {
 
 		countMap := make(map[string]int)
 		dataMap := make(map[string]*output.ResultEvent)
+		endpointsMap := make(map[string][]string)
 		for _, line := range lines {
 			if line == "" {
 				continue
@@ -125,6 +127,31 @@ func Execute(options *types.Options) error {
 				key := fmt.Sprintf("[%s:%s:%s]", result.TemplateID, result.MatcherName, v)
 				countMap[key]++
 				dataMap[key] = &result
+				if _, ok := endpointsMap[key]; !ok {
+					endpointsMap[key] = []string{}
+				}
+				if result.Matched != "" {
+					parsedUrl, err := url.Parse(result.Matched)
+					var newValue string
+					if err == nil {
+						newValue = parsedUrl.Path
+					} else {
+						newValue = result.Matched
+					}
+					if newValue == "" {
+						continue
+					}
+					found := false
+					for _, endpoint := range endpointsMap[key] {
+						if endpoint == newValue {
+							found = true
+							break
+						}
+					}
+					if !found {
+						endpointsMap[key] = append(endpointsMap[key], newValue)
+					}
+				}
 			}
 		}
 
@@ -137,6 +164,12 @@ func Execute(options *types.Options) error {
 		for _, key := range keys {
 			result := dataMap[key]
 			count := countMap[key]
+			// Add a teaser
+			sort.Strings(endpointsMap[key])
+			if count > 3 {
+				endpointsMap[key] = endpointsMap[key][:3]
+				endpointsMap[key] = append(endpointsMap[key], "...")
+			}
 			// Change message shown
 			result.Matched = ""
 			result.Host = fmt.Sprintf("Found on %d URLs", count)
@@ -145,7 +178,7 @@ func Execute(options *types.Options) error {
 				result.IsFuzzingResult = false
 			}
 			// Print to stdout
-			_, _ = os.Stdout.Write(writer.FormatScreen(result))
+			_, _ = os.Stdout.Write(writer.FormatScreen(result, endpointsMap[key]))
 			_, _ = os.Stdout.Write([]byte("\n"))
 		}
 	}

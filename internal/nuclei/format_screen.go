@@ -58,7 +58,7 @@ func NewNGStandardWriter() *NGStandardWriter {
 }
 
 // FormatScreen formats the output for showing on screen.
-func (w *NGStandardWriter) FormatScreen(output *output.ResultEvent) []byte {
+func (w *NGStandardWriter) FormatScreen(output *output.ResultEvent, endpoints []string) []byte {
 	builder := &bytes.Buffer{}
 
 	if !w.noMetadata {
@@ -175,5 +175,20 @@ func (w *NGStandardWriter) FormatScreen(output *output.ResultEvent) []byte {
 		builder.WriteString(output.FuzzingMethod)
 		builder.WriteString("]")
 	}
+
+	if len(endpoints) > 0 {
+		builder.WriteString(" [")
+		first := true
+		for _, endpoint := range endpoints {
+			if !first {
+				builder.WriteString(", ")
+			}
+			first = false
+
+			builder.WriteString(w.aurora.BrightWhite(endpoint).String())
+		}
+		builder.WriteString("]")
+	}
+
 	return builder.Bytes()
 }
