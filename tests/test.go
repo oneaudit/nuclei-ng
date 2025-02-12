@@ -164,14 +164,36 @@ func complexJsFormHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
-	var input string
-	err := r.ParseForm()
-	if err != nil {
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-		return
+	switch r.Method {
+	case "POST":
+		var input string
+		err := r.ParseForm()
+		if err != nil {
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
+		}
+		input = r.FormValue("input")
+		w.Write([]byte(fmt.Sprintf("You typed: %s", input)))
+
+	case "OPTIONS":
+		w.Header().Set("Allow", "HEAD, POST, OPTIONS")
+		w.WriteHeader(http.StatusOK)
+
+	case "HEAD":
+		w.WriteHeader(http.StatusOK)
+
+	default:
+		// Handle non-POST methods
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(`<html>
+<head><title>404 Not Found</title></head>
+<body><h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+</body>
+</html>
+`))
 	}
-	input = r.FormValue("input")
-	w.Write([]byte(fmt.Sprintf("You typed: %s", input)))
 }
 
 func cookieFormHandler(w http.ResponseWriter, r *http.Request) {
@@ -185,10 +207,46 @@ func cookieFormHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
-	username := r.FormValue("username")
-	encodedUsername := base64.StdEncoding.EncodeToString([]byte(username))
-	http.SetCookie(w, &http.Cookie{Name: "user", Value: encodedUsername})
-	w.Write([]byte(fmt.Sprintf("Logged in as: %s. <a href='/empty_page/1337'>Logout</a>", username)))
+	switch r.Method {
+	case "POST":
+		username := r.FormValue("username")
+
+		if username == "" {
+			w.Header().Set("Content-Type", "text/html")
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(`<!doctype html>
+<html lang="en">
+<title>400 Bad Request</title>
+<h1>Bad Request</h1>
+<p>The browser (or proxy) sent a request that this server could not understand.</p>
+</html>
+`))
+			return
+		}
+
+		encodedUsername := base64.StdEncoding.EncodeToString([]byte(username))
+		http.SetCookie(w, &http.Cookie{Name: "user", Value: encodedUsername})
+		w.Write([]byte(fmt.Sprintf("Logged in as: %s. <a href='/empty_page/1337'>Logout</a>", username)))
+
+	case "OPTIONS":
+		w.Header().Set("Allow", "HEAD, POST, OPTIONS")
+		w.WriteHeader(http.StatusOK)
+
+	case "HEAD":
+		w.WriteHeader(http.StatusOK)
+
+	default:
+		// Handle non-POST methods
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(`<html>
+<head><title>404 Not Found</title></head>
+<body><h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+</body>
+</html>
+`))
+	}
 }
 
 func jsEventLinkHandler(w http.ResponseWriter, r *http.Request) {
