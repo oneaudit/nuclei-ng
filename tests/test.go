@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"text/template"
@@ -215,17 +216,20 @@ func complexJsFormHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "tests/static/search.html")
 }
 
+type HiddenSpyInput struct {
+	Input string `json:"input"`
+}
+
 func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
-		var input string
-		err := r.ParseForm()
+		var inputData HiddenSpyInput
+		err := json.NewDecoder(r.Body).Decode(&inputData)
 		if err != nil {
 			http.Error(w, "Internal server error", http.StatusInternalServerError)
 			return
 		}
-		input = r.FormValue("input")
-		_, _ = w.Write([]byte(fmt.Sprintf("You typed: %s", input)))
+		_, _ = w.Write([]byte(fmt.Sprintf("You typed: %s", inputData.Input)))
 
 	case "OPTIONS":
 		w.Header().Set("Allow", "HEAD, POST, OPTIONS")
