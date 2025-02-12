@@ -18,8 +18,11 @@ CGO_ENABLED=1 go install github.com/oneaudit/nuclei-ng/cmd/nuclei-ng@latest
 
 [INF] Temporary file created: /tmp/swagger.yaml286455905
 [cookie-detect] [http] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
+[cookie-detect] [http] [info] Found on 1 URLs ["user"] [/ng_hidden_login]
 [cookies-without-httponly] [javascript] [info] Found on 1 URLs ["PHPSESSID"]
+[cookies-without-httponly] [javascript] [info] Found on 1 URLs ["user"]
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["PHPSESSID"]
+[cookies-without-secure] [javascript] [info] Found on 1 URLs ["user"]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- \\n\\n\\n\\nmy secret password is:\\n\\n\\n\\n toto123\\n\\n-->"]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- my secret password is: toto123 -->"]
 [http-missing-security-headers:content-security-policy] [http] [info] Found on 28 URLs [/, /apache-v, /comment, ...]

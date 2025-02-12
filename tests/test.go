@@ -31,6 +31,7 @@ func main() {
 	http.HandleFunc("/js-event-link-id", jsEventLinkIdHandler)
 	http.HandleFunc("/js-external-link-id", jsExternalLinkIdHandler)
 	http.HandleFunc("/empty_page/", emptyPageHandler)
+	http.HandleFunc("/secret/", secretJettyDirectory)
 	http.HandleFunc("/re", redirectToHandler)
 
 	for _, filename := range []string{
@@ -56,6 +57,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 </body>
 </html>
 `))
+		return
 	}
 
 	// Render the list of routes, excluding secret ones
@@ -72,6 +74,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		"/js-event-link-id",
 		"/js-external-link-id",
 		"/re?redirect=/",
+		"/secret/",
 	}
 	tmpl, err := template.New("index").Parse(`
 <!DOCTYPE html>
@@ -115,12 +118,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	_ = tmpl.Execute(w, routes)
 }
 
-func robotsTxtHandler(w http.ResponseWriter, r *http.Request) {
+func robotsTxtHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 	_, _ = w.Write([]byte("User-agent: *\nDisallow:\n"))
 }
 
-func humansTxtHandler(w http.ResponseWriter, r *http.Request) {
+func humansTxtHandler(w http.ResponseWriter, _ *http.Request) {
 	content := `
 /* TEAM */
 	Chef: John Doe
@@ -131,7 +134,7 @@ func humansTxtHandler(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte(content))
 }
 
-func sitemapHandler(w http.ResponseWriter, r *http.Request) {
+func sitemapHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/xml")
 	_, _ = w.Write([]byte(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1">
@@ -141,7 +144,7 @@ func sitemapHandler(w http.ResponseWriter, r *http.Request) {
 </urlset>`))
 }
 
-func securityTxtHandler(w http.ResponseWriter, r *http.Request) {
+func securityTxtHandler(w http.ResponseWriter, _ *http.Request) {
 	content := `# Welcome to Example Security Page
 Contact: security@example.com
 Contact: security[at]example.com`
@@ -149,57 +152,59 @@ Contact: security[at]example.com`
 	_, _ = w.Write([]byte(content))
 }
 
-func nginxHeaderHandler(w http.ResponseWriter, r *http.Request) {
+func nginxHeaderHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Server", "nginx/1.33.7")
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("Hello, World! #Nginx"))
 }
 
-func apacheHeaderHandler(w http.ResponseWriter, r *http.Request) {
+func apacheHeaderHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Server", "Apache/2.4.41")
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("Hello, World! #Apache"))
 }
 
-func phpHeaderHandler(w http.ResponseWriter, r *http.Request) {
+func phpHeaderHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	w.Header().Set("X-Powered-By", "PHP/7.4.0")
 	w.Header().Set("Server", "Apache/2.4.41 (Debian) PHP/7.4.0")
-	http.SetCookie(w, &http.Cookie{Name: "PHPSESSID", Value: "session_id_here"})
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("Hello, World! #PHP"))
 }
 
-func emptyIconsFolder(w http.ResponseWriter, r *http.Request) {
+func emptyIconsFolder(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("server", "Jetty(12.0.17.v20201231)")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`<a href="robots.txt">old robots.txt file</a>`))
 }
 
-func sitemapFakeFileHandler(w http.ResponseWriter, r *http.Request) {
+func sitemapFakeFileHandler(w http.ResponseWriter, _ *http.Request) {
 	_, _ = w.Write([]byte{})
 }
 
-func nonGenericRobotsTxtHandler(w http.ResponseWriter, r *http.Request) {
+func nonGenericRobotsTxtHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("X-Powered-By", "Unknown/21.4.21")
 	_, _ = w.Write([]byte("User-agent: *\nDisallow: /admin/"))
 }
 
-func inlineCommentHandler(w http.ResponseWriter, r *http.Request) {
+func inlineCommentHandler(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("X-Powered-By", "PHP/7.4.0")
+	http.SetCookie(w, &http.Cookie{Name: "PHPSESSID", Value: "session_id_here"})
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("<!-- my secret password is: toto123 -->"))
 }
 
-func multilinesCommentHandler(w http.ResponseWriter, r *http.Request) {
+func multilinesCommentHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("<!-- \n\n\n\nmy secret password is:\n\n\n\n toto123\n\n-->"))
 }
 
-func simpleFormHandler(w http.ResponseWriter, r *http.Request) {
+func simpleFormHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
@@ -252,7 +257,7 @@ func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func cookieFormHandler(w http.ResponseWriter, r *http.Request) {
+func cookieFormHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
@@ -283,11 +288,10 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		encodedUsername := base64.StdEncoding.EncodeToString([]byte(username))
+		http.SetCookie(w, &http.Cookie{Name: "user", Value: encodedUsername})
 		w.Header().Set("Content-Type", "text/html")
 		w.WriteHeader(http.StatusOK)
-		http.SetCookie(w, &http.Cookie{Name: "user", Value: encodedUsername})
 		_, _ = w.Write([]byte(fmt.Sprintf("Logged in as: %s. <a href='/empty_page/1337'>Logout</a>", username)))
-
 	case "OPTIONS":
 		w.Header().Set("Allow", "HEAD, POST, OPTIONS")
 		w.WriteHeader(http.StatusOK)
@@ -309,7 +313,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func jsEventLinkHandler(w http.ResponseWriter, r *http.Request) {
+func jsEventLinkHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
@@ -317,7 +321,7 @@ func jsEventLinkHandler(w http.ResponseWriter, r *http.Request) {
 	`))
 }
 
-func jsEventLinkIdHandler(w http.ResponseWriter, r *http.Request) {
+func jsEventLinkIdHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
@@ -330,13 +334,42 @@ func jsEventLinkIdHandler(w http.ResponseWriter, r *http.Request) {
 	`))
 }
 
-func jsExternalLinkIdHandler(w http.ResponseWriter, r *http.Request) {
+func jsExternalLinkIdHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
 		<button id="redirectButton">Go to Empty Page 4</button>
-		<script src="/static/link_id.js"></script>
+		<script src="/link_id.js"></script>
 	`))
+}
+
+func secretJettyDirectory(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/secret/" {
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(http.StatusNotFound)
+		_, _ = w.Write([]byte(`"404 page not found"`))
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="jetty-dir.css" rel="stylesheet" />
+<title>Directory: /secret/</title>
+</head>
+<body>
+<h1 class="title">Directory: /secret/</h1>
+<table class="listing">
+<thead><tr><th class="name"><a href="?C=N&O=D">Name&nbsp; &#8679;</a></th><th class="lastmodified"><a href="?C=M&O=A">Last Modified</a></th><th class="size"><a href="?C=S&O=A">Size</a></th></tr></thead>
+<tbody>
+<tr><td class="name"><a href="/secret/dir.empty">dir.empty&nbsp;</a></td><td class="lastmodified">1 janv. 2009 00:00:00&nbsp;</td><td class="size">1337 bytes&nbsp;</td></tr>
+</tbody>
+</table>
+</body></html>
+`))
 }
 
 func emptyPageHandler(w http.ResponseWriter, r *http.Request) {
