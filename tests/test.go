@@ -32,6 +32,14 @@ func main() {
 	http.HandleFunc("/empty_page/", emptyPageHandler)
 	http.HandleFunc("/re", redirectToHandler)
 
+	for _, filename := range []string{
+		"favicon.ico", "secret.ico", "link_id.js",
+	} {
+		http.HandleFunc("/"+filename, func(w http.ResponseWriter, r *http.Request) {
+			http.ServeFile(w, r, "tests/static/"+filename)
+		})
+	}
+
 	_ = http.ListenAndServe(":5000", nil)
 }
 
@@ -204,7 +212,7 @@ func simpleFormHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func complexJsFormHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "static/search.html")
+	http.ServeFile(w, r, "tests/static/search.html")
 }
 
 func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {

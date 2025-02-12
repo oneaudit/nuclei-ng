@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        async function sendData() {
+            const input = document.getElementById('inputField').value;
+            const response = await fetch('/ng_hidden_spy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ input: input }),
+            });
+            const result = await response.text();
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</head>
+<body>
+<input type="text" id="inputField" oninput="sendData()" placeholder="Type something...">
+<div id="result"></div>
+</body>
+</html>
