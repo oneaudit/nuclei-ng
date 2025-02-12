@@ -10,11 +10,12 @@ import (
 	"github.com/projectdiscovery/nuclei/v3/pkg/output"
 	errorutil "github.com/projectdiscovery/utils/errors"
 	"gopkg.in/yaml.v3"
-	"log"
+	"math"
 	"net/url"
 	"os"
 	"os/exec"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -68,6 +69,7 @@ func Execute(options *types.Options) error {
 		if err != nil {
 			return errorutil.NewWithErr(err).Msgf("Error creating temp file")
 		}
+		//goland:noinspection GoDeferInLoop,GoUnhandledErrorResult
 		defer tempFile.Close()
 		gologger.Info().Msgf("Temporary file created: %s\n", tempFile.Name())
 		encoder := yaml.NewEncoder(tempFile)
@@ -77,7 +79,12 @@ func Execute(options *types.Options) error {
 		if err != nil {
 			return errorutil.NewWithErr(err).Msgf("could not write output file: %s", tempFile.Name())
 		}
+		//goland:noinspection GoDeferInLoop,GoUnhandledErrorResult
 		defer os.Remove(tempFile.Name())
+
+		nucleiTemplateDir := "../nuclei-dast-templates/"
+		//nucleiTemplateDir := "../nuclei-dast-templates/web/4.fingerprint/cookies/"
+		//nucleiTemplateDir := "../nuclei-dast-templates/web/4.fingerprint/pages/"
 
 		// Run nuclei
 		cmd := exec.Command("nuclei",
@@ -87,19 +94,19 @@ func Execute(options *types.Options) error {
 			"-list", tempFile.Name(),
 
 			"-disable-update-check",
-			"-t", "../nuclei-dast-templates/",
-			"-update-template-dir", "../nuclei-dast-templates/",
+			"-t", nucleiTemplateDir,
+			"-update-template-dir", nucleiTemplateDir,
 
 			"-tags", strings.Join(tags, " "),
 
 			"-follow-redirects", "-no-mhe",
-			//"-fuzz-param-frequency", "100",
+			"-fuzz-param-frequency", strconv.Itoa(math.MaxInt32-1),
 
 			"-j", "-silent", "-omit-raw", "-omit-template", "-no-color",
 		)
 		cmdOutput, err := cmd.CombinedOutput()
 		if err != nil {
-			log.Fatalf("Error executing command: %v", err)
+			return errorutil.NewWithErr(err).Msgf("Error executing nuclei command: %s", cmdOutput)
 		}
 		lines := strings.Split(string(cmdOutput), "\n")
 
@@ -113,7 +120,7 @@ func Execute(options *types.Options) error {
 			var result output.ResultEvent
 			err := json.Unmarshal([]byte(line), &result)
 			if err != nil {
-				log.Printf("Error unmarshaling JSON: %v", err)
+				gologger.Error().Msgf("Error unmarshaling JSON: %v for %s", err.Error(), line)
 				continue
 			}
 
