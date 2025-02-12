@@ -16,7 +16,7 @@ func main() {
 	http.HandleFunc("/nginx-v", nginxHeaderHandler)
 	http.HandleFunc("/apache-v", apacheHeaderHandler)
 	http.HandleFunc("/php-v", phpHeaderHandler)
-	http.HandleFunc("/icons/", sitemapFakeFolderHandler)
+	http.HandleFunc("/icons/", emptyIconsFolder)
 	http.HandleFunc("/icons/sitemap.png", sitemapFakeFileHandler)
 	http.HandleFunc("/icons/robots.txt", nonGenericRobotsTxtHandler)
 	http.HandleFunc("/comment", inlineCommentHandler)
@@ -32,39 +32,69 @@ func main() {
 	http.HandleFunc("/empty_page/", emptyPageHandler)
 	http.HandleFunc("/re", redirectToHandler)
 
-	http.ListenAndServe(":5000", nil)
+	_ = http.ListenAndServe(":5000", nil)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		// If no other handler matches, serve 404
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(http.StatusNotFound)
+		_, _ = w.Write([]byte(`<html>
+<head><title>404 Not Found</title></head>
+<body><h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+</body>
+</html>
+`))
+	}
+
 	// Render the list of routes, excluding secret ones
 	routes := []string{
-		"/robots.txt",
-		"/humans.txt",
-		"/sitemap.xml",
-		"/.well-known/security.txt",
 		"/nginx-v",
 		"/apache-v",
 		"/php-v",
-		"/icons/",
-		"/icons/sitemap.png",
-		"/icons/robots.txt",
-		"/ng_hidden_spy",
-		"/ng_hidden_login",
-		"/empty_page/1337",
+		"/comment",
+		"/comment-long",
+		"/simple-form",
+		"/complex-js-form",
+		"/cookie-form",
+		"/js-event-link",
+		"/js-event-link-id",
+		"/js-external-link-id",
 		"/re?redirect=/",
 	}
 	tmpl, err := template.New("index").Parse(`
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index of /</title>
 </head>
 <body>
-	<h1>Routes</h1>
-	<ul>{{range .}}
-		<li><a href="{{.}}">{{.}}</a></li>{{end}}
-	</ul>
+    <h1>Index of /</h1>
+    <table>
+        <tbody>
+            <tr><th valign="top"><img src="" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
+            <tr><th colspan="5"><hr></th></tr>
+            <tr><td valign="top"><img src="" alt="[PARENTDIR]"></td><td><a href="/">Parent Directory</a>       </td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
+            {{range .}}
+            <tr>
+                <td valign="top">
+                    <img src="" alt="[IMG]">
+                </td>
+                <td>
+                    <a href="{{.}}">{{.}}</a>
+                </td>
+                <td align="right">2009-01-01 00:00  </td>
+                <td align="right">1337 </td>
+                <td>&nbsp;</td>
+            </tr>
+            {{end}}
+            <tr><th colspan="5"><hr></th></tr>
+        </tbody>
+    </table>
 </body>
 </html>
 `)
@@ -73,12 +103,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Server", "Werkzeug/1.5.7 Python/3.10.2")
-	tmpl.Execute(w, routes)
+	_ = tmpl.Execute(w, routes)
 }
 
 func robotsTxtHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
-	w.Write([]byte("User-agent: *\nDisallow:\n"))
+	_, _ = w.Write([]byte("User-agent: *\nDisallow:\n"))
 }
 
 func humansTxtHandler(w http.ResponseWriter, r *http.Request) {
@@ -89,12 +119,12 @@ func humansTxtHandler(w http.ResponseWriter, r *http.Request) {
 	From: City, State, Country
 `
 	w.Header().Set("Content-Type", "text/plain")
-	w.Write([]byte(content))
+	_, _ = w.Write([]byte(content))
 }
 
 func sitemapHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/xml")
-	w.Write([]byte(`<?xml version="1.0" encoding="UTF-8"?>
+	_, _ = w.Write([]byte(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1">
     <url>
         <loc>/icons/sitemap.png</loc>
@@ -107,49 +137,63 @@ func securityTxtHandler(w http.ResponseWriter, r *http.Request) {
 Contact: security@example.com
 Contact: security[at]example.com`
 	w.Header().Set("Content-Type", "text/plain")
-	w.Write([]byte(content))
+	_, _ = w.Write([]byte(content))
 }
 
 func nginxHeaderHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Server", "nginx/1.33.7")
-	w.Write([]byte("Hello, World! #Nginx"))
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("Hello, World! #Nginx"))
 }
 
 func apacheHeaderHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Server", "Apache/2.4.41")
-	w.Write([]byte("Hello, World! #Apache"))
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("Hello, World! #Apache"))
 }
 
 func phpHeaderHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
 	w.Header().Set("X-Powered-By", "PHP/7.4.0")
 	w.Header().Set("Server", "Apache/2.4.41 (Debian) PHP/7.4.0")
 	http.SetCookie(w, &http.Cookie{Name: "PHPSESSID", Value: "session_id_here"})
-	w.Write([]byte("Hello, World! #PHP"))
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("Hello, World! #PHP"))
 }
 
-func sitemapFakeFolderHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`<a href="robots.txt">old robots.txt file</a>`))
+func emptyIconsFolder(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte(`<a href="robots.txt">old robots.txt file</a>`))
 }
 
 func sitemapFakeFileHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte{})
+	_, _ = w.Write([]byte{})
 }
 
 func nonGenericRobotsTxtHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
-	w.Write([]byte("User-agent: *\nDisallow: /admin/"))
+	_, _ = w.Write([]byte("User-agent: *\nDisallow: /admin/"))
 }
 
 func inlineCommentHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<!-- my secret password is: toto123 -->"))
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("<!-- my secret password is: toto123 -->"))
 }
 
 func multilinesCommentHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<!-- \n\n\n\nmy secret password is:\n\n\n\n toto123\n\n-->"))
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("<!-- \n\n\n\nmy secret password is:\n\n\n\n toto123\n\n-->"))
 }
 
 func simpleFormHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte(`
 	<form action="#" method="GET">
 		<label for="name">Name:</label>
 		<input type="text" id="name" name="name" required>
@@ -160,7 +204,7 @@ func simpleFormHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func complexJsFormHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "templates/search.html")
+	http.ServeFile(w, r, "static/search.html")
 }
 
 func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
@@ -173,7 +217,7 @@ func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		input = r.FormValue("input")
-		w.Write([]byte(fmt.Sprintf("You typed: %s", input)))
+		_, _ = w.Write([]byte(fmt.Sprintf("You typed: %s", input)))
 
 	case "OPTIONS":
 		w.Header().Set("Allow", "HEAD, POST, OPTIONS")
@@ -186,7 +230,7 @@ func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
 		// Handle non-POST methods
 		w.Header().Set("Content-Type", "text/html")
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`<html>
+		_, _ = w.Write([]byte(`<html>
 <head><title>404 Not Found</title></head>
 <body><h1>Not Found</h1>
 <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
@@ -197,7 +241,9 @@ func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func cookieFormHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte(`
 	<form action="/ng_hidden_login" method="POST">
 		<label for="username">Username:</label>
 		<input type="text" id="username" name="username" required>
@@ -214,7 +260,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 		if username == "" {
 			w.Header().Set("Content-Type", "text/html")
 			w.WriteHeader(http.StatusBadRequest)
-			w.Write([]byte(`<!doctype html>
+			_, _ = w.Write([]byte(`<!doctype html>
 <html lang="en">
 <title>400 Bad Request</title>
 <h1>Bad Request</h1>
@@ -225,8 +271,10 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		encodedUsername := base64.StdEncoding.EncodeToString([]byte(username))
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(http.StatusOK)
 		http.SetCookie(w, &http.Cookie{Name: "user", Value: encodedUsername})
-		w.Write([]byte(fmt.Sprintf("Logged in as: %s. <a href='/empty_page/1337'>Logout</a>", username)))
+		_, _ = w.Write([]byte(fmt.Sprintf("Logged in as: %s. <a href='/empty_page/1337'>Logout</a>", username)))
 
 	case "OPTIONS":
 		w.Header().Set("Allow", "HEAD, POST, OPTIONS")
@@ -239,7 +287,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 		// Handle non-POST methods
 		w.Header().Set("Content-Type", "text/html")
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`<html>
+		_, _ = w.Write([]byte(`<html>
 <head><title>404 Not Found</title></head>
 <body><h1>Not Found</h1>
 <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
@@ -250,13 +298,17 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsEventLinkHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte(`
 		<button onclick="location.href='/empty_page/1'">Go to Empty Page 1</button>
 	`))
 }
 
 func jsEventLinkIdHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte(`
 		<button id="redirectButton">Go to Empty Page 2</button>
 		<script>
 			document.getElementById('redirectButton').addEventListener('click', function() {
@@ -267,15 +319,19 @@ func jsEventLinkIdHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsExternalLinkIdHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte(`
 		<button id="redirectButton">Go to Empty Page 4</button>
 		<script src="/static/link_id.js"></script>
 	`))
 }
 
 func emptyPageHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusOK)
 	counterID := r.URL.Path[len("/empty_page/"):]
-	w.Write([]byte(fmt.Sprintf("Empty page: %s", counterID)))
+	_, _ = w.Write([]byte(fmt.Sprintf("Empty page: %s", counterID)))
 }
 
 func redirectToHandler(w http.ResponseWriter, r *http.Request) {
