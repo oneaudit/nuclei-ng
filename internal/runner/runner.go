@@ -6,6 +6,7 @@ import (
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/oneaudit/nuclei-ng/internal/nuclei"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
+	"github.com/oneaudit/nuclei-ng/pkg/utils/extensions"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/nuclei/v3/pkg/output"
 	errorutil "github.com/projectdiscovery/utils/errors"
@@ -14,6 +15,7 @@ import (
 	"net/url"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
@@ -39,12 +41,27 @@ func Execute(options *types.Options) error {
 	var entries = make(map[string]*openapi3.Paths)
 	entries["generic"] = &openapi3.Paths{}
 	entries["images"] = &openapi3.Paths{}
+	entries["html"] = &openapi3.Paths{}
 
 	for path, item := range spec.Paths.Map() {
 		entries["generic"].Set(path, item)
-		//if strings.HasSuffix(path, ".xml") {
-		//entries["images"].Set(path, item)
-		//}
+		ext := filepath.Ext(path)
+
+		// HTML
+		if ext == "" {
+			entries["html"].Set(path, item)
+		} else {
+			found := false
+			for _, htmlExt := range extensions.DefaultDenylist {
+				if strings.EqualFold(ext, htmlExt) {
+					found = true
+					break
+				}
+			}
+			if !found {
+				entries["html"].Set(path, item)
+			}
+		}
 	}
 
 	writer := nuclei.NewNGStandardWriter()
@@ -61,7 +78,10 @@ func Execute(options *types.Options) error {
 			tags = append(tags, "image")
 		case "generic":
 			tags = append(tags, "generic")
+		case "html":
+			tags = append(tags, "html")
 		}
+		gologger.Info().Msgf("Running nuclei with tags: %v against %d targets\n", tags, paths.Len())
 
 		// Create a temporary swagger file
 		// With the paths associated to the tag

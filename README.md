@@ -12,19 +12,18 @@ CGO_ENABLED=1 go install github.com/oneaudit/nuclei-ng/cmd/nuclei-ng@latest
    ____  __  _______/ /__  (_)
   / __ \/ / / / ___/ / _ \/ /
  / / / / /_/ / /__/ /  __/ /
-/_/ /_/\__,_/\___/_/\___/_/ ng  v1.0.7
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.0.8
 
 		github.com/oneaudit
 
-[INF] Temporary file created: /tmp/swagger.yaml286455905
+[INF] Running nuclei with tags: [generic] against 27 targets
+[INF] Temporary file created: /tmp/swagger.yaml2737371735
 [cookie-detect] [http] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
 [cookie-detect] [http] [info] Found on 1 URLs ["user"] [/ng_hidden_login]
 [cookies-without-httponly] [javascript] [info] Found on 1 URLs ["PHPSESSID"]
 [cookies-without-httponly] [javascript] [info] Found on 1 URLs ["user"]
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["PHPSESSID"]
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["user"]
-[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- \\n\\n\\n\\nmy secret password is:\\n\\n\\n\\n toto123\\n\\n-->"]
-[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- my secret password is: toto123 -->"]
 [http-missing-security-headers:content-security-policy] [http] [info] Found on 28 URLs [/, /apache-v, /comment, ...]
 [http-missing-security-headers:permissions-policy] [http] [info] Found on 28 URLs [/, /apache-v, /comment, ...]
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 28 URLs [/, /apache-v, /comment, ...]
@@ -38,10 +37,11 @@ CGO_ENABLED=1 go install github.com/oneaudit/nuclei-ng/cmd/nuclei-ng@latest
 [tech-detect:php] [http] [info] Found on 1 URLs [/comment]
 [tech-detect:python] [http] [info] Found on 2 URLs [/]
 [tech-version-new] [javascript] [info] Found on 1 URLs ["Unknown/21.4.21"]
-[tech-version:nginx] [http] [info] Found on 1 URLs ["1.33.7"] [/nginx-v]
-[tech-version:werkzeug] [http] [info] Found on 2 URLs ["1.5.7"] [/]
-[tech-version:jetty] [http] [info] Found on 1 URLs ["12.0.17.v20201231"] [/icons/]
-[tech-version:apache] [http] [info] Found on 2 URLs ["2.4.41"] [/apache-v, /php-v]
-[tech-version:python] [http] [info] Found on 2 URLs ["3.10.2"] [/]
-[tech-version:php] [http] [info] Found on 2 URLs ["7.4.0"] [/comment, /php-v]
+[INF] Running nuclei with tags: [html] against 24 targets
+[INF] Temporary file created: /tmp/swagger.yaml1689671623
+[directory-listing] [http] [info] Found on 2 URLs [/]
+[form-detect] [http] [info] Found on 1 URLs ["#"] [/simple-form]
+[form-detect] [http] [info] Found on 1 URLs ["/ng_hidden_login"] [/cookie-form]
+[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- \\n\\n\\n\\nmy secret password is:\\n\\n\\n\\n toto123\\n\\n-->"]
+[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- my secret password is: toto123 -->"]
 ```
