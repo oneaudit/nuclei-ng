@@ -316,6 +316,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 
 func jsEventLinkHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("X-Entrypoint", "/empty_page/1234/")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
 		<button onclick="location.href='/empty_page/1'">Go to Empty Page 1</button>

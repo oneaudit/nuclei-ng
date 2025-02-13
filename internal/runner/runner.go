@@ -206,6 +206,7 @@ func Execute(options *types.Options) error {
 			_, _ = os.Stdout.Write(writer.FormatScreen(result, endpointsMap[key]))
 			_, _ = os.Stdout.Write([]byte("\n"))
 		}
+		_, _ = os.Stdout.Write([]byte("\n"))
 	}
 
 	return nil
