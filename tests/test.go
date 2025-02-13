@@ -201,7 +201,8 @@ func inlineCommentHandler(w http.ResponseWriter, _ *http.Request) {
 func multilinesCommentHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write([]byte("<!-- \n\n\n\nmy secret password is:\n\n\n\n toto123\n\n-->"))
+	_, _ = w.Write([]byte("<link rel=\"icon\" href=\"/secret.ico\" type=\"image/x-icon\">" +
+		"<!-- \n\n\n\nmy secret password is:\n\n\n\n toto123\n\n-->"))
 }
 
 func simpleFormHandler(w http.ResponseWriter, _ *http.Request) {

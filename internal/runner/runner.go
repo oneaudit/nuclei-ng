@@ -40,10 +40,10 @@ func Execute(options *types.Options) error {
 	}
 	var entries = make(map[string]*openapi3.Paths)
 	entries["generic"] = &openapi3.Paths{}
-	entries["images"] = &openapi3.Paths{}
 	entries["html"] = &openapi3.Paths{}
 
 	for path, item := range spec.Paths.Map() {
+		// All URLs
 		entries["generic"].Set(path, item)
 		ext := filepath.Ext(path)
 
@@ -74,8 +74,6 @@ func Execute(options *types.Options) error {
 		// Compute nuclei options
 		var tags []string
 		switch category {
-		case "image":
-			tags = append(tags, "image")
 		case "generic":
 			tags = append(tags, "generic")
 		case "html":
