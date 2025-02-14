@@ -25,7 +25,6 @@ CGO_ENABLED=1 go install github.com/oneaudit/nuclei-ng/cmd/nuclei-ng@latest
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- \\n\\n\\n\\nmy secret password is:\\n\\n\\n\\n toto123\\n\\n-->"]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- my secret password is: toto123 -->"]
 
-
 [INF] Running nuclei with tags: [generic] against 32 targets
 [INF] Temporary file created: /tmp/swagger.yaml747212024
 [cookie-detect] [http] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
@@ -41,7 +40,10 @@ CGO_ENABLED=1 go install github.com/oneaudit/nuclei-ng/cmd/nuclei-ng@latest
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 34 URLs [/, /apache-v, /comment, ...]
 [http-missing-security-headers:strict-transport-security] [http] [info] Found on 34 URLs [/, /apache-v, /comment, ...]
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 34 URLs [/, /apache-v, /comment, ...]
-[http-suspicious-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"]
+[http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"]
+[http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"]
+[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"]
+[open-redirect-exploit] [http] [medium] Found on 1 URLs [query:redirect] [GET] [/]
 [options-method-generic] [http] [info] Found on 3 URLs [/ng_hidden_login, /ng_hidden_spy]
 [options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"]
 [tech-detect:apache] [http] [info] Found on 2 URLs [/apache-v, /php-v]
