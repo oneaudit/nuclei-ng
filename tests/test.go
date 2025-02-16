@@ -35,7 +35,7 @@ func main() {
 	http.HandleFunc("/re", redirectToHandler)
 
 	for _, filename := range []string{
-		"favicon.ico", "secret.ico", "link_id.js", "config.php~",
+		"favicon.ico", "secret.ico", "link_id.js", "config.php.old",
 	} {
 		http.HandleFunc("/"+filename, func(w http.ResponseWriter, r *http.Request) {
 			http.ServeFile(w, r, "tests/static/"+filename)
