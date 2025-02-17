@@ -191,8 +191,8 @@ func Execute(options *types.Options) error {
 			count := countMap[key]
 			// Add a teaser
 			sort.Strings(endpointsMap[key])
-			if count > 3 {
-				endpointsMap[key] = endpointsMap[key][:3]
+			if len(endpointsMap[key]) > 3 {
+				endpointsMap[key] = endpointsMap[key][:2]
 				endpointsMap[key] = append(endpointsMap[key], "...")
 			}
 			// Change message shown
