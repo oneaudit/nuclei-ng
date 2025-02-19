@@ -9,6 +9,10 @@ import (
 type Options struct {
 	// InputFile openapi input file
 	InputFile string
+	// NucleiTemplateDir path with nuclei templates to use
+	NucleiTemplateDir string
+	// NucleiConfig path with nuclei configuration to use
+	NucleiConfig string
 	// Silent shows only output
 	Silent bool
 	// Verbose specifies showing verbose output

@@ -6,11 +6,16 @@ import (
 	"os/exec"
 )
 
-func validateOptions(_ *types.Options) error {
+func validateOptions(options *types.Options) error {
 	cmd := exec.Command("nuclei", "-version")
 	err := cmd.Run()
 	if err != nil {
-		return errorutil.NewWithErr(err).Msgf("could not execute nuclei")
+		return errorutil.NewWithErr(err).Msgf("could not find nuclei")
 	}
+
+	if options.NucleiTemplateDir == "" {
+		return errorutil.New("no nuclei template dir specified")
+	}
+
 	return nil
 }

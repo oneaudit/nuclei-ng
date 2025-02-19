@@ -35,6 +35,15 @@ func readFlags() (*goflags.FlagSet, error) {
 		flagSet.StringVarP(&options.InputFile, "input", "i", "", "openapi input file"),
 	)
 
+	flagSet.CreateGroup("nuclei", "Nuclei",
+		flagSet.StringVarP(&options.NucleiTemplateDir, "templates-dir", "t", "", "path to the nuclei templates directory"),
+		flagSet.StringVar(&options.NucleiConfig, "nuclei", "", "path to the nuclei configuration file"),
+	)
+
+	flagSet.CreateGroup("config", "Configuration",
+		flagSet.StringVar(&cfgFile, "config", "", "path to the nuclei-ng configuration file"),
+	)
+
 	flagSet.CreateGroup("output", "Output",
 		flagSet.BoolVar(&options.Silent, "silent", false, "display output only"),
 		flagSet.BoolVarP(&options.Verbose, "verbose", "v", false, "display verbose output"),
