@@ -1,1 +1,2 @@
 templates-dir: ../nuclei-dast-templates/
+nuclei: ./config-nuclei.yaml

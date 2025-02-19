@@ -44,6 +44,8 @@ This will display the following results.
 [cookies-without-httponly] [javascript] [info] Found on 1 URLs ["user"]
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["PHPSESSID"]
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["user"]
+[cors-detect:headers] [http] [info] Found on 1 URLs [/cors]
+[cors-exploit:arbitrary-origin] [http] [info] Found on 1 URLs [header:User-Agent] [GET] [/cors]
 [favicon-detect:Vue] [http] [info] Found on 1 URLs [/favicon.ico]
 [favicon-new:mmh3] [http] [info] Found on 1 URLs ["1823185746"] [/secret.ico]
 [favicon-new:md5] [http] [info] Found on 1 URLs ["b7f5b488d0b802ed63ea4ffefbbb1d6d"] [/secret.ico]
