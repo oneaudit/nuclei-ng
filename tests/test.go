@@ -33,6 +33,7 @@ func main() {
 	http.HandleFunc("/empty_page/", emptyPageHandler)
 	http.HandleFunc("/secret/", secretJettyDirectory)
 	http.HandleFunc("/re", redirectToHandler)
+	http.HandleFunc("/cors", corsHandler)
 
 	for _, filename := range []string{
 		"favicon.ico", "secret.ico", "link_id.js", "config.php.old",
@@ -75,6 +76,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		"/js-external-link-id",
 		"/re?redirect=/",
 		"/secret/",
+		"/cors",
 	}
 	tmpl, err := template.New("index").Parse(`
 <!DOCTYPE html>
@@ -384,4 +386,32 @@ func emptyPageHandler(w http.ResponseWriter, r *http.Request) {
 func redirectToHandler(w http.ResponseWriter, r *http.Request) {
 	targetURL := r.URL.Query().Get("redirect")
 	http.Redirect(w, r, targetURL, http.StatusFound)
+}
+
+func corsHandler(w http.ResponseWriter, r *http.Request) {
+	origin := r.Header.Get("Origin")
+	if origin == "" {
+		origin = fmt.Sprintf("http://%s", r.Host)
+	}
+
+	w.Header().Set("Access-Control-Allow-Origin", origin)
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+
+	if r.Method == http.MethodOptions {
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	_, _ = fmt.Fprintf(w, `
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>CORS Example</title>
+		</head>
+		<body>
+			<p>Your Origin: %s</p>
+			<p>Your Cookies: %s</p>
+		</body>
+		</html>
+	`, origin, r.Header.Get("Cookie"))
 }
