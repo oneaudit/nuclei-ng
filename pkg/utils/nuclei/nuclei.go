@@ -18,7 +18,19 @@ import (
 )
 
 func ExecuteCommand(options *types.Options, tags types.Tag, specification *openapi3.T, paths *openapi3.Paths) (string, error) {
-	tempFile, err := openapiutil.CreateTemporarySwaggerFile(specification, paths)
+	var (
+		tempFile    *os.File
+		inputFormat string
+		err         error
+	)
+	if tags != types.JsExt {
+		inputFormat = "openapi"
+		tempFile, err = openapiutil.CreateTemporarySwaggerFile(specification, paths)
+	} else {
+		inputFormat = "list"
+		tempFile, err = openapiutil.CreateTemporaryEndpointsFile(paths)
+	}
+
 	if err != nil {
 		return "", err
 	}
@@ -29,7 +41,7 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 	cmd := exec.Command("nuclei",
 		"-dast", "-no-interactsh",
 
-		"-im", "openapi",
+		"-im", inputFormat,
 		"-list", tempFile.Name(),
 
 		"-disable-update-check",
@@ -46,6 +58,8 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 		"-config", options.NucleiConfig,
 	)
 	gologger.Debug().Msgf("Executing command: %v", cmd)
+	return "", errorutil.New("Executing command: %v", cmd)
+
 	cmdOutput, err := cmd.CombinedOutput()
 	if err != nil {
 		return "", errorutil.NewWithErr(err).Msgf("%s", cmdOutput)

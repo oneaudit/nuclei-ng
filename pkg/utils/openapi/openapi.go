@@ -1,6 +1,7 @@
 package openapi
 
 import (
+	"bytes"
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
 	"github.com/oneaudit/nuclei-ng/pkg/utils/extensions"
@@ -18,19 +19,14 @@ func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.
 		entries[tag] = &openapi3.Paths{}
 	}
 
-	fakeItem := &openapi3.PathItem{
-		Get: openapi3.NewOperation(),
-	}
-	fakeItem.Get.Responses = openapi3.NewResponses()
-
 	for path, item := range specification.Paths.Map() {
 		// All URLs can use GENERIC templates
-		entries[types.GENERIC].Set(path, item)
+		// entries[types.GENERIC].Set(path, item)
 		ext := filepath.Ext(path)
 
 		// Files matching the HTML filter can use HTML templates
 		if extensions.IsHTMLFile(ext) {
-			entries[types.HTML].Set(path, item)
+			// entries[types.HTML].Set(path, item)
 		}
 
 		if strings.HasSuffix(ext, ".js") {
@@ -39,16 +35,26 @@ func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.
 			} else {
 				// These files must have secrets, right?
 			}
-
-			// Try to determine the version of JavaScript Libs
-			entries[types.JsExt].Set(specification.Servers[0].URL+path, fakeItem)
 		}
 
 		// Try to determine the version of JavaScript Libs
 		if libs, found := item.Extensions["x-javascript-libs"].([]interface{}); found {
 			for _, _libName := range libs {
 				libName := _libName.(string)
-				entries[types.JsExt].Set(libName, fakeItem)
+
+				pathItem := entries[types.JsExt].Value(libName)
+				if pathItem == nil {
+					pathItem = &openapi3.PathItem{
+						Get: openapi3.NewOperation(),
+					}
+					pathItem.Extensions = make(map[string]interface{})
+					pathItem.Extensions["x-endpoints"] = []string{path}
+					entries[types.JsExt].Set(libName, pathItem)
+				} else {
+					endpoints := pathItem.Extensions["x-endpoints"].([]string)
+					endpoints = append(endpoints, path)
+					pathItem.Extensions["x-endpoints"] = endpoints
+				}
 			}
 		}
 	}
@@ -69,6 +75,27 @@ func CreateTemporarySwaggerFile(specification *openapi3.T, paths *openapi3.Paths
 	encoder.SetIndent(2)
 	specification.Paths = paths
 	err = encoder.Encode(&specification)
+	if err != nil {
+		return nil, errorutil.NewWithErr(err).Msgf("could not write output file: %s", tempFile.Name())
+	}
+	return tempFile, nil
+}
+
+func CreateTemporaryEndpointsFile(paths *openapi3.Paths) (*os.File, error) {
+	tempFile, err := os.CreateTemp("", "urls.txt")
+	if err != nil {
+		return nil, errorutil.NewWithErr(err).Msgf("error creating temp file")
+	}
+	//goland:noinspection GoUnhandledErrorResult
+	defer tempFile.Close()
+
+	gologger.Info().Msgf("Temporary file created: %s\n", tempFile.Name())
+
+	var buffer bytes.Buffer
+	for URL, _ := range paths.Map() {
+		buffer.WriteString(URL + "\n")
+	}
+	_, err = tempFile.Write(buffer.Bytes())
 	if err != nil {
 		return nil, errorutil.NewWithErr(err).Msgf("could not write output file: %s", tempFile.Name())
 	}
