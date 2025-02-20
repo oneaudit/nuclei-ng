@@ -21,12 +21,12 @@ func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.
 
 	for path, item := range specification.Paths.Map() {
 		// All URLs can use GENERIC templates
-		// entries[types.GENERIC].Set(path, item)
+		entries[types.GENERIC].Set(path, item)
 		ext := filepath.Ext(path)
 
 		// Files matching the HTML filter can use HTML templates
 		if extensions.IsHTMLFile(ext) {
-			// entries[types.HTML].Set(path, item)
+			entries[types.HTML].Set(path, item)
 		}
 
 		if strings.HasSuffix(ext, ".js") {
@@ -75,27 +75,6 @@ func CreateTemporarySwaggerFile(specification *openapi3.T, paths *openapi3.Paths
 	encoder.SetIndent(2)
 	specification.Paths = paths
 	err = encoder.Encode(&specification)
-	if err != nil {
-		return nil, errorutil.NewWithErr(err).Msgf("could not write output file: %s", tempFile.Name())
-	}
-	return tempFile, nil
-}
-
-func CreateTemporaryEndpointsFile(paths *openapi3.Paths) (*os.File, error) {
-	tempFile, err := os.CreateTemp("", "urls.txt")
-	if err != nil {
-		return nil, errorutil.NewWithErr(err).Msgf("error creating temp file")
-	}
-	//goland:noinspection GoUnhandledErrorResult
-	defer tempFile.Close()
-
-	gologger.Info().Msgf("Temporary file created: %s\n", tempFile.Name())
-
-	var buffer bytes.Buffer
-	for URL, _ := range paths.Map() {
-		buffer.WriteString(URL + "\n")
-	}
-	_, err = tempFile.Write(buffer.Bytes())
 	if err != nil {
 		return nil, errorutil.NewWithErr(err).Msgf("could not write output file: %s", tempFile.Name())
 	}

@@ -24,7 +24,7 @@ This will display the following results.
    ____  __  _______/ /__  (_)
   / __ \/ / / / ___/ / _ \/ /
  / / / / /_/ / /__/ /  __/ /
-/_/ /_/\__,_/\___/_/\___/_/ ng  v1.0.10
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.0.11
 
 		github.com/oneaudit
 
@@ -35,6 +35,7 @@ This will display the following results.
 [form-detect] [http] [info] Found on 1 URLs ["/ng_hidden_login"] [/cookie-form]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- \\n\\n\\n\\nmy secret password is:\\n\\n\\n\\n toto123\\n\\n-->"]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- my secret password is: toto123 -->"]
+[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- no version --> <!-- version in path --> <!-- version in path or copyright --> <!-- @version (+redirect) -->"]
 
 [INF] Running nuclei with tags: [generic] against 31 targets
 [INF] Temporary file created: /tmp/swagger.yaml747212024
@@ -61,18 +62,11 @@ This will display the following results.
 [options-method-generic] [http] [info] Found on 3 URLs [/ng_hidden_login, /ng_hidden_spy]
 [options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"]
 [tech-detect:apache] [http] [info] Found on 4 URLs [/apache-v, /php-v]
-[tech-detect:bootstrap] [http] [info] Found on 2 URLs [/libs]
-[tech-detect:bulma] [http] [info] Found on 2 URLs [/libs]
-[tech-detect:font-awesome] [http] [info] Found on 2 URLs [/libs]
 [tech-detect:jetty] [http] [info] Found on 2 URLs [/icons/]
 [tech-detect:jsdelivr] [http] [info] Found on 2 URLs [/libs]
-[tech-detect:materialize-css] [http] [info] Found on 2 URLs [/libs]
-[tech-detect:milligram] [http] [info] Found on 2 URLs [/libs]
 [tech-detect:nginx] [http] [info] Found on 2 URLs [/nginx-v]
 [tech-detect:php] [http] [info] Found on 2 URLs [/comment]
 [tech-detect:python] [http] [info] Found on 4 URLs [/]
-[tech-detect:semantic-ui] [http] [info] Found on 2 URLs [/libs]
-[tech-detect:zurb-foundation] [http] [info] Found on 2 URLs [/libs]
 [tech-version-new] [javascript] [info] Found on 1 URLs ["Unknown/21.4.21"]
 [tech-version-new] [javascript] [info] Found on 1 URLs ["empty_page/1234"]
 [tech-version:nginx] [http] [info] Found on 2 URLs ["1.33.7"] [/nginx-v]
@@ -81,4 +75,28 @@ This will display the following results.
 [tech-version:apache] [http] [info] Found on 4 URLs ["2.4.41"] [/apache-v, /php-v]
 [tech-version:python] [http] [info] Found on 4 URLs ["3.10.2"] [/]
 [tech-version:php] [http] [info] Found on 4 URLs ["7.4.0"] [/comment, /php-v]
+
+[INF] Running nuclei with tags: [jsext] against 22 targets
+[javascript-library] [code] [info] Found on 1 URLs ["alpine.min.js==2.8.2"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["aos.js==2.3.4"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["axios.min.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["bootstrap.min.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["chart.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["d3.min.js==7.8.1"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["gsap.min.js==3.11.1"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["index.js==2.2.19"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["jquery-3.6.0.min.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["jquery-ui.min.js==1.12.1"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["jquery.validate.min.js==1.19.3"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["leaflet.min.js==1.7.1"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["lodash.min.js==4.17.21"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["moment.min.js==2.29.1"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["pixi.min.js==6.4.3"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["popper.min.js==2.11.6"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["react-dom.production.min.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["react.production.min.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["socket.io.min.js==4.3.2"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["svelte.min.js==3.44.0"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["three.min.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["vue.min.js==2.6.14"] [/libs]
 ```

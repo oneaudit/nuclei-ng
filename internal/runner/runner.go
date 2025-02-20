@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/getkin/kin-openapi/openapi3"
 	nucleiinternal "github.com/oneaudit/nuclei-ng/internal/nuclei"
+	"github.com/oneaudit/nuclei-ng/pkg/javascript"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
 	nucleiutil "github.com/oneaudit/nuclei-ng/pkg/utils/nuclei"
 	openapiutil "github.com/oneaudit/nuclei-ng/pkg/utils/openapi"
@@ -47,12 +48,23 @@ func Execute(options *types.Options) error {
 
 		gologger.Info().Msgf("Running nuclei with tags: [%v] against %d targets\n", tags, paths.Len())
 
-		result, err := nucleiutil.ExecuteCommand(options, tags, spec, paths)
-		if err != nil {
-			return errorutil.NewWithErr(err).Msgf("error executing nuclei command")
+		var endpointsMap map[string]*nucleiutil.ParsedEvent
+
+		if tags == types.JsExt {
+			endpointsMap, err = javascript.AnalyzeExternalScripts(options, paths)
+			if err != nil {
+				return errorutil.NewWithErr(err).Msgf("error while analyzing external scripts")
+			}
+		} else {
+			result, err := nucleiutil.ExecuteCommand(options, tags, spec, paths)
+			if err != nil {
+				return errorutil.NewWithErr(err).Msgf("error executing nuclei command")
+			}
+
+			endpointsMap = nucleiutil.ParseResult(result)
 		}
 
-		endpointsMap := nucleiutil.ParseResult(result)
+		// Sort keys
 		keys := make([]string, 0, len(endpointsMap))
 		for key := range endpointsMap {
 			keys = append(keys, key)
