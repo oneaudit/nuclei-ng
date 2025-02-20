@@ -49,7 +49,7 @@ func Execute(options *types.Options) error {
 
 		result, err := nucleiutil.ExecuteCommand(options, tags, spec, paths)
 		if err != nil {
-			return errorutil.NewWithErr(err).Msgf("Error executing nuclei command: %s", err.Error())
+			return errorutil.NewWithErr(err).Msgf("error executing nuclei command")
 		}
 
 		endpointsMap := nucleiutil.ParseResult(result)
