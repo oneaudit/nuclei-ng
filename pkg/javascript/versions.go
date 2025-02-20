@@ -13,16 +13,17 @@ import (
 )
 
 var (
-	JsS  = `(`
-	JsP0 = `((?:v|\/)(\d+\.\d+\.\d+))`
-	JsP1 = `|((?:\/|@)(\d+\.\d+\.\d+)\/)`
-	JsP2 = `|((?:\.)(\d+\.\d+\.\d+)(?:-))`
-	JsP3 = `|((?:\/|\.)(\d+\.\d+\.\d+))`
-	JsE  = `)`
-	// relativeEndpointsRegex is the regex to find endpoints in js files.
+	JsS                    = `(`
+	JsP0                   = `((?:v|\/)(\d+\.\d+\.\d+))`
+	JsP1                   = `|((?:\/|@)(\d+\.\d+\.\d+)\/)`
+	JsP2                   = `|((?:\.)(\d+\.\d+\.\d+)(?:-))`
+	JsP3                   = `|((?:\/|\.)(\d+\.\d+\.\d+))`
+	JsE                    = `)`
 	relativeEndpointsRegex = regexp.MustCompile(JsS + JsP0 + JsP1 + JsP2 + JsP3 + JsE)
 
-	templateID = ""
+	versionInNameRegex = regexp.MustCompile(`(\d+\.\d+\.\d+)`)
+
+	templateID = "javascript-library"
 )
 
 func AnalyzeExternalScripts(_ *types.Options, paths *openapi3.Paths) (map[string]*nucleiutil.ParsedEvent, error) {
@@ -44,6 +45,14 @@ func AnalyzeExternalScripts(_ *types.Options, paths *openapi3.Paths) (map[string
 		}
 
 		if extractedVersion == "" {
+			libFileName := path.Base(libName)
+			versionMatch := versionInNameRegex.FindStringSubmatch(libFileName)
+			if len(versionMatch) > 1 {
+				extractedVersion = versionMatch[0]
+			}
+		}
+
+		if extractedVersion == "" {
 			extractedVersion = "unknown"
 		}
 
@@ -58,7 +67,7 @@ func AnalyzeExternalScripts(_ *types.Options, paths *openapi3.Paths) (map[string
 						Severity: severity.Info,
 					},
 				},
-				TemplateID: "javascript-library",
+				TemplateID: templateID,
 				Type:       "code",
 			},
 			Endpoints: libItem.Extensions["x-endpoints"].([]string),

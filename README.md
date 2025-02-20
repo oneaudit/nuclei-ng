@@ -28,7 +28,7 @@ This will display the following results.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: html against 27 targets
+[INF] Running nuclei with tags: [html] against 32 targets
 [INF] Temporary file created: /tmp/swagger.yaml1269739532
 [directory-listing] [http] [info] Found on 6 URLs [/, /secret/]
 [form-detect] [http] [info] Found on 2 URLs ["#"] [/simple-form]
@@ -76,16 +76,17 @@ This will display the following results.
 [tech-version:python] [http] [info] Found on 4 URLs ["3.10.2"] [/]
 [tech-version:php] [http] [info] Found on 4 URLs ["7.4.0"] [/comment, /php-v]
 
-[INF] Running nuclei with tags: [javascript] against 8 targets
+[INF] Running nuclei with tags: [javascript] against 9 targets
 [INF] Temporary file created: /tmp/swagger.yaml3600235712
-[javascript-library] [javascript] [info] Found on 1 URLs ["angular.js:1.8.3"]
-[javascript-library] [javascript] [info] Found on 1 URLs ["bootstrap.js:5.3.3"]
-[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-migrate.js:3.5.2"]
-[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-ui.js:1.14.1"]
-[javascript-library] [javascript] [info] Found on 1 URLs ["jquery.js:3.7.1"]
-[javascript-library] [javascript] [info] Found on 1 URLs ["jszip.js:3.10.1"]
-[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.js:unknown"]
-[javascript-library] [javascript] [info] Found on 1 URLs ["link_id.js:unknown"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["angular.js==1.8.3"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["bootstrap.js==5.3.3"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-1.14.0.js==1.14.0"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-migrate.js==3.5.2"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-ui.js==1.14.1"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery.js==3.7.1"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jszip.js==3.10.1"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.js==unknown"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["link_id.js==unknown"]
 
 [INF] Running nuclei with tags: [jsext] against 18 targets
 [javascript-library] [code] [info] Found on 1 URLs ["alpine.min.js==2.8.2"] [/libs]
@@ -95,7 +96,7 @@ This will display the following results.
 [javascript-library] [code] [info] Found on 1 URLs ["chart.js==unknown"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["d3.min.js==7.8.1"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["gsap.min.js==3.11.1"] [/libs]
-[javascript-library] [code] [info] Found on 1 URLs ["jquery-3.6.0.min.js==unknown"] [/libs]
+[javascript-library] [code] [info] Found on 1 URLs ["jquery-3.6.0.min.js==3.6.0"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["jquery-ui.min.js==1.12.1"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["jquery.validate.min.js==1.19.3"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["leaflet.min.js==1.7.1"] [/libs]

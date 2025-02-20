@@ -55,6 +55,7 @@ func main() {
 		if !info.IsDir() {
 			filename := info.Name()
 			http.HandleFunc("/assets/js/"+filename, func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set("Content-Type", "application/javascript")
 				http.ServeFile(w, r, "tests/static/js/"+filename)
 			})
 		}
@@ -483,6 +484,7 @@ func libsHandler(w http.ResponseWriter, r *http.Request) {
 	<script src="/assets/js/angular.js"></script>
 	<script src="/assets/js/bootstrap.js"></script>
 	<script src="/assets/js/jquery.js"></script>
+	<script src="/assets/js/jquery-1.14.0.js"></script>
 	<script src="/assets/js/jquery-migrate.js"></script>
 	<script src="/assets/js/jquery-ui.js"></script>
 	<script src="/assets/js/jszip.js"></script>
