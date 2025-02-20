@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"github.com/projectdiscovery/gologger"
 	"net/http"
+	"os"
+	"path/filepath"
 	"text/template"
 )
 
@@ -45,7 +47,25 @@ func main() {
 		})
 	}
 
-	err := http.ListenAndServe(":5000", nil)
+	err := filepath.Walk("tests/static/js/", func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if !info.IsDir() {
+			filename := info.Name()
+			http.HandleFunc("/assets/js/"+filename, func(w http.ResponseWriter, r *http.Request) {
+				http.ServeFile(w, r, "tests/static/js/"+filename)
+			})
+		}
+
+		return nil
+	})
+	if err != nil {
+		gologger.Fatal().Msgf("Could not add javascript files: %s", err.Error())
+	}
+
+	err = http.ListenAndServe(":5000", nil)
 	if err != nil {
 		gologger.Fatal().Msgf("Could not start test server: %s", err.Error())
 	}
@@ -458,6 +478,15 @@ func libsHandler(w http.ResponseWriter, r *http.Request) {
 
 	<!-- no version -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<!-- local -->
+	<script src="/assets/js/angular.js"></script>
+	<script src="/assets/js/bootstrap.js"></script>
+	<script src="/assets/js/jquery.js"></script>
+	<script src="/assets/js/jquery-migrate.js"></script>
+	<script src="/assets/js/jquery-ui.js"></script>
+	<script src="/assets/js/jszip.js"></script>
+	<script src="/assets/js/leaflet.js"></script>
 </head>
 </html>`))
 }

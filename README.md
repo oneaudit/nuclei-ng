@@ -30,14 +30,14 @@ This will display the following results.
 
 [INF] Running nuclei with tags: html against 27 targets
 [INF] Temporary file created: /tmp/swagger.yaml1269739532
-[directory-listing] [http] [info] Found on 3 URLs [/, /secret/]
-[form-detect] [http] [info] Found on 1 URLs ["#"] [/simple-form]
-[form-detect] [http] [info] Found on 1 URLs ["/ng_hidden_login"] [/cookie-form]
+[directory-listing] [http] [info] Found on 6 URLs [/, /secret/]
+[form-detect] [http] [info] Found on 2 URLs ["#"] [/simple-form]
+[form-detect] [http] [info] Found on 2 URLs ["/ng_hidden_login"] [/cookie-form]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- \\n\\n\\n\\nmy secret password is:\\n\\n\\n\\n toto123\\n\\n-->"]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- my secret password is: toto123 -->"]
-[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- no version --> <!-- version in path --> <!-- version in path or copyright --> <!-- @version (+redirect) -->"]
+[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- version in path --> <!-- version in name --> <!-- version in copyright --> <!-- @version (+redirect) --> <!-- no version --> <!-- local -->"]
 
-[INF] Running nuclei with tags: [generic] against 31 targets
+[INF] Running nuclei with tags: [generic] against 43 targets
 [INF] Temporary file created: /tmp/swagger.yaml747212024
 [cookie-detect] [http] [info] Found on 2 URLs ["PHPSESSID"] [/comment]
 [cookie-detect] [http] [info] Found on 2 URLs ["user"] [/ng_hidden_login]
@@ -50,11 +50,11 @@ This will display the following results.
 [favicon-detect:Vue] [http] [info] Found on 1 URLs [/favicon.ico]
 [favicon-new:mmh3] [http] [info] Found on 2 URLs ["1823185746"] [/secret.ico]
 [favicon-new:md5] [http] [info] Found on 2 URLs ["b7f5b488d0b802ed63ea4ffefbbb1d6d"] [/secret.ico]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 63 URLs [/, /apache-v, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 65 URLs [/, /apache-v, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 65 URLs [/, /apache-v, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 65 URLs [/, /apache-v, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 65 URLs [/, /apache-v, ...]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 87 URLs [/, /apache-v, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 89 URLs [/, /apache-v, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 89 URLs [/, /apache-v, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 89 URLs [/, /apache-v, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 89 URLs [/, /apache-v, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"]
 [open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"]
@@ -76,7 +76,18 @@ This will display the following results.
 [tech-version:python] [http] [info] Found on 4 URLs ["3.10.2"] [/]
 [tech-version:php] [http] [info] Found on 4 URLs ["7.4.0"] [/comment, /php-v]
 
-[INF] Running nuclei with tags: [jsext] against 22 targets
+[INF] Running nuclei with tags: [javascript] against 8 targets
+[INF] Temporary file created: /tmp/swagger.yaml3600235712
+[javascript-library] [javascript] [info] Found on 1 URLs ["angular.js:1.8.3"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["bootstrap.js:5.3.3"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-migrate.js:3.5.2"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-ui.js:1.14.1"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery.js:3.7.1"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jszip.js:3.10.1"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.js:unknown"]
+[javascript-library] [javascript] [info] Found on 1 URLs ["link_id.js:unknown"]
+
+[INF] Running nuclei with tags: [jsext] against 18 targets
 [javascript-library] [code] [info] Found on 1 URLs ["alpine.min.js==2.8.2"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["aos.js==2.3.4"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["axios.min.js==unknown"] [/libs]
@@ -84,19 +95,15 @@ This will display the following results.
 [javascript-library] [code] [info] Found on 1 URLs ["chart.js==unknown"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["d3.min.js==7.8.1"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["gsap.min.js==3.11.1"] [/libs]
-[javascript-library] [code] [info] Found on 1 URLs ["index.js==2.2.19"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["jquery-3.6.0.min.js==unknown"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["jquery-ui.min.js==1.12.1"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["jquery.validate.min.js==1.19.3"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["leaflet.min.js==1.7.1"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["lodash.min.js==4.17.21"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["moment.min.js==2.29.1"] [/libs]
-[javascript-library] [code] [info] Found on 1 URLs ["pixi.min.js==6.4.3"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["popper.min.js==2.11.6"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["react-dom.production.min.js==unknown"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["react.production.min.js==unknown"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["socket.io.min.js==4.3.2"] [/libs]
-[javascript-library] [code] [info] Found on 1 URLs ["svelte.min.js==3.44.0"] [/libs]
-[javascript-library] [code] [info] Found on 1 URLs ["three.min.js==unknown"] [/libs]
 [javascript-library] [code] [info] Found on 1 URLs ["vue.min.js==2.6.14"] [/libs]
 ```

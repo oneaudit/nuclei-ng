@@ -1,7 +1,6 @@
 package openapi
 
 import (
-	"bytes"
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
 	"github.com/oneaudit/nuclei-ng/pkg/utils/extensions"
@@ -21,7 +20,7 @@ func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.
 
 	for path, item := range specification.Paths.Map() {
 		// All URLs can use GENERIC templates
-		entries[types.GENERIC].Set(path, item)
+		entries[types.Generic].Set(path, item)
 		ext := filepath.Ext(path)
 
 		// Files matching the HTML filter can use HTML templates
@@ -35,6 +34,8 @@ func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.
 			} else {
 				// These files must have secrets, right?
 			}
+
+			entries[types.JavaScript].Set(path, item)
 		}
 
 		// Try to determine the version of JavaScript Libs
