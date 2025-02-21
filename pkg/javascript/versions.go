@@ -10,6 +10,7 @@ import (
 	"github.com/projectdiscovery/nuclei/v3/pkg/output"
 	"path"
 	"regexp"
+	"strings"
 )
 
 var (
@@ -30,6 +31,7 @@ func AnalyzeExternalScripts(_ *types.Options, paths *openapi3.Paths) (map[string
 	endpointsMap := make(map[string]*nucleiutil.ParsedEvent)
 
 	for libName, libItem := range paths.Map() {
+		libFileName := path.Base(strings.Split(libName, "?")[0])
 		relativeMatches := relativeEndpointsRegex.FindAllStringSubmatch(libName, -1)
 
 		var extractedVersion string
@@ -45,7 +47,6 @@ func AnalyzeExternalScripts(_ *types.Options, paths *openapi3.Paths) (map[string
 		}
 
 		if extractedVersion == "" {
-			libFileName := path.Base(libName)
 			versionMatch := versionInNameRegex.FindStringSubmatch(libFileName)
 			if len(versionMatch) > 1 {
 				extractedVersion = versionMatch[0]
@@ -57,7 +58,7 @@ func AnalyzeExternalScripts(_ *types.Options, paths *openapi3.Paths) (map[string
 		}
 
 		// Add to the list
-		extractedResult := fmt.Sprintf("%s==%s", path.Base(libName), extractedVersion)
+		extractedResult := fmt.Sprintf("%s==%s", libFileName, extractedVersion)
 		key := fmt.Sprintf("[%s:%s:%s]", templateID, "", extractedResult)
 		endpointsMap[key] = &nucleiutil.ParsedEvent{
 			Name: extractedResult,

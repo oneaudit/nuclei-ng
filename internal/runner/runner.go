@@ -77,8 +77,8 @@ func Execute(options *types.Options) error {
 
 			// Add a teaser
 			sort.Strings(value.Endpoints)
-			if len(value.Endpoints) > 3 {
-				value.Endpoints = value.Endpoints[:2]
+			if len(value.Endpoints) > 4 {
+				value.Endpoints = value.Endpoints[:3]
 				value.Endpoints = append(value.Endpoints, "...")
 			}
 

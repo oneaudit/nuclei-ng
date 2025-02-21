@@ -93,7 +93,19 @@ func ParseResult(result string) map[string]*ParsedEvent {
 			extracted = append(extracted, "")
 		}
 
+		// Nuclei JavaScript templates are not returning the path
+		// So, we have to add trick like these
+		var extractedCleaned []string
+		var baseEndpoints []string
 		for _, extractedResult := range extracted {
+			if strings.HasPrefix(extractedResult, "oneaudit:") {
+				baseEndpoints = append(baseEndpoints, strings.Split(extractedResult, "oneaudit:")[1])
+			} else {
+				extractedCleaned = append(extractedCleaned, extractedResult)
+			}
+		}
+
+		for _, extractedResult := range extractedCleaned {
 			// We consider a duplicate when we found the same extract result for the same matcher and template
 			// (like two URLs on a website having the exact same issue, e.g. a missing header)
 			key := fmt.Sprintf("[%s:%s:%s]", result.TemplateID, result.MatcherName, extractedResult)
@@ -102,7 +114,7 @@ func ParseResult(result string) map[string]*ParsedEvent {
 			value := &ParsedEvent{
 				Name:      extractedResult,
 				Result:    result,
-				Endpoints: []string{},
+				Endpoints: append([]string{}, baseEndpoints...),
 				Count:     0,
 			}
 
@@ -141,7 +153,8 @@ func extractEndpoint(result *output.ResultEvent, value *ParsedEvent) string {
 	} else {
 		newValue = result.Matched
 	}
-	if newValue == "" {
+	// If there is no match
+	if newValue == "" || !strings.HasPrefix(newValue, "/") {
 		return ""
 	}
 
