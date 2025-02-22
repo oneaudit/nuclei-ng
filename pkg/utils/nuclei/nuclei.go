@@ -18,40 +18,44 @@ import (
 )
 
 func ExecuteCommand(options *types.Options, tags types.Tag, specification *openapi3.T, paths *openapi3.Paths) (string, error) {
-	var (
-		tempFile    *os.File
-		inputFormat string
-		err         error
-	)
-	inputFormat = "openapi"
-	tempFile, err = openapiutil.CreateTemporarySwaggerFile(specification, paths)
-
-	if err != nil {
-		return "", err
-	}
-	//goland:noinspection GoDeferInLoop,GoUnhandledErrorResult
-	defer os.Remove(tempFile.Name())
-
-	// Run the command
-	cmd := exec.Command("nuclei",
+	args := []string{
 		"-dast", "-no-interactsh",
 
-		"-im", inputFormat,
-		"-list", tempFile.Name(),
-
 		"-disable-update-check",
-		"-t", options.NucleiTemplateDir,
 		"-update-template-dir", options.NucleiTemplateDir,
 
-		"-tags", string(tags),
-
 		"-follow-redirects", "-no-mhe",
-		"-fuzz-param-frequency", strconv.Itoa(math.MaxInt32-1),
+		"-fuzz-param-frequency", strconv.Itoa(math.MaxInt32 - 1),
 
 		"-j", "-silent", "-omit-raw", "-omit-template", "-no-color",
 
 		"-config", options.NucleiConfig,
-	)
+	}
+
+	tempFile, err := openapiutil.CreateTemporarySwaggerFile(specification, paths)
+	if err != nil {
+		return "", err
+	}
+
+	args = append(args, "-im", "openapi", "-list", tempFile.Name())
+
+	if tags == types.WordPress {
+		// Load a specific workflow that will gradually enable tags
+		args = append(args, "-w", "workflows/wordpress.yaml")
+	} else {
+		// Load all templates while filtering them using tags
+		args = append(args,
+			"-t", options.NucleiTemplateDir,
+			"-tags", string(tags),
+			//"-etags", "noisy,fuzzing",
+		)
+	}
+
+	//goland:noinspection GoDeferInLoop,GoUnhandledErrorResult
+	defer os.Remove(tempFile.Name())
+
+	// Run the command
+	cmd := exec.Command("nuclei", args...)
 	gologger.Debug().Msgf("Executing command: %v", cmd)
 	//return "", errorutil.New("Executing command: %v", cmd)
 

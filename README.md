@@ -207,6 +207,6 @@ This will display the following results on the test WordPress instance.
 [javascript-library] [code] [info] Found on 4 URLs ["password-strength-meter.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
 [javascript-library] [code] [info] Found on 4 URLs ["underscore.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
 [javascript-library] [code] [info] Found on 4 URLs ["user-profile.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 9 URLs ["view.min.js==unknown"] [/, /0/, /2025/, ...]
+[javascript-library] [code] [info] Found on 8 URLs ["view.min.js==unknown"] [/0/, /2025/, /2025/02/, ...]
 [javascript-library] [code] [info] Found on 4 URLs ["wp-util.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
 ```

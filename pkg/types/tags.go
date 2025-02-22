@@ -7,8 +7,9 @@ const (
 	HTML       Tag = "html"
 	JavaScript Tag = "javascript"
 	JsExt      Tag = "jsext"
+	WordPress  Tag = "wordpress"
 )
 
 var AllTags = []Tag{
-	Generic, HTML, JavaScript, JsExt,
+	Generic, HTML, JavaScript, JsExt, WordPress,
 }
