@@ -214,6 +214,12 @@ This will display the following results on the test WordPress instance.
 
 [INF] Running nuclei with tags: [wordpress] against 112 targets
 [INF] Temporary file created: /tmp/swagger.yaml869050629
+[wordpress-license] [http] [info] Found on 4 URLs [/LICENSE, /LICENSE.txt, /license, /license.txt]
+[wordpress-readme] [http] [info] Found on 4 URLs [/README, /Readme, /readme, /readme.html]
+[wordpress-users:author] [http] [info] Found on 6 URLs ["testwp"] [/, /0/, /author/testwp/, ...]
+[wordpress-users:rdf] [http] [info] Found on 14 URLs ["testwp"] [/2025/02/14/bonjour-tout-le-monde/feed/rdf/, /2025/02/14/feed/rdf/, /2025/02/feed/rdf/, ...]
 [wordpress-users:yoast] [http] [info] Found on 4 URLs ["testwp"] [////author-sitemap.xml, ///author-sitemap.xml, //author-sitemap.xml, /author-sitemap.xml]
-[wordpress-xmlrpc:_xmlrpc] [http] [info] Found on 3 URLs [//xmlrpc.php, /xmlrpc, /xmlrpc.php]
+[wordpress-xmlrpc:listmethods] [http] [info] Found on 2 URLs ["80 methods"] [/xmlrpc.php/xmlrpc.php, /xmlrpc/xmlrpc.php]
+[wordpress-xmlrpc] [http] [info] Found on 3 URLs [//xmlrpc.php, /xmlrpc, /xmlrpc.php]
+[wordpress-xmlrpc:pingback] [http] [medium] Found on 2 URLs [/xmlrpc, /xmlrpc.php]
 ```

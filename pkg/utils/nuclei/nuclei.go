@@ -19,7 +19,7 @@ import (
 
 func ExecuteCommand(options *types.Options, tags types.Tag, specification *openapi3.T, paths *openapi3.Paths) (string, error) {
 	args := []string{
-		"-dast", "-no-interactsh",
+		"-dast", "-interactsh-server", "oast.pro",
 
 		"-disable-update-check",
 		"-update-template-dir", options.NucleiTemplateDir,
@@ -47,7 +47,7 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 		args = append(args,
 			"-t", options.NucleiTemplateDir,
 			"-tags", string(tags),
-			//"-etags", "noisy,fuzzing",
+			//"-etags", "generic,html,javascript",
 		)
 	}
 
@@ -61,6 +61,9 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 
 	cmdOutput, err := cmd.CombinedOutput()
 	if err != nil {
+		if strings.HasSuffix(string(cmdOutput), "no templates provided for scan\n") {
+			return "", nil
+		}
 		return "", errorutil.NewWithErr(err).Msgf("%s", cmdOutput)
 	}
 
@@ -112,7 +115,7 @@ func ParseResult(result string) map[string]*ParsedEvent {
 		for _, extractedResult := range extractedCleaned {
 			// We consider a duplicate when we found the same extract result for the same matcher and template
 			// (like two URLs on a website having the exact same issue, e.g. a missing header)
-			key := fmt.Sprintf("[%s:%s:%s]", result.TemplateID, result.MatcherName, extractedResult)
+			key := fmt.Sprintf("[%s:%s:%s:%s]", result.TemplateID, result.MatcherName, result.ExtractorName, extractedResult)
 
 			// We don't modify the result as it is shared between extract results
 			value := &ParsedEvent{

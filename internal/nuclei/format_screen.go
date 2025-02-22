@@ -70,10 +70,10 @@ func (w *NGStandardWriter) FormatScreen(output *output.ResultEvent, endpoints []
 		builder.WriteRune('[')
 		builder.WriteString(w.aurora.BrightGreen(output.TemplateID).String())
 
-		if output.MatcherName != "" {
+		if output.MatcherName != "" && !strings.HasPrefix(output.MatcherName, "_") {
 			builder.WriteString(":")
 			builder.WriteString(w.aurora.BrightGreen(output.MatcherName).Bold().String())
-		} else if output.ExtractorName != "" {
+		} else if output.ExtractorName != "" && !strings.HasPrefix(output.MatcherName, "_") {
 			builder.WriteString(":")
 			builder.WriteString(w.aurora.BrightGreen(output.ExtractorName).Bold().String())
 		}
