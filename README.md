@@ -60,10 +60,10 @@ This will display the following results on the test instance.
 [http-missing-security-headers:permissions-policy] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
 [http-missing-security-headers:strict-transport-security] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 44 URLs [/, /apache-v, /assets/, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
-[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/,/re]
+[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/]
 [open-redirect-exploit] [http] [medium] Found on 1 URLs [query:redirect] [GET] [/]
 [options-method-generic] [http] [info] Found on 3 URLs [/ng_hidden_login, /ng_hidden_spy]
 [options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"] [/ng_hidden_spy]
@@ -73,7 +73,7 @@ This will display the following results on the test instance.
 [tech-detect:nginx] [http] [info] Found on 1 URLs [/nginx-v]
 [tech-detect:php] [http] [info] Found on 1 URLs [/comment]
 [tech-detect:python] [http] [info] Found on 6 URLs [/]
-[tech-version-new] [javascript] [info] Found on 1 URLs ["Unknown/21.4.21"] [/icons/robots.txt,/iconsrobots.txt]
+[tech-version-new] [javascript] [info] Found on 1 URLs ["Unknown/21.4.21"] [/icons/robots.txt]
 [tech-version-new] [javascript] [info] Found on 1 URLs ["empty_page/1234"] [/js-event-link]
 [tech-version:nginx] [http] [info] Found on 1 URLs ["1.33.7"] [/nginx-v]
 [tech-version:werkzeug] [http] [info] Found on 6 URLs ["1.5.7"] [/]
@@ -126,18 +126,18 @@ This will display the following results on the test WordPress instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 64 targets
+[INF] Running nuclei with tags: [html] against 72 targets
 [INF] Temporary file created: /tmp/swagger.yaml2790815807
 [form-detect] [http] [info] Found on 2 URLs ["http://wp.sec2/"] [//, /comments/]
 [form-detect] [http] [info] Found on 3 URLs ["http://wp.sec2/wp-comments-post.php"] [/2025/02/14/bonjour-tout-le-monde/]
 [form-detect] [http] [info] Found on 3 URLs ["http://wp.sec2/wp-login.php"] [//wp-login, /wp-login, /wp-login.php]
-[html-comments-detect] [javascript] [info] Found on 11 URLs ["<!--<!-- / Yoast SEO plugin. -->-->"] [/category/non-classe/]
-[html-comments-detect] [javascript] [info] Found on 11 URLs ["<!--<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->-->"] [/category/non-classe/]
-[html-comments-detect] [javascript] [info] Found on 4 URLs ["<!--<!-- This site is optimized with the Yoast SEO plugin v24.5 - https:\\/\\/yoast.com\\/wordpress\\/plugins\\/seo\\/ -->-->"] [/wp-json/wp/v2/users]
-[html-comments-detect] [javascript] [info] Found on 4 URLs ["<!--<!-- \\/ Yoast SEO plugin. -->-->"] [/wp-json/wp/v2/users]
+[html-comments-detect] [javascript] [info] Found on 11 URLs ["<!--<!-- / Yoast SEO plugin. -->-->"] [/author/testwp/]
+[html-comments-detect] [javascript] [info] Found on 11 URLs ["<!--<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->-->"] [/author/testwp/]
+[html-comments-detect] [javascript] [info] Found on 4 URLs ["<!--<!-- This site is optimized with the Yoast SEO plugin v24.5 - https:\\/\\/yoast.com\\/wordpress\\/plugins\\/seo\\/ -->-->"] [/wp-json/wp/v2/posts/1]
+[html-comments-detect] [javascript] [info] Found on 4 URLs ["<!--<!-- \\/ Yoast SEO plugin. -->-->"] [/wp-json/wp/v2/posts/1]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!--<!-- generator="WordPress/6.7.2" -->-->"] [/wp-links-opml]
 
-[INF] Running nuclei with tags: [generic] against 89 targets
+[INF] Running nuclei with tags: [generic] against 112 targets
 [INF] Temporary file created: /tmp/swagger.yaml4026525154
 [cookie-detect] [http] [info] Found on 7 URLs ["wordpress_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php, ///////wp-login.php, //////wp-login.php, ...]
 [cookie-detect] [http] [info] Found on 7 URLs ["wordpress_logged_in_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php, ///////wp-login.php, //////wp-login.php, ...]
@@ -149,15 +149,15 @@ This will display the following results on the test WordPress instance.
 [cookie-detect] [http] [info] Found on 7 URLs ["wp-settings-0"] [/////////wp-login.php, ///////wp-login.php, //////wp-login.php, ...]
 [cookie-detect] [http] [info] Found on 7 URLs ["wp-settings-time-0"] [/////////wp-login.php, ///////wp-login.php, //////wp-login.php, ...]
 [cookie-detect] [http] [info] Found on 4 URLs ["wp_lang"] [////wp-login.php, ///wp-login.php, //wp-login, //wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpress_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpress_logged_in_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpress_sec_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpress_c9fd5a0c97d0e084fdf80980af45bd8b"] [///////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpress_logged_in_c9fd5a0c97d0e084fdf80980af45bd8b"] [///////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpress_sec_c9fd5a0c97d0e084fdf80980af45bd8b"] [///////wp-login.php]
 [cookies-without-httponly] [javascript] [info] Found on 13 URLs ["wordpress_test_cookie"] [////wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpresspass_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpressuser_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wp-postpass_c9fd5a0c97d0e084fdf80980af45bd8b"] [/////////wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wp-settings-0"] [/////////wp-login.php]
-[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wp-settings-time-0"] [/////////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpresspass_c9fd5a0c97d0e084fdf80980af45bd8b"] [///////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wordpressuser_c9fd5a0c97d0e084fdf80980af45bd8b"] [///////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wp-postpass_c9fd5a0c97d0e084fdf80980af45bd8b"] [///////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wp-settings-0"] [///////wp-login.php]
+[cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wp-settings-time-0"] [///////wp-login.php]
 [cookies-without-httponly] [javascript] [info] Found on 4 URLs ["wp_lang"] [////wp-login.php]
 [cookies-without-secure] [javascript] [info] Found on 4 URLs ["wordpress_c9fd5a0c97d0e084fdf80980af45bd8b"] [//////wp-login.php]
 [cookies-without-secure] [javascript] [info] Found on 4 URLs ["wordpress_logged_in_c9fd5a0c97d0e084fdf80980af45bd8b"] [//////wp-login.php]
@@ -168,20 +168,21 @@ This will display the following results on the test WordPress instance.
 [cookies-without-secure] [javascript] [info] Found on 4 URLs ["wp-postpass_c9fd5a0c97d0e084fdf80980af45bd8b"] [//////wp-login.php]
 [cookies-without-secure] [javascript] [info] Found on 4 URLs ["wp-settings-0"] [//////wp-login.php]
 [cookies-without-secure] [javascript] [info] Found on 4 URLs ["wp-settings-time-0"] [//////wp-login.php]
-[cookies-without-secure] [javascript] [info] Found on 4 URLs ["wp_lang"] [//wp-login]
+[cookies-without-secure] [javascript] [info] Found on 4 URLs ["wp_lang"] [/wp-login.php]
 [cors-detect:headers] [http] [info] Found on 17 URLs [////wp-json/oembed/1.0/embed, ///wp-json/oembed/1.0/embed, //wp-json/oembed/1.0/embed, ...]
 [cors-exploit:arbitrary-origin] [http] [info] Found on 16 URLs [header:Origin] [GET] [////wp-json/oembed/1.0/embed, ///wp-json/oembed/1.0/embed, //wp-json/oembed/1.0/embed, ...]
+[email-detect] [http] [info] Found on 2 URLs ["jdoe@example.com"] [/.git/config, /.git/logs/HEAD]
 [http-missing-security-headers:content-security-policy] [http] [info] Found on 115 URLs [/, /.git/, /.git/HEAD, ...]
 [http-missing-security-headers:permissions-policy] [http] [info] Found on 115 URLs [/, /.git/, /.git/HEAD, ...]
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 115 URLs [/, /.git/, /.git/HEAD, ...]
 [http-missing-security-headers:strict-transport-security] [http] [info] Found on 115 URLs [/, /.git/, /.git/HEAD, ...]
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 99 URLs [/, /.git/, /.git/HEAD, ...]
-[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["dir"]
-[open-redirect-detect:parameters] [javascript] [info] Found on 3 URLs ["redirect_to"]
-[open-redirect-detect:parameters] [javascript] [info] Found on 4 URLs ["url"]
+[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["dir"] [/wp-admin/load-styles.php]
+[open-redirect-detect:parameters] [javascript] [info] Found on 3 URLs ["redirect_to"] [/////////wp-login.php]
+[open-redirect-detect:parameters] [javascript] [info] Found on 4 URLs ["url"] [///wp-json/oembed/1.0/embed]
 [options-method-generic] [http] [info] Found on 54 URLs [/.git/, /.git/HEAD, /.git/config, ...]
-[options-method-non-generic] [javascript] [info] Found on 40 URLs ["POST"] [undefined]
-[options-method-non-generic] [javascript] [info] Found on 36 URLs ["TRACE"] [undefined]
+[options-method-non-generic] [javascript] [info] Found on 40 URLs ["POST"] [/LICENSE]
+[options-method-non-generic] [javascript] [info] Found on 36 URLs ["TRACE"] [/LICENSE]
 [tech-detect:apache] [http] [info] Found on 122 URLs [/, /.git/, /.git/HEAD, ...]
 [tech-detect:gravatar] [http] [info] Found on 4 URLs [/2025/02/14/bonjour-tout-le-monde/, /author/testwp/]
 [tech-detect:php] [http] [info] Found on 86 URLs [/, //, ///, ...]
@@ -190,7 +191,7 @@ This will display the following results on the test WordPress instance.
 [tech-version:php] [http] [info] Found on 122 URLs ["8.3.6"] [/, /.git/, /.git/HEAD, ...]
 [tech-version:cms] [http] [info] Found on 15 URLs ["WordPress 6.7.2"] [/, //, /0/, ...]
 
-[INF] Running nuclei with tags: [javascript] against 4 targets
+[INF] Running nuclei with tags: [javascript] against 6 targets
 [INF] Temporary file created: /tmp/swagger.yaml259532497
 [javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.js==unknown"] [/wp-admin/js/password-strength-meter.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.min.js==6.7.2"] [/wp-admin/js/password-strength-meter.min.js]
@@ -210,4 +211,9 @@ This will display the following results on the test WordPress instance.
 [javascript-library] [code] [info] Found on 4 URLs ["user-profile.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
 [javascript-library] [code] [info] Found on 8 URLs ["view.min.js==unknown"] [/0/, /2025/, /2025/02/, ...]
 [javascript-library] [code] [info] Found on 4 URLs ["wp-util.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
+
+[INF] Running nuclei with tags: [wordpress] against 112 targets
+[INF] Temporary file created: /tmp/swagger.yaml869050629
+[wordpress-users:yoast] [http] [info] Found on 4 URLs ["testwp"] [////author-sitemap.xml, ///author-sitemap.xml, //author-sitemap.xml, /author-sitemap.xml]
+[wordpress-xmlrpc:_xmlrpc] [http] [info] Found on 3 URLs [//xmlrpc.php, /xmlrpc, /xmlrpc.php]
 ```
