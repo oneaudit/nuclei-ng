@@ -28,9 +28,9 @@ This will display the following results on the test instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 32 targets
+[INF] Running nuclei with tags: [html] against 39 targets
 [INF] Temporary file created: /tmp/swagger.yaml1269739532
-[directory-listing] [http] [info] Found on 3 URLs [/, /secret/]
+[directory-listing] [http] [info] Found on 10 URLs [/, /secret/]
 [form-detect] [http] [info] Found on 1 URLs ["#"] [/simple-form]
 [form-detect] [http] [info] Found on 1 URLs ["/ng_hidden_login"] [/cookie-form]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!--<!-- @version (+redirect) -->-->"] [/libs]
@@ -42,7 +42,7 @@ This will display the following results on the test instance.
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!--<!-- version in name -->-->"] [/libs]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!--<!-- version in path -->-->"] [/libs]
 
-[INF] Running nuclei with tags: [generic] against 43 targets
+[INF] Running nuclei with tags: [generic] against 51 targets
 [INF] Temporary file created: /tmp/swagger.yaml747212024
 [cookie-detect] [http] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
 [cookie-detect] [http] [info] Found on 1 URLs ["user"] [/ng_hidden_login]
@@ -56,29 +56,30 @@ This will display the following results on the test instance.
 [favicon-detect:Vue] [http] [info] Found on 1 URLs [/favicon.ico]
 [favicon-new:mmh3] [http] [info] Found on 1 URLs ["1823185746"] [/secret.ico]
 [favicon-new:md5] [http] [info] Found on 1 URLs ["b7f5b488d0b802ed63ea4ffefbbb1d6d"] [/secret.ico]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 44 URLs [/, /apache-v, /assets/, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 45 URLs [/, /apache-v, /assets/, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 45 URLs [/, /apache-v, /assets/, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 45 URLs [/, /apache-v, /assets/, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 45 URLs [/, /apache-v, /assets/, ...]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 51 URLs [/, /apache-v, /assets/, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 52 URLs [/, /apache-v, /assets/, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
-[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"]
+[http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
+[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/,/re]
 [open-redirect-exploit] [http] [medium] Found on 1 URLs [query:redirect] [GET] [/]
 [options-method-generic] [http] [info] Found on 3 URLs [/ng_hidden_login, /ng_hidden_spy]
-[options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"] [undefined]
+[options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"] [/ng_hidden_spy]
 [tech-detect:apache] [http] [info] Found on 2 URLs [/apache-v, /php-v]
 [tech-detect:jetty] [http] [info] Found on 1 URLs [/icons/]
 [tech-detect:jsdelivr] [http] [info] Found on 1 URLs [/libs]
 [tech-detect:nginx] [http] [info] Found on 1 URLs [/nginx-v]
 [tech-detect:php] [http] [info] Found on 1 URLs [/comment]
-[tech-detect:python] [http] [info] Found on 2 URLs [/]
-[tech-version-new] [javascript] [info] Found on 1 URLs ["Unknown/21.4.21"] [undefined]
-[tech-version-new] [javascript] [info] Found on 1 URLs ["empty_page/1234"] [undefined]
+[tech-detect:python] [http] [info] Found on 6 URLs [/]
+[tech-version-new] [javascript] [info] Found on 1 URLs ["Unknown/21.4.21"] [/icons/robots.txt,/iconsrobots.txt]
+[tech-version-new] [javascript] [info] Found on 1 URLs ["empty_page/1234"] [/js-event-link]
 [tech-version:nginx] [http] [info] Found on 1 URLs ["1.33.7"] [/nginx-v]
-[tech-version:werkzeug] [http] [info] Found on 2 URLs ["1.5.7"] [/]
+[tech-version:werkzeug] [http] [info] Found on 6 URLs ["1.5.7"] [/]
 [tech-version:jetty] [http] [info] Found on 1 URLs ["12.0.17.v20201231"] [/icons/]
 [tech-version:apache] [http] [info] Found on 2 URLs ["2.4.41"] [/apache-v, /php-v]
-[tech-version:python] [http] [info] Found on 2 URLs ["3.10.2"] [/]
+[tech-version:python] [http] [info] Found on 6 URLs ["3.10.2"] [/]
 [tech-version:php] [http] [info] Found on 2 URLs ["7.4.0"] [/comment, /php-v]
 
 [INF] Running nuclei with tags: [javascript] against 9 targets

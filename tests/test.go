@@ -56,6 +56,7 @@ func main() {
 			filename := info.Name()
 			http.HandleFunc("/assets/js/"+filename, func(w http.ResponseWriter, r *http.Request) {
 				w.Header().Set("Content-Type", "application/javascript")
+				w.Header().Set("X-Content-Type-Options", "nosniff")
 				http.ServeFile(w, r, "tests/static/js/"+filename)
 			})
 		}
