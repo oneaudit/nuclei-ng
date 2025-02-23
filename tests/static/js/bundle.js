@@ -1,0 +1,2 @@
+(()=>{"use strict";document.querySelector("#button")?.addEventListener("click",(o=>{document.querySelector("#password").textContent===String.fromCharCode(64,80,49,64)+String.fromCharCode(95,85,83,51,114)+String.fromCharCode(33)&&console.log("Good password")}))})();
+//# sourceMappingURL=bundle.js.map

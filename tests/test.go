@@ -490,6 +490,7 @@ func libsHandler(w http.ResponseWriter, r *http.Request) {
 	<script src="/assets/js/jquery-ui.js"></script>
 	<script src="/assets/js/jszip.js"></script>
 	<script src="/assets/js/leaflet.js"></script>
+	<script src="/assets/js/bundle.js"></script>	
 </head>
 </html>`))
 }
