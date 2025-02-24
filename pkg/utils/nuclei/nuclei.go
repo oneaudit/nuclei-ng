@@ -49,6 +49,9 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 			"-tags", string(tags),
 			//"-etags", "generic,html,javascript",
 		)
+		//if tags != types.Generic {
+		//	return "", nil
+		//}
 	}
 
 	//goland:noinspection GoDeferInLoop,GoUnhandledErrorResult
