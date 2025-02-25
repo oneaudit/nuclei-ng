@@ -39,6 +39,7 @@ func main() {
 	http.HandleFunc("/re", redirectToHandler)
 	http.HandleFunc("/cors", corsHandler)
 	http.HandleFunc("/libs", libsHandler)
+	http.HandleFunc("/aspNetErrorPage", aspNetErrorPage)
 
 	exposeFolder("tests/static/js/", "/assets/js/", true)
 	exposeFolder("tests/static/composer/", "/", true)
@@ -93,6 +94,116 @@ func notFound(w http.ResponseWriter) {
 `))
 }
 
+func aspNetErrorPage(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusForbidden)
+	_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuration Error</title>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body bgcolor="white">
+<span>
+    <H1>Server Error in '/' Application.<hr width=100% size=1 color=silver></H1>
+    <h2> <i>Configuration Error</i> </h2></span>
+    <font face="Arial, Helvetica, Geneva, SunSans-Regular, sans-serif ">
+    <b> Description: </b>An error occurred during the processing of a configuration file required to service this request.
+        Please review the specific error details below and modify your configuration file appropriately.
+    <br><br>
+
+    <b> Parser Error Message: </b>An error occurred loading a configuration file: Failed to start monitoring changes to
+        '\\SecretShare\Website\Admin' because access is denied.<br><br>
+
+    <b>Source Error:</b> <br><br>
+
+    <table width=100% bgcolor="#ffffcc">
+        <tr>
+            <td>
+                <code>
+
+                    An application error occurred on the server. The current custom error settings for this application prevent the details of the application error from being viewed remotely (for security reasons). It could, however, be viewed by browsers running on the local server machine.                      </code>
+
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <b> Source File: </b> \\SecretShare\Website\Admin\web.config<b> &nbsp;&nbsp; Line: </b> 0
+    <br><br>
+
+    <br><div class="expandable" onclick="OnToggleTOCLevel1('additionalConfigErrorInfo')">Click here to show additional error information:</div>
+    <div id="additionalConfigErrorInfo" style="display: none;">
+        <br>            <b> Exception Details: </b>System.Web.HttpException: Failed to start monitoring changes to '\\SecretShare\Website\Admin' because access is denied.<br><br>
+
+        <b>Source Error:</b> <br><br>
+
+        <table width=100% bgcolor="#ffffcc">
+            <tr>
+                <td>
+                    <code>
+
+                        An unhandled exception was generated during the execution of the current web request. Information regarding the origin and location of the exception can be identified using the exception stack trace below.                      </code>
+
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <b>Stack Trace:</b> <br><br>
+
+        <table width=100% bgcolor="#ffffcc">
+            <tr>
+                <td>
+                    <code><pre>
+
+[HttpException (0x00000000): Failed to start monitoring changes to &#39;\\SecretShare\Website\Admin&#39; because access is denied.]
+   System.Web.FileChangesMonitor.FindDirectoryMonitor(String dir, Boolean addIfNotFound, Boolean throwOnError) +555
+   [...SNIP...]
+</pre>                      </code>
+
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        function OnToggleTOCLevel1(level2ID)
+        {
+            var elemLevel2 = document.getElementById(level2ID);
+            if (elemLevel2.style.display == 'none')
+            {
+                elemLevel2.style.display = '';
+            }
+            else {
+                elemLevel2.style.display = 'none';
+            }
+        }
+    </script>
+    <hr width=100% size=1 color=silver>
+    <b>Version Information:</b>&nbsp;Microsoft .NET Framework Version:4.7.03056; ASP.NET Version:18.0.23273.0
+
+</font>
+
+</body>
+</html>
+<!--
+[HttpException]: Failed to start monitoring changes to &#39;\\SecretShare\Website\Admin&#39; because access is denied.
+   at ...
+[ConfigurationErrorsException]: An error occurred loading a configuration file: Failed to start monitoring changes to &#39;\\SecretShare\Website\Admin&#39; because access is denied. (\\SecretShare\Website\Admin\web.config)
+   at ...
+--><!--
+This error page might contain sensitive information because ASP.NET is configured to show verbose error messages using &lt;customErrors mode="Off"/&gt;. Consider using &lt;customErrors mode="On"/&gt; or &lt;customErrors mode="RemoteOnly"/&gt; in production environments.-->
+`))
+}
+
 func forbidden(w http.ResponseWriter) {
 	// If no other handler matches, serve 404
 	w.Header().Set("Content-Type", "text/html")
@@ -122,6 +233,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		"/secret/",
 		"/cors",
 		"/libs",
+		"/aspNetErrorPage",
 	}
 	tmpl, err := template.New("index").Parse(`
 <!DOCTYPE html>

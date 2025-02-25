@@ -28,7 +28,7 @@ This will display the following results on the test instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 39 targets
+[INF] Running nuclei with tags: [html] against 50 targets
 [INF] Temporary file created: /tmp/swagger.yaml1269739532
 [directory-listing] [http] [info] Found on 10 URLs [/, /secret/]
 [form-detect] [http] [info] Found on 1 URLs ["#"] [/simple-form]
@@ -42,8 +42,10 @@ This will display the following results on the test instance.
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- version in name -->"] [/libs]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- version in path -->"] [/libs]
 
-[INF] Running nuclei with tags: [generic] against 51 targets
+[INF] Running nuclei with tags: [generic] against 73 targets
 [INF] Temporary file created: /tmp/swagger.yaml747212024
+[composer-config:composer.json] [http] [low] Found on 2 URLs [/composer.json, /vendor/composer/installed.json]
+[composer-vendor] [http] [low] Found on 2 URLs [/vendor/autoload.php, /vendor/composer/installed.json]
 [cookie-detect] [http] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
 [cookie-detect] [http] [info] Found on 1 URLs ["user"] [/ng_hidden_login]
 [cookies-without-httponly] [javascript] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
@@ -52,6 +54,7 @@ This will display the following results on the test instance.
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["user"] [/ng_hidden_login]
 [cors-detect:headers] [http] [info] Found on 1 URLs [/cors]
 [cors-exploit:arbitrary-origin] [http] [info] Found on 1 URLs [header:Origin] [GET] [/cors]
+[email-detect] [http] [info] Found on 2 URLs ["barbushin@gmail.com"] [/composer.lock, /vendor/composer/installed.json]
 [email-detect] [http] [info] Found on 1 URLs ["jdoe [at] example.com"] [/humans.txt]
 [email-detect] [http] [info] Found on 2 URLs ["jdoe@example.com"] [/.git/config, /.git/logs/HEAD]
 [email-detect] [http] [info] Found on 1 URLs ["security@example.com"] [/.well-known/security.txt]
@@ -64,17 +67,17 @@ This will display the following results on the test instance.
 [git-config:folder] [http] [medium] Found on 1 URLs [/.git/]
 [git-config:ignore] [http] [medium] Found on 1 URLs [/.gitignore]
 [git-config:logs] [http] [medium] Found on 1 URLs [/.git/logs/HEAD]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 66 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 67 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 67 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 67 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 50 URLs [/, /.git/, /.git/logs/, ...]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 73 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 74 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 74 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 74 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 52 URLs [/, /.git/, /.git/logs/, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
 [open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/]
 [open-redirect-exploit] [http] [medium] Found on 1 URLs [query:redirect] [GET] [/]
 [options-method-generic] [http] [info] Found on 3 URLs [/ng_hidden_login, /ng_hidden_spy]
-[options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"] [/ng_hidden_spy]
+[options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"] [/ng_hidden_login]
 [robots-txt-generic] [http] [info] Found on 1 URLs [/robots.txt]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["b77a70c632c0be0cea6bbce3dff8a2317392303b0730327589b3485c4b892dcd"] [/icons/robots.txt]
 [sitemap-detect] [http] [info] Found on 1 URLs [/sitemap.xml]
@@ -92,7 +95,7 @@ This will display the following results on the test instance.
 [tech-version:php] [http] [info] Found on 2 URLs ["7.4.0"] [/comment, /php-v]
 [tech-version:python] [http] [info] Found on 6 URLs ["3.10.2"] [/]
 [tech-version:werkzeug] [http] [info] Found on 6 URLs ["1.5.7"] [/]
-[well-known-detect] [http] [info] Found on 9 URLs [/.git/HEAD, /.git/config, /.git/logs/HEAD, ...]
+[well-known-detect] [http] [info] Found on 2 URLs [/.well-known/security.txt, /humans.txt]
 
 [INF] Running nuclei with tags: [javascript] against 9 targets
 [INF] Temporary file created: /tmp/swagger.yaml3600235712
