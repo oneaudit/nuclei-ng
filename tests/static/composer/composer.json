@@ -1,0 +1,7 @@
+{
+    "name": "doe/example",
+    "type": "library",
+    "require-dev": {
+        "php-console/php-console": "^3.1"
+    }
+}
