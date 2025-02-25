@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/template"
 )
 
@@ -39,37 +40,40 @@ func main() {
 	http.HandleFunc("/cors", corsHandler)
 	http.HandleFunc("/libs", libsHandler)
 
-	for _, filename := range []string{
-		"favicon.ico", "secret.ico", "link_id.js", "config.php.old",
-	} {
-		http.HandleFunc("/"+filename, func(w http.ResponseWriter, r *http.Request) {
-			http.ServeFile(w, r, "tests/static/"+filename)
-		})
-	}
+	exposeFolder("tests/static/js/", "/assets/js/", true)
+	exposeFolder("tests/static/composer/", "/", true)
+	exposeFolder("tests/static/", "/", false)
+	exposeFolder("tests/static/git/", "/.git/", true)
 
-	err := filepath.Walk("tests/static/js/", func(path string, info os.FileInfo, err error) error {
+	err := http.ListenAndServe(":5000", nil)
+	if err != nil {
+		gologger.Fatal().Msgf("Could not start test server: %s", err.Error())
+	}
+}
+
+func exposeFolder(folderToExpose string, exposurePath string, recurse bool) {
+	err := filepath.Walk(folderToExpose, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 
-		if !info.IsDir() {
-			filename := info.Name()
-			http.HandleFunc("/assets/js/"+filename, func(w http.ResponseWriter, r *http.Request) {
-				w.Header().Set("Content-Type", "application/javascript")
-				w.Header().Set("X-Content-Type-Options", "nosniff")
-				http.ServeFile(w, r, "tests/static/js/"+filename)
-			})
+		if info.IsDir() {
+			if !recurse && folderToExpose != path {
+				return filepath.SkipDir
+			}
+			return nil
 		}
+
+		exposureFile := exposurePath + strings.Replace(path, folderToExpose, "", 1)
+		http.HandleFunc(exposureFile, func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("X-Content-Type-Options", "nosniff")
+			http.ServeFile(w, r, path)
+		})
 
 		return nil
 	})
 	if err != nil {
 		gologger.Fatal().Msgf("Could not add javascript files: %s", err.Error())
-	}
-
-	err = http.ListenAndServe(":5000", nil)
-	if err != nil {
-		gologger.Fatal().Msgf("Could not start test server: %s", err.Error())
 	}
 }
 
