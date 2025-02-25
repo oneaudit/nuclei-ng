@@ -24,7 +24,7 @@ This will display the following results on the test instance.
    ____  __  _______/ /__  (_)
   / __ \/ / / / ___/ / _ \/ /
  / / / / /_/ / /__/ /  __/ /
-/_/ /_/\__,_/\___/_/\___/_/ ng  v1.0.11
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.1.2
 
 		github.com/oneaudit
 
@@ -53,17 +53,22 @@ This will display the following results on the test instance.
 [cors-detect:headers] [http] [info] Found on 1 URLs [/cors]
 [cors-exploit:arbitrary-origin] [http] [info] Found on 1 URLs [header:Origin] [GET] [/cors]
 [email-detect] [http] [info] Found on 1 URLs ["jdoe [at] example.com"] [/humans.txt]
+[email-detect] [http] [info] Found on 2 URLs ["jdoe@example.com"] [/.git/config, /.git/logs/HEAD]
 [email-detect] [http] [info] Found on 1 URLs ["security@example.com"] [/.well-known/security.txt]
 [email-detect] [http] [info] Found on 1 URLs ["security[at]example.com"] [/.well-known/security.txt]
 [email-detect] [http] [info] Found on 1 URLs ["stuart [at] stuartk.com"] [/assets/js/jszip.js]
 [favicon-detect:Vue] [http] [info] Found on 1 URLs [/favicon.ico]
 [favicon-new:md5] [http] [info] Found on 1 URLs ["b7f5b488d0b802ed63ea4ffefbbb1d6d"] [/secret.ico]
 [favicon-new:mmh3] [http] [info] Found on 1 URLs ["1823185746"] [/secret.ico]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 59 URLs [/, /.well-known/, /.well-known/security.txt, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 60 URLs [/, /.well-known/, /.well-known/security.txt, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 60 URLs [/, /.well-known/, /.well-known/security.txt, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 60 URLs [/, /.well-known/, /.well-known/security.txt, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 51 URLs [/, /.well-known/, /.well-known/security.txt, ...]
+[git-config:config] [http] [medium] Found on 3 URLs [/.git/HEAD, /.git/config, /.git/index]
+[git-config:folder] [http] [medium] Found on 1 URLs [/.git/]
+[git-config:ignore] [http] [medium] Found on 1 URLs [/.gitignore]
+[git-config:logs] [http] [medium] Found on 1 URLs [/.git/logs/HEAD]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 66 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 67 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 67 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 67 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 50 URLs [/, /.git/, /.git/logs/, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
 [open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/]
@@ -87,7 +92,7 @@ This will display the following results on the test instance.
 [tech-version:php] [http] [info] Found on 2 URLs ["7.4.0"] [/comment, /php-v]
 [tech-version:python] [http] [info] Found on 6 URLs ["3.10.2"] [/]
 [tech-version:werkzeug] [http] [info] Found on 6 URLs ["1.5.7"] [/]
-[well-known-detect] [http] [info] Found on 5 URLs [/.well-known/security.txt, /humans.txt, /icons/robots.txt, ...]
+[well-known-detect] [http] [info] Found on 9 URLs [/.git/HEAD, /.git/config, /.git/logs/HEAD, ...]
 
 [INF] Running nuclei with tags: [javascript] against 9 targets
 [INF] Temporary file created: /tmp/swagger.yaml3600235712

@@ -57,18 +57,21 @@ func exposeFolder(folderToExpose string, exposurePath string, recurse bool) {
 			return err
 		}
 
-		if info.IsDir() {
-			if !recurse && folderToExpose != path {
-				return filepath.SkipDir
-			}
-			return nil
+		if info.IsDir() && !recurse && folderToExpose != path {
+			return filepath.SkipDir
 		}
 
 		exposureFile := exposurePath + strings.Replace(path, folderToExpose, "", 1)
-		http.HandleFunc(exposureFile, func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("X-Content-Type-Options", "nosniff")
-			http.ServeFile(w, r, path)
-		})
+		if !info.IsDir() {
+			http.HandleFunc(exposureFile, func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set("X-Content-Type-Options", "nosniff")
+				http.ServeFile(w, r, path)
+			})
+		} else if exposureFile != "/" {
+			http.HandleFunc(exposureFile, func(w http.ResponseWriter, _ *http.Request) {
+				forbidden(w)
+			})
+		}
 
 		return nil
 	})
@@ -77,18 +80,28 @@ func exposeFolder(folderToExpose string, exposurePath string, recurse bool) {
 	}
 }
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		// If no other handler matches, serve 404
-		w.Header().Set("Content-Type", "text/html")
-		w.WriteHeader(http.StatusNotFound)
-		_, _ = w.Write([]byte(`<html>
+func notFound(w http.ResponseWriter) {
+	// If no other handler matches, serve 404
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusNotFound)
+	_, _ = w.Write([]byte(`<html>
 <head><title>404 Not Found</title></head>
 <body><h1>Not Found</h1>
 <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
 </body>
 </html>
 `))
+}
+
+func forbidden(w http.ResponseWriter) {
+	// If no other handler matches, serve 404
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusForbidden)
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		notFound(w)
 		return
 	}
 
