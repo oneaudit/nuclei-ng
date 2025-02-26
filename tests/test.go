@@ -69,7 +69,11 @@ func exposeFolder(folderToExpose string, exposurePath string, recurse bool) {
 				http.ServeFile(w, r, path)
 			})
 		} else if exposureFile != "/" {
-			http.HandleFunc(exposureFile, func(w http.ResponseWriter, _ *http.Request) {
+			http.HandleFunc(exposureFile, func(w http.ResponseWriter, r *http.Request) {
+				if r.URL.Path != exposureFile {
+					notFound(w)
+					return
+				}
 				forbidden(w)
 			})
 		}

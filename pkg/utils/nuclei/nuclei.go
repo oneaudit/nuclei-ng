@@ -47,7 +47,7 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 		args = append(args,
 			"-t", options.NucleiTemplateDir,
 			"-tags", string(tags),
-			//"-etags", "generic,html,javascript",
+			"-etags", "generic,html,javascript",
 		)
 		//if tags != types.Generic {
 		//	return "", nil

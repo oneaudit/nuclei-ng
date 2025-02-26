@@ -28,9 +28,9 @@ This will display the following results on the test instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 50 targets
+[INF] Running nuclei with tags: [html] against 48 targets
 [INF] Temporary file created: /tmp/swagger.yaml1269739532
-[directory-listing] [http] [info] Found on 10 URLs [/, /secret/]
+[directory-listing] [http] [info] Found on 4 URLs [/, /secret/]
 [form-detect] [http] [info] Found on 1 URLs ["#"] [/simple-form]
 [form-detect] [http] [info] Found on 1 URLs ["/ng_hidden_login"] [/cookie-form]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- @version (+redirect) -->"] [/libs]
@@ -41,8 +41,10 @@ This will display the following results on the test instance.
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- version in copyright -->"] [/libs]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- version in name -->"] [/libs]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- version in path -->"] [/libs]
+[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!--\\nThis error page might contain sensitive information because ASP.NET is configured to show verbose error messages using &lt;customErrors mode="Off"/&gt;. Consider using &lt;customErrors mode="On"/&gt; or &lt;customErrors mode="RemoteOnly"/&gt; in production environments.-->"] [/aspNetErrorPage]
+[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!--\\n[HttpException]: Failed to start monitoring changes to &#39;\\\\SecretShare\\Website\\Admin&#39; because access is denied.\\n   at ...\\n[ConfigurationErrorsException]: An error occurred loading a configuration file: Failed to start monitoring changes to &#39;\\\\SecretShare\\Website\\Admin&#39; because access is denied. (\\\\SecretShare\\Website\\Admin\\web.config)\\n   at ...\\n-->"] [/aspNetErrorPage]
 
-[INF] Running nuclei with tags: [generic] against 73 targets
+[INF] Running nuclei with tags: [generic] against 68 targets
 [INF] Temporary file created: /tmp/swagger.yaml747212024
 [composer-config:composer.json] [http] [low] Found on 2 URLs [/composer.json, /vendor/composer/installed.json]
 [composer-vendor] [http] [low] Found on 2 URLs [/vendor/autoload.php, /vendor/composer/installed.json]
@@ -67,17 +69,18 @@ This will display the following results on the test instance.
 [git-config:folder] [http] [medium] Found on 1 URLs [/.git/]
 [git-config:ignore] [http] [medium] Found on 1 URLs [/.gitignore]
 [git-config:logs] [http] [medium] Found on 1 URLs [/.git/logs/HEAD]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 73 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 74 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 74 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 74 URLs [/, /.git/, /.git/HEAD, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 52 URLs [/, /.git/, /.git/logs/, ...]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 67 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 68 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 68 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 68 URLs [/, /.git/, /.git/HEAD, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 46 URLs [/, /.git/, /.git/logs/, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
+[known-error-pages:aspnet] [http] [info] Found on 1 URLs [/aspNetErrorPage]
 [open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/]
 [open-redirect-exploit] [http] [medium] Found on 1 URLs [query:redirect] [GET] [/]
-[options-method-generic] [http] [info] Found on 3 URLs [/ng_hidden_login, /ng_hidden_spy]
-[options-method-non-generic] [javascript] [info] Found on 3 URLs ["POST"] [/ng_hidden_login]
+[options-method-generic] [http] [info] Found on 2 URLs [/ng_hidden_login, /ng_hidden_spy]
+[options-method-non-generic] [javascript] [info] Found on 2 URLs ["POST"] [/ng_hidden_login]
 [robots-txt-generic] [http] [info] Found on 1 URLs [/robots.txt]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["b77a70c632c0be0cea6bbce3dff8a2317392303b0730327589b3485c4b892dcd"] [/icons/robots.txt]
 [sitemap-detect] [http] [info] Found on 1 URLs [/sitemap.xml]
@@ -86,18 +89,22 @@ This will display the following results on the test instance.
 [tech-detect:jsdelivr] [http] [info] Found on 1 URLs [/libs]
 [tech-detect:nginx] [http] [info] Found on 1 URLs [/nginx-v]
 [tech-detect:php] [http] [info] Found on 1 URLs [/comment]
-[tech-detect:python] [http] [info] Found on 6 URLs [/]
+[tech-detect:python] [http] [info] Found on 2 URLs [/]
 [tech-version-new] [javascript] [info] Found on 1 URLs ["Unknown/21.4.21"] [/icons/robots.txt]
+[tech-version-new] [javascript] [info] Found on 1 URLs ["Version:18.0.23273.0"] [/aspNetErrorPage]
+[tech-version-new] [javascript] [info] Found on 1 URLs ["Version:4.7.03056"] [/aspNetErrorPage]
 [tech-version-new] [javascript] [info] Found on 1 URLs ["empty_page/1234"] [/js-event-link]
 [tech-version:apache] [http] [info] Found on 2 URLs ["2.4.41"] [/apache-v, /php-v]
+[tech-version:aspnet] [http] [info] Found on 1 URLs ["18.0.23273.0"] [/aspNetErrorPage]
+[tech-version:aspnet_framework] [http] [info] Found on 1 URLs ["4.7.03056"] [/aspNetErrorPage]
 [tech-version:jetty] [http] [info] Found on 5 URLs ["12.0.17.v20201231"] [/icons/, /icons/.robots.txt.swp, /icons/robots.bak, ...]
 [tech-version:nginx] [http] [info] Found on 1 URLs ["1.33.7"] [/nginx-v]
 [tech-version:php] [http] [info] Found on 2 URLs ["7.4.0"] [/comment, /php-v]
-[tech-version:python] [http] [info] Found on 6 URLs ["3.10.2"] [/]
-[tech-version:werkzeug] [http] [info] Found on 6 URLs ["1.5.7"] [/]
+[tech-version:python] [http] [info] Found on 2 URLs ["3.10.2"] [/]
+[tech-version:werkzeug] [http] [info] Found on 2 URLs ["1.5.7"] [/]
 [well-known-detect] [http] [info] Found on 2 URLs [/.well-known/security.txt, /humans.txt]
 
-[INF] Running nuclei with tags: [javascript] against 9 targets
+[INF] Running nuclei with tags: [javascript] against 10 targets
 [INF] Temporary file created: /tmp/swagger.yaml3600235712
 [javascript-library] [javascript] [info] Found on 1 URLs ["angular.js==1.8.3"] [/assets/js/angular.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["bootstrap.js==5.3.3"] [/assets/js/bootstrap.js]
@@ -140,70 +147,46 @@ This will display the following results on the test WordPress instance.
    ____  __  _______/ /__  (_)
   / __ \/ / / / ___/ / _ \/ /
  / / / / /_/ / /__/ /  __/ /
-/_/ /_/\__,_/\___/_/\___/_/ ng  v1.0.11
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.1.2
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 72 targets
+[INF] Running nuclei with tags: [html] against 69 targets
 [INF] Temporary file created: /tmp/swagger.yaml2790815807
-[form-detect] [http] [info] Found on 14 URLs ["http://wp.sec2/"] [//, ///, ////, ...]
+[form-detect] [http] [info] Found on 20 URLs ["http://wp.sec2/"] [/.git/, /.git/HEAD, /.git/config, ...]
 [form-detect] [http] [info] Found on 2 URLs ["http://wp.sec2/wp-comments-post.php"] [/2025/02/14/bonjour-tout-le-monde/]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- #respond -->"] [/2025/02/14/bonjour-tout-le-monde/]
-[html-comments-detect] [javascript] [info] Found on 16 URLs ["<!-- / Yoast SEO plugin. -->"] [/docs/]
-[html-comments-detect] [javascript] [info] Found on 16 URLs ["<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->"] [/docs/]
+[html-comments-detect] [javascript] [info] Found on 22 URLs ["<!-- / Yoast SEO plugin. -->"] [/search/Saisissez]
+[html-comments-detect] [javascript] [info] Found on 22 URLs ["<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->"] [/search/Saisissez]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- generator="WordPress/6.7.2" -->"] [/wp-links-opml]
 
 [INF] Running nuclei with tags: [generic] against 103 targets
 [INF] Temporary file created: /tmp/swagger.yaml4026525154
-[email-detect] [http] [info] Found on 2 URLs ["jdoe@example.com"] [/.git/config, /.git/logs/HEAD]
-[git-config:config] [http] [medium] Found on 1 URLs [/.git/HEAD]
-[git-config:folder] [http] [medium] Found on 1 URLs [/.git/]
-[git-config:ignore] [http] [medium] Found on 1 URLs [/.gitignore]
-[git-config:logs] [http] [medium] Found on 1 URLs [/.git/logs/HEAD]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 68 URLs [/.git/HEAD, /.git/config, /.git/index, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 68 URLs [/.git/HEAD, /.git/config, /.git/index, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 68 URLs [/.git/HEAD, /.git/config, /.git/index, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 68 URLs [/.git/HEAD, /.git/config, /.git/index, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 68 URLs [/.git/HEAD, /.git/config, /.git/index, ...]
-[open-redirect-detect:parameters] [javascript] [info] Found on 2 URLs ["url"] [/wp-json/oembed/1.0/embed]
-[options-method-generic] [http] [info] Found on 31 URLs [/.git/HEAD, /.git/config, /.git/logs/, ...]
-[options-method-non-generic] [javascript] [info] Found on 35 URLs ["POST"] [/readme.html]
-[options-method-non-generic] [javascript] [info] Found on 33 URLs ["TRACE"] [/readme.html]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
+[known-error-pages:apache] [http] [info] Found on 2 URLs [/wp-content/themes/twentytwentyfive/assets/fonts/, /wp-content/themes/twentytwentyfive/assets/fonts/fira-code/]
+[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["url"] [/wp-json/oembed/1.0/embed]
+[options-method-generic] [http] [info] Found on 15 URLs [/LICENSE.txt, /README, /Readme, ...]
+[options-method-non-generic] [javascript] [info] Found on 17 URLs ["POST"] [/wp-admin/images/spinner-2x.gif]
+[options-method-non-generic] [javascript] [info] Found on 16 URLs ["TRACE"] [/wp-admin/images/spinner-2x.gif]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["673fe3c92956f2618d0d11e0a9f0be1023e8a63ca3fbe977816ced034e767534"] [/robots.txt]
-[tech-detect:apache] [http] [info] Found on 64 URLs [/.git/, /.git/HEAD, /.git/config, ...]
-[tech-detect:gravatar] [http] [info] Found on 1 URLs [/2025/02/14/bonjour-tout-le-monde/]
-[tech-detect:php] [http] [info] Found on 31 URLs [////, /////, //xmlrpc.php, ...]
-[tech-version:apache] [http] [info] Found on 68 URLs ["2.4.59"] [/, /.git/, /.git/HEAD, ...]
-[tech-version:cms] [http] [info] Found on 13 URLs ["WordPress 6.7.2"] [/, ///, ////, ...]
-[tech-version:mod_fcgid] [http] [info] Found on 68 URLs ["2.3.10"] [/, /.git/, /.git/HEAD, ...]
-[tech-version:php] [http] [info] Found on 68 URLs ["8.3.6"] [/, /.git/, /.git/HEAD, ...]
-[well-known-detect] [http] [info] Found on 5 URLs [/LICENSE, /LICENSE.txt, /license, ...]
+[tech-detect:apache] [http] [info] Found on 27 URLs [/, /.git/HEAD, /.git/logs/, ...]
+[tech-detect:php] [http] [info] Found on 17 URLs [/, /.git/HEAD, /.git/logs/, ...]
+[tech-version:apache] [http] [info] Found on 23 URLs ["2.4.59"] [/.git/logs/, ////, /Readme, ...]
+[tech-version:cms] [http] [info] Found on 3 URLs ["WordPress 6.7.2"] [/.git/logs/, ////, /docs/]
+[tech-version:mod_fcgid] [http] [info] Found on 23 URLs ["2.3.10"] [/.git/logs/, ////, /Readme, ...]
+[tech-version:php] [http] [info] Found on 23 URLs ["8.3.6"] [/.git/logs/, ////, /Readme, ...]
 
-[INF] Running nuclei with tags: [javascript] against 6 targets
-[INF] Temporary file created: /tmp/swagger.yaml259532497
-[javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.js==unknown"] [/wp-admin/js/password-strength-meter.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.min.js==6.7.2"] [/wp-admin/js/password-strength-meter.min.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.min.js==unknown"] [//wp-admin/js/password-strength-meter.min.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["user-profile.js==unknown"] [/wp-admin/js/user-profile.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["user-profile.min.js==6.7.2"] [/wp-admin/js/user-profile.min.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["user-profile.min.js==unknown"] [//wp-admin/js/user-profile.min.js]
-
-[INF] Running nuclei with tags: [jsext] against 10 targets
-[javascript-library] [code] [info] Found on 4 URLs ["a11y.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 1 URLs ["comment-reply.min.js==unknown"] [/2025/02/14/bonjour-tout-le-monde/]
-[javascript-library] [code] [info] Found on 4 URLs ["dom-ready.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 4 URLs ["i18n.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 4 URLs ["load-scripts.php==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 4 URLs ["password-strength-meter.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 4 URLs ["underscore.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 4 URLs ["user-profile.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
-[javascript-library] [code] [info] Found on 8 URLs ["view.min.js==unknown"] [/0/, /2025/, /2025/02/, ...]
-[javascript-library] [code] [info] Found on 4 URLs ["wp-util.min.js==unknown"] [/wp-admin/import.php, /wp-admin/update-core.php, /wp-login, /wp-login.php]
+[INF] Running nuclei with tags: [jsext] against 1 targets
+[javascript-library] [code] [info] Found on 3 URLs ["view.min.js==unknown"] [/, /page-d-exemple/, /search/Saisissez]
 
 [INF] Running nuclei with tags: [wordpress] against 103 targets
 [INF] Temporary file created: /tmp/swagger.yaml869050629
-[wordpress-debug-log] [http] [low] Found on 1 URLs ["1494043 bytes"] [/wp-content/debug.log]
-[wordpress-debug-log] [http] [low] Found on 1 URLs ["1496111 bytes"] [//wp-content/debug.log]
+[wordpress-debug-log] [http] [low] Found on 1 URLs ["5890023 bytes"] [/wp-content/debug.log]
+[wordpress-debug-log] [http] [low] Found on 1 URLs ["5894667 bytes"] [//wp-content/debug.log]
 [wordpress-license] [http] [info] Found on 4 URLs [/LICENSE, /LICENSE.txt, /license, /license.txt]
 [wordpress-login] [http] [info] Found on 1 URLs [/mysecretlogin/]
 [wordpress-readme] [http] [info] Found on 4 URLs [/README, /Readme, /readme, /readme.html]
@@ -213,13 +196,13 @@ This will display the following results on the test WordPress instance.
 [wordpress-users:rdf] [http] [info] Found on 9 URLs ["testwp"] [//rdf/, /2025/02/14/bonjour-tout-le-monde/feed/rdf/, /comments/feed/rdf/, ...]
 [wordpress-users:usernames] [http] [low] Found on 1 URLs ["testwp"] [/]
 [wordpress-users:yoast] [http] [info] Found on 2 URLs ["testwp"] [//author-sitemap.xml, /author-sitemap.xml]
-[wordpress-version:by_css] [http] [info] Found on 28 URLs ["6.7.2"] [/, //, ///, ...]
-[wordpress-version:by_generator] [http] [info] Found on 32 URLs ["6.7.2"] [/, //, ///, ...]
-[wordpress-version:by_js] [http] [info] Found on 26 URLs ["6.7.2"] [/, //, ///, ...]
+[wordpress-version:by_css] [http] [info] Found on 35 URLs ["6.7.2"] [/, /.git/, /.git/HEAD, ...]
+[wordpress-version:by_generator] [http] [info] Found on 39 URLs ["6.7.2"] [/, /.git/, /.git/HEAD, ...]
+[wordpress-version:by_js] [http] [info] Found on 33 URLs ["6.7.2"] [/, /.git/, /.git/HEAD, ...]
 [wordpress-wpjson:routes] [http] [info] Found on 1 URLs ["50 routes"] [/]
 [wordpress-xmlrpc:listmethods] [http] [info] Found on 2 URLs ["80 methods"] [//xmlrpc.php/xmlrpc.php, /xmlrpc/xmlrpc.php]
 [wordpress-xmlrpc] [http] [info] Found on 3 URLs [//xmlrpc.php, /xmlrpc, /xmlrpc.php]
-[wordpress-xmlrpc:pingback] [http] [medium] Found on 2 URLs [//xmlrpc.php, /xmlrpc]
+[wordpress-xmlrpc:pingback] [http] [medium] Found on 3 URLs [//xmlrpc.php, /xmlrpc]
 ```
 
 ## Current issues
