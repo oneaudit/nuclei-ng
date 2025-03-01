@@ -37,7 +37,12 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 		return "", err
 	}
 
+	if len(specification.Servers) != 1 {
+		return "", errorutil.New("specification does not have exactly one server")
+	}
+
 	args = append(args, "-im", "openapi", "-list", tempFile.Name())
+	args = append(args, "-var", "ServerRoot="+specification.Servers[0].URL)
 
 	if tags == types.WordPress {
 		// Load a specific workflow that will gradually enable tags
