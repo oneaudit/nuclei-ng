@@ -219,46 +219,43 @@ This will display the following results on the test GLPI instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 697 targets
+[INF] Running nuclei with tags: [html] against 115 targets
 [INF] Temporary file created: /tmp/swagger.yaml1887317488
-[directory-listing] [http] [info] Found on 144 URLs [/bin/, /css/, /css/includes/, ...]
+[directory-listing] [http] [info] Found on 65 URLs [/bin/, /css/, /css/includes/, ...]
 [form-detect] [http] [info] Found on 3 URLs ["/front/login.php"] [/, /Index, /index]
 [form-detect] [http] [info] Found on 1 URLs ["/public/front/login.php"] [/public/]
 
-[INF] Running nuclei with tags: [generic] against 1789 targets
+[INF] Running nuclei with tags: [generic] against 398 targets
 [INF] Temporary file created: /tmp/swagger.yaml3295598526
-[cookie-detect] [http] [info] Found on 41 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/, ////////index.php, ///////index.php, ...]
-[cookies-without-httponly] [javascript] [info] Found on 41 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/ajax/getDropdownUsers.php]
-[cookies-without-secure] [javascript] [info] Found on 41 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/index.php?redirect=%2Fajax%2Fplanning.php&error=3]
-[email-detect] [http] [info] Found on 1 URLs ["A@D.nxF"] [/pics/screenshots/ticket.png]
+[cookie-detect] [http] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/, ///front/locale.php, //front/locale.php, ...]
+[cookies-without-httponly] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/]
+[cookies-without-secure] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/front/login.php]
 [email-detect] [http] [info] Found on 2 URLs ["wowohoo@qq.com"] [//public/lib/fuzzy.min.js, /public/lib/fuzzy.min.js]
 [favicon-detect:glpi] [http] [info] Found on 1 URLs [/pics/favicon.ico]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [known-error-pages:apache-403] [http] [info] Found on 5 URLs [/js/"+CFG_GLPI.root_doc+e.original.url+", /js/"+CFG_GLPI.root_doc+el.original.url+", /js/"+i+", ...]
 [known-error-pages:apache-404] [http] [info] Found on 1 URLs [/public/front/login.php]
 [open-redirect-detect:parameters] [javascript] [info] Found on 2 URLs ["domain"] [//front/locale.php]
-[open-redirect-detect:parameters] [javascript] [info] Found on 6 URLs ["redirect"] [/////index.php]
-[options-method-generic] [http] [info] Found on 903 URLs [//css/lib/tabler/icons-webfont/fonts/tabler-icons.eot, //css_compiled/css_palettes_auror.min.css, //js/common.min.js, ...]
-[options-method-non-generic] [javascript] [info] Found on 903 URLs ["POST"] [/src/System/System]
-[options-method-non-generic] [javascript] [info] Found on 903 URLs ["TRACE"] [/src/System/System]
-[tech-detect:apache] [http] [info] Found on 1795 URLs [/, ////////index.php, ///////index.php, ...]
-[tech-detect:php] [http] [info] Found on 887 URLs [/, ////////index.php, ///////index.php, ...]
-[tech-version:apache] [http] [info] Found on 1795 URLs ["2.4.59"] [/, ////////index.php, ///////index.php, ...]
-[tech-version:mod_fcgid] [http] [info] Found on 1795 URLs ["2.3.10"] [/, ////////index.php, ///////index.php, ...]
-[tech-version:os] [http] [info] Found on 1795 URLs ["Win64"] [/, ////////index.php, ///////index.php, ...]
-[tech-version:php] [http] [info] Found on 1795 URLs ["8.3.6"] [/, ////////index.php, ///////index.php, ...]
+[options-method-generic] [http] [info] Found on 357 URLs [//js/common.min.js, //js/fileupload.min.js, //js/flatpickr_buttons_plugin.min.js, ...]
+[options-method-non-generic] [javascript] [info] Found on 357 URLs ["POST"] [/css/palettes/clockworkorange.scss]
+[options-method-non-generic] [javascript] [info] Found on 357 URLs ["TRACE"] [/css/palettes/clockworkorange.scss]
+[tech-detect:apache] [http] [info] Found on 392 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[tech-detect:php] [http] [info] Found on 30 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:apache] [http] [info] Found on 392 URLs ["2.4.59"] [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:mod_fcgid] [http] [info] Found on 392 URLs ["2.3.10"] [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:os] [http] [info] Found on 392 URLs ["Win64"] [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:php] [http] [info] Found on 392 URLs ["8.3.6"] [/, ///front/locale.php, //front/locale.php, ...]
 
-[INF] Running nuclei with tags: [javascript] against 65 targets
+[INF] Running nuclei with tags: [javascript] against 64 targets
 [INF] Temporary file created: /tmp/swagger.yaml2318201103
 [javascript-library] [javascript] [info] Found on 1 URLs ["ContentTemplatesParameters.js==unknown"] [/js/RichText/ContentTemplatesParameters.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["ContentTemplatesParameters.min.js==unknown"] [/js/RichText/ContentTemplatesParameters.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["FaIconSelector.js==unknown"] [/js/Forms/FaIconSelector.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["FaIconSelector.min.js==unknown"] [/js/Forms/FaIconSelector.min.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["GenericView.js==unknown"] [/js/modules/Search/GenericView.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["ResultsView.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//js/modules/Search/ResultsView.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["ResultsView.min.js==unknown"] [/js/modules/Search/ResultsView.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["Table.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//js/modules/Search/Table.min.js]
@@ -296,8 +293,8 @@ This will display the following results on the test GLPI instance.
 [javascript-library] [javascript] [info] Found on 1 URLs ["impact.min.js==unknown"] [/js/impact.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["jquery-file-upload.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//public/lib/jquery-file-upload.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["jquery-file-upload.min.js==unknown"] [/public/lib/jquery-file-upload.min.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//public/lib/leaflet.min.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.min.js==unknown"] [/public/lib/leaflet.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/public/lib/leaflet.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.min.js==unknown"] [//public/lib/leaflet.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["log_filters.js==unknown"] [/js/log_filters.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["log_filters.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/log_filters.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["log_filters.min.js==unknown"] [//js/log_filters.min.js]
