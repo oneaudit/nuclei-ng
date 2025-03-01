@@ -30,6 +30,10 @@ This will display the following results on the test instance.
 
 [INF] Running nuclei with tags: [html] against 48 targets
 [INF] Temporary file created: /tmp/swagger.yaml1269739532
+[cdn-detect:cdnjs] [http] [info] Found on 1 URLs [/libs]
+[cdn-detect:jquery-cdn] [http] [info] Found on 1 URLs [/libs]
+[cdn-detect:jsdelivr] [http] [info] Found on 1 URLs [/libs]
+[cdn-detect:unpkg] [http] [info] Found on 1 URLs [/libs]
 [directory-listing] [http] [info] Found on 4 URLs [/, /secret/]
 [form-detect] [http] [info] Found on 1 URLs ["#"] [/simple-form]
 [form-detect] [http] [info] Found on 1 URLs ["/ng_hidden_login"] [/cookie-form]
@@ -55,7 +59,6 @@ This will display the following results on the test instance.
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
 [cookies-without-secure] [javascript] [info] Found on 1 URLs ["user"] [/ng_hidden_login]
 [cors-detect:headers] [http] [info] Found on 1 URLs [/cors]
-[cors-exploit:arbitrary-origin] [http] [info] Found on 1 URLs [header:Origin] [GET] [/cors]
 [email-detect] [http] [info] Found on 2 URLs ["barbushin@gmail.com"] [/composer.lock, /vendor/composer/installed.json]
 [email-detect] [http] [info] Found on 1 URLs ["jdoe [at] example.com"] [/humans.txt]
 [email-detect] [http] [info] Found on 2 URLs ["jdoe@example.com"] [/.git/config, /.git/logs/HEAD]
@@ -76,9 +79,8 @@ This will display the following results on the test instance.
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 46 URLs [/, /.git/, /.git/logs/, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
-[known-error-pages:aspnet] [http] [info] Found on 1 URLs [/aspNetErrorPage]
+[known-error-pages:aspnet-403] [http] [info] Found on 1 URLs [/aspNetErrorPage]
 [open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/]
-[open-redirect-exploit] [http] [medium] Found on 1 URLs [query:redirect] [GET] [/]
 [options-method-generic] [http] [info] Found on 2 URLs [/ng_hidden_login, /ng_hidden_spy]
 [options-method-non-generic] [javascript] [info] Found on 2 URLs ["POST"] [/ng_hidden_login]
 [robots-txt-generic] [http] [info] Found on 1 URLs [/robots.txt]
@@ -99,6 +101,7 @@ This will display the following results on the test instance.
 [tech-version:aspnet_framework] [http] [info] Found on 1 URLs ["4.7.03056"] [/aspNetErrorPage]
 [tech-version:jetty] [http] [info] Found on 5 URLs ["12.0.17.v20201231"] [/icons/, /icons/.robots.txt.swp, /icons/robots.bak, ...]
 [tech-version:nginx] [http] [info] Found on 1 URLs ["1.33.7"] [/nginx-v]
+[tech-version:os] [http] [info] Found on 1 URLs ["Debian"] [/php-v]
 [tech-version:php] [http] [info] Found on 2 URLs ["7.4.0"] [/comment, /php-v]
 [tech-version:python] [http] [info] Found on 2 URLs ["3.10.2"] [/]
 [tech-version:werkzeug] [http] [info] Found on 2 URLs ["1.5.7"] [/]
@@ -116,7 +119,6 @@ This will display the following results on the test instance.
 [javascript-library] [javascript] [info] Found on 1 URLs ["jszip.js==3.10.1"] [/assets/js/jszip.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.js==unknown"] [/assets/js/leaflet.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["link_id.js==unknown"] [/link_id.js]
-[source-map-js] [http] [low] Found on 1 URLs [/assets/js/bundle.js.map]
 [source-map-js] [http] [low] Found on 1 URLs ["bundle.js.map"] [/assets/js/bundle.js]
 
 [INF] Running nuclei with tags: [jsext] against 18 targets
@@ -211,3 +213,5 @@ When access to a route is blocked, but an alternative route works, common checks
 
 - [ ] `wp-json` and `?rest_route`
 - [ ] `wp-login`/`wp-admin` and CVE bypasses
+- [ ] Exploits are not executed
+- [ ] Jetty (Java), XXX (Python), WordPress (MySQL), etc.
