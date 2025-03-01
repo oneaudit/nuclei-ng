@@ -158,37 +158,38 @@ This will display the following results on the test WordPress instance.
 [form-detect] [http] [info] Found on 20 URLs ["http://wp.sec2/"] [/.git/, /.git/HEAD, /.git/config, ...]
 [form-detect] [http] [info] Found on 2 URLs ["http://wp.sec2/wp-comments-post.php"] [/2025/02/14/bonjour-tout-le-monde/]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- #respond -->"] [/2025/02/14/bonjour-tout-le-monde/]
-[html-comments-detect] [javascript] [info] Found on 22 URLs ["<!-- / Yoast SEO plugin. -->"] [/search/Saisissez]
-[html-comments-detect] [javascript] [info] Found on 22 URLs ["<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->"] [/search/Saisissez]
+[html-comments-detect] [javascript] [info] Found on 22 URLs ["<!-- / Yoast SEO plugin. -->"] [/var/www/]
+[html-comments-detect] [javascript] [info] Found on 22 URLs ["<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->"] [/var/www/]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- generator="WordPress/6.7.2" -->"] [/wp-links-opml]
 
 [INF] Running nuclei with tags: [generic] against 103 targets
 [INF] Temporary file created: /tmp/swagger.yaml4026525154
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 31 URLs [/, /.git/, ///, ...]
-[known-error-pages:apache] [http] [info] Found on 2 URLs [/wp-content/themes/twentytwentyfive/assets/fonts/, /wp-content/themes/twentytwentyfive/assets/fonts/fira-code/]
-[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["url"] [/wp-json/oembed/1.0/embed]
-[options-method-generic] [http] [info] Found on 15 URLs [/LICENSE.txt, /README, /Readme, ...]
-[options-method-non-generic] [javascript] [info] Found on 17 URLs ["POST"] [/wp-admin/images/spinner-2x.gif]
-[options-method-non-generic] [javascript] [info] Found on 16 URLs ["TRACE"] [/wp-admin/images/spinner-2x.gif]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 51 URLs [/, /.git/, /.git/logs/, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 51 URLs [/, /.git/, /.git/logs/, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 51 URLs [/, /.git/, /.git/logs/, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 51 URLs [/, /.git/, /.git/logs/, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 51 URLs [/, /.git/, /.git/logs/, ...]
+[known-error-pages:apache-403] [http] [info] Found on 4 URLs [/wp-admin/images/, /wp-content/themes/twentytwentyfive/assets/fonts/fira-code/, /wp-content/themes/twentytwentyfive/assets/fonts/manrope/, /wp-content/themes/twentytwentyfive/assets/images/]
+[known-error-pages:apache-404] [http] [info] Found on 2 URLs [/wp-json/, /wp-json/oembed/1.0/embed]
+[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["url"] [//wp-json/oembed/1.0/embed]
+[options-method-generic] [http] [info] Found on 12 URLs [/license.txt, /wp-admin/css/, /wp-admin/css/install.css, ...]
+[options-method-non-generic] [javascript] [info] Found on 25 URLs ["POST"] [/wp-content/debug.log]
+[options-method-non-generic] [javascript] [info] Found on 23 URLs ["TRACE"] [/wp-content/debug.log]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["673fe3c92956f2618d0d11e0a9f0be1023e8a63ca3fbe977816ced034e767534"] [/robots.txt]
-[tech-detect:apache] [http] [info] Found on 27 URLs [/, /.git/HEAD, /.git/logs/, ...]
-[tech-detect:php] [http] [info] Found on 17 URLs [/, /.git/HEAD, /.git/logs/, ...]
-[tech-version:apache] [http] [info] Found on 23 URLs ["2.4.59"] [/.git/logs/, ////, /Readme, ...]
-[tech-version:cms] [http] [info] Found on 3 URLs ["WordPress 6.7.2"] [/.git/logs/, ////, /docs/]
-[tech-version:mod_fcgid] [http] [info] Found on 23 URLs ["2.3.10"] [/.git/logs/, ////, /Readme, ...]
-[tech-version:php] [http] [info] Found on 23 URLs ["8.3.6"] [/.git/logs/, ////, /Readme, ...]
+[tech-detect:apache] [http] [info] Found on 54 URLs [/.git/index, /.git/logs/, /.git/logs/HEAD, ...]
+[tech-detect:php] [http] [info] Found on 33 URLs [/.git/index, /.git/logs/, /.git/logs/HEAD, ...]
+[tech-version:apache] [http] [info] Found on 58 URLs ["2.4.59"] [/, /.git/HEAD, /.git/config, ...]
+[tech-version:cms] [http] [info] Found on 21 URLs ["WordPress 6.7.2"] [/, /.git/HEAD, /.git/config, ...]
+[tech-version:mod_fcgid] [http] [info] Found on 58 URLs ["2.3.10"] [/, /.git/HEAD, /.git/config, ...]
+[tech-version:os] [http] [info] Found on 58 URLs ["Win64"] [/, /.git/HEAD, /.git/config, ...]
+[tech-version:php] [http] [info] Found on 58 URLs ["8.3.6"] [/, /.git/HEAD, /.git/config, ...]
 
 [INF] Running nuclei with tags: [jsext] against 1 targets
 [javascript-library] [code] [info] Found on 3 URLs ["view.min.js==unknown"] [/, /page-d-exemple/, /search/Saisissez]
 
 [INF] Running nuclei with tags: [wordpress] against 103 targets
 [INF] Temporary file created: /tmp/swagger.yaml869050629
-[wordpress-debug-log] [http] [low] Found on 1 URLs ["5890023 bytes"] [/wp-content/debug.log]
-[wordpress-debug-log] [http] [low] Found on 1 URLs ["5894667 bytes"] [//wp-content/debug.log]
+[wordpress-debug-log] [http] [low] Found on 2 URLs ["5971239 bytes"] [//wp-content/debug.log, /wp-content/debug.log]
 [wordpress-license] [http] [info] Found on 4 URLs [/LICENSE, /LICENSE.txt, /license, /license.txt]
 [wordpress-login] [http] [info] Found on 1 URLs [/mysecretlogin/]
 [wordpress-readme] [http] [info] Found on 4 URLs [/README, /Readme, /readme, /readme.html]
@@ -204,7 +205,7 @@ This will display the following results on the test WordPress instance.
 [wordpress-wpjson:routes] [http] [info] Found on 1 URLs ["50 routes"] [/]
 [wordpress-xmlrpc:listmethods] [http] [info] Found on 2 URLs ["80 methods"] [//xmlrpc.php/xmlrpc.php, /xmlrpc/xmlrpc.php]
 [wordpress-xmlrpc] [http] [info] Found on 3 URLs [//xmlrpc.php, /xmlrpc, /xmlrpc.php]
-[wordpress-xmlrpc:pingback] [http] [medium] Found on 3 URLs [//xmlrpc.php, /xmlrpc]
+[wordpress-xmlrpc:pingback] [http] [medium] Found on 2 URLs [//xmlrpc.php, /xmlrpc]
 ```
 
 ## Current issues
