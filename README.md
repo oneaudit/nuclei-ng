@@ -208,6 +208,120 @@ This will display the following results on the test WordPress instance.
 [wordpress-xmlrpc:pingback] [http] [medium] Found on 2 URLs [//xmlrpc.php, /xmlrpc]
 ```
 
+This will display the following results on the test GLPI instance.
+
+```
+                     __     _
+   ____  __  _______/ /__  (_)
+  / __ \/ / / / ___/ / _ \/ /
+ / / / / /_/ / /__/ /  __/ /
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.1.2
+
+		github.com/oneaudit
+
+[INF] Running nuclei with tags: [html] against 697 targets
+[INF] Temporary file created: /tmp/swagger.yaml1887317488
+[directory-listing] [http] [info] Found on 144 URLs [/bin/, /css/, /css/includes/, ...]
+[form-detect] [http] [info] Found on 3 URLs ["/front/login.php"] [/, /Index, /index]
+[form-detect] [http] [info] Found on 1 URLs ["/public/front/login.php"] [/public/]
+
+[INF] Running nuclei with tags: [generic] against 1789 targets
+[INF] Temporary file created: /tmp/swagger.yaml3295598526
+[cookie-detect] [http] [info] Found on 41 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/, ////////index.php, ///////index.php, ...]
+[cookies-without-httponly] [javascript] [info] Found on 41 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/ajax/getDropdownUsers.php]
+[cookies-without-secure] [javascript] [info] Found on 41 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/index.php?redirect=%2Fajax%2Fplanning.php&error=3]
+[email-detect] [http] [info] Found on 1 URLs ["A@D.nxF"] [/pics/screenshots/ticket.png]
+[email-detect] [http] [info] Found on 2 URLs ["wowohoo@qq.com"] [//public/lib/fuzzy.min.js, /public/lib/fuzzy.min.js]
+[favicon-detect:glpi] [http] [info] Found on 1 URLs [/pics/favicon.ico]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 1781 URLs [/, ////////index.php, ///////index.php, ...]
+[known-error-pages:apache-403] [http] [info] Found on 5 URLs [/js/"+CFG_GLPI.root_doc+e.original.url+", /js/"+CFG_GLPI.root_doc+el.original.url+", /js/"+i+", ...]
+[known-error-pages:apache-404] [http] [info] Found on 1 URLs [/public/front/login.php]
+[open-redirect-detect:parameters] [javascript] [info] Found on 2 URLs ["domain"] [//front/locale.php]
+[open-redirect-detect:parameters] [javascript] [info] Found on 6 URLs ["redirect"] [/////index.php]
+[options-method-generic] [http] [info] Found on 903 URLs [//css/lib/tabler/icons-webfont/fonts/tabler-icons.eot, //css_compiled/css_palettes_auror.min.css, //js/common.min.js, ...]
+[options-method-non-generic] [javascript] [info] Found on 903 URLs ["POST"] [/src/System/System]
+[options-method-non-generic] [javascript] [info] Found on 903 URLs ["TRACE"] [/src/System/System]
+[tech-detect:apache] [http] [info] Found on 1795 URLs [/, ////////index.php, ///////index.php, ...]
+[tech-detect:php] [http] [info] Found on 887 URLs [/, ////////index.php, ///////index.php, ...]
+[tech-version:apache] [http] [info] Found on 1795 URLs ["2.4.59"] [/, ////////index.php, ///////index.php, ...]
+[tech-version:mod_fcgid] [http] [info] Found on 1795 URLs ["2.3.10"] [/, ////////index.php, ///////index.php, ...]
+[tech-version:os] [http] [info] Found on 1795 URLs ["Win64"] [/, ////////index.php, ///////index.php, ...]
+[tech-version:php] [http] [info] Found on 1795 URLs ["8.3.6"] [/, ////////index.php, ///////index.php, ...]
+
+[INF] Running nuclei with tags: [javascript] against 65 targets
+[INF] Temporary file created: /tmp/swagger.yaml2318201103
+[javascript-library] [javascript] [info] Found on 1 URLs ["ContentTemplatesParameters.js==unknown"] [/js/RichText/ContentTemplatesParameters.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["ContentTemplatesParameters.min.js==unknown"] [/js/RichText/ContentTemplatesParameters.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["FaIconSelector.js==unknown"] [/js/Forms/FaIconSelector.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["FaIconSelector.min.js==unknown"] [/js/Forms/FaIconSelector.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["GenericView.js==unknown"] [/js/modules/Search/GenericView.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["ResultsView.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//js/modules/Search/ResultsView.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["ResultsView.min.js==unknown"] [/js/modules/Search/ResultsView.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["Table.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//js/modules/Search/Table.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["Table.min.js==unknown"] [/js/modules/Search/Table.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["UserMention.js==unknown"] [/js/RichText/UserMention.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["UserMention.min.js==unknown"] [/js/RichText/UserMention.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["base.min.js==1.0.0"] [//public/lib/base.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["base.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/public/lib/base.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["cable.js==unknown"] [/js/cable.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["cable.min.js==unknown"] [/js/cable.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["clipboard.js==unknown"] [/js/clipboard.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["clipboard.min.js==unknown"] [/js/clipboard.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["common.js==unknown"] [/js/common.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["common.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/common.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["common.min.js==unknown"] [//js/common.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["dashboard.js==unknown"] [/js/dashboard.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["dashboard.min.js==unknown"] [/js/dashboard.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fileupload.js==unknown"] [/js/fileupload.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fileupload.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/fileupload.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fileupload.min.js==unknown"] [//js/fileupload.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["flatpickr.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//public/lib/flatpickr.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["flatpickr.min.js==4.6.11"] [/public/lib/flatpickr.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["flatpickr_buttons_plugin.js==unknown"] [/js/flatpickr_buttons_plugin.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["flatpickr_buttons_plugin.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/flatpickr_buttons_plugin.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["flatpickr_buttons_plugin.min.js==unknown"] [//js/flatpickr_buttons_plugin.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fuzzy.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//public/lib/fuzzy.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fuzzy.min.js==3.8.8"] [/public/lib/fuzzy.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fuzzysearch.js==unknown"] [/js/fuzzysearch.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fuzzysearch.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/fuzzysearch.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["fuzzysearch.min.js==unknown"] [//js/fuzzysearch.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["glpi_dialog.js==unknown"] [/js/glpi_dialog.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["glpi_dialog.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/glpi_dialog.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["glpi_dialog.min.js==unknown"] [//js/glpi_dialog.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["impact.js==unknown"] [/js/impact.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["impact.min.js==unknown"] [/js/impact.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-file-upload.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//public/lib/jquery-file-upload.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["jquery-file-upload.min.js==unknown"] [/public/lib/jquery-file-upload.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//public/lib/leaflet.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["leaflet.min.js==unknown"] [/public/lib/leaflet.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["log_filters.js==unknown"] [/js/log_filters.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["log_filters.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/log_filters.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["log_filters.min.js==unknown"] [//js/log_filters.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["marketplace.js==unknown"] [/js/marketplace.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["marketplace.min.js==unknown"] [/js/marketplace.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["misc.js==unknown"] [/js/misc.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["misc.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/misc.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["misc.min.js==unknown"] [//js/misc.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["notifications_ajax.js==unknown"] [/js/notifications_ajax.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["notifications_ajax.min.js==unknown"] [/js/notifications_ajax.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["photoswipe.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [//public/lib/photoswipe.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["photoswipe.min.js==unknown"] [/public/lib/photoswipe.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["planning.js==unknown"] [/js/planning.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["planning.min.js==unknown"] [/js/planning.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["rack.js==unknown"] [/js/rack.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["rack.min.js==unknown"] [/js/rack.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["reservations.js==unknown"] [/js/reservations.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["reservations.min.js==unknown"] [/js/reservations.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["webkit_fix.js==unknown"] [/js/webkit_fix.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["webkit_fix.min.js==2b8ebd59a8d46b694cc14c813395db6f6b21a878"] [/js/webkit_fix.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["webkit_fix.min.js==unknown"] [//js/webkit_fix.min.js]
+[source-map-js] [http] [low] Found on 8 URLs [//public/lib/leaflet.min.js, //public/lib/photoswipe.min.js, /js/planning.js, ...]
+```
+
 ## Current issues
 
 When access to a route is blocked, but an alternative route works, common checks are not executed on the alternative route unless the route is added to the list.
