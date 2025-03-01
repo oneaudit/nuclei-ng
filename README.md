@@ -229,8 +229,8 @@ This will display the following results on the test GLPI instance.
 [INF] Running nuclei with tags: [generic] against 240 targets
 [INF] Temporary file created: /tmp/swagger.yaml3295598526
 [cookie-detect] [http] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/, ///front/locale.php, //front/locale.php, ...]
-[cookies-without-httponly] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/status]
-[cookies-without-secure] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [///front/locale.php]
+[cookies-without-httponly] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/index.php?error=3]
+[cookies-without-secure] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/status/ready]
 [email-detect] [http] [info] Found on 2 URLs ["wowohoo@qq.com"] [//public/lib/fuzzy.min.js, /public/lib/fuzzy.min.js]
 [favicon-detect:glpi] [http] [info] Found on 1 URLs [/pics/favicon.ico]
 [http-missing-security-headers:content-security-policy] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
@@ -238,12 +238,14 @@ This will display the following results on the test GLPI instance.
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [http-missing-security-headers:strict-transport-security] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
-[known-error-pages:apache-403] [http] [info] Found on 5 URLs [/js/"+CFG_GLPI.root_doc+e.original.url+", /js/"+CFG_GLPI.root_doc+el.original.url+", /js/"+i+", ...]
-[known-error-pages:apache-404] [http] [info] Found on 1 URLs [/public/front/login.php]
+[known-403-page:apache] [http] [info] Found on 6 URLs [/:, /js/"+CFG_GLPI.root_doc+e.original.url+", /js/"+CFG_GLPI.root_doc+el.original.url+", ...]
+[known-404-page:apache] [http] [info] Found on 3 URLs [/PAGENOTFOUND, /PAGENOTFOUND/, /public/front/login.php]
+[license-file] [http] [info] Found on 2 URLs [/LICENSE, /license]
 [open-redirect-detect:parameters] [javascript] [info] Found on 2 URLs ["domain"] [/front/locale.php]
 [options-method-generic] [http] [info] Found on 208 URLs [//js/common.min.js, //js/fileupload.min.js, //js/flatpickr_buttons_plugin.min.js, ...]
-[options-method-non-generic] [javascript] [info] Found on 208 URLs ["POST"] [/sound/sound_b.ogg]
-[options-method-non-generic] [javascript] [info] Found on 208 URLs ["TRACE"] [/sound/sound_b.ogg]
+[options-method-non-generic] [javascript] [info] Found on 208 URLs ["POST"] [/js/cable.js]
+[options-method-non-generic] [javascript] [info] Found on 208 URLs ["TRACE"] [/js/cable.js]
+[readme-file] [http] [info] Found on 1 URLs [/README.md]
 [tech-detect:apache] [http] [info] Found on 243 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [tech-detect:php] [http] [info] Found on 30 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [tech-version:apache] [http] [info] Found on 243 URLs ["2.4.59"] [/, ///front/locale.php, //front/locale.php, ...]
@@ -324,8 +326,6 @@ This will display the following results on the test GLPI instance.
 
 When access to a route is blocked, but an alternative route works, common checks are not executed on the alternative route unless the route is added to the list.
 
-- [ ] `wp-json` and `?rest_route`
-- [ ] `wp-login`/`wp-admin` and CVE bypasses
 - [ ] Exploits are not executed
 - [ ] Jetty (Java), XXX (Python), WordPress (MySQL), etc.
 - [ ] MIA
@@ -344,4 +344,5 @@ SASS/SCSS
 * [ ] Incorrect
 
 ```
-[source-map-js] [http] [low] Found on 8 URLs [//public/lib/leaflet.min.js, //public/lib/photoswipe.min.js, /js/planning.js, ...]```
+[source-map-js] [http] [low] Found on 8 URLs [//public/lib/leaflet.min.js, //public/lib/photoswipe.min.js, /js/planning.js, ...]
+```
