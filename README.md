@@ -80,9 +80,9 @@ This will display the following results on the test instance.
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
 [known-error-pages:aspnet-403] [http] [info] Found on 1 URLs [/aspNetErrorPage]
-[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/]
+[open-redirect-detect:parameters] [javascript] [info] Found on 1 URLs ["redirect"] [/re]
 [options-method-generic] [http] [info] Found on 2 URLs [/ng_hidden_login, /ng_hidden_spy]
-[options-method-non-generic] [javascript] [info] Found on 2 URLs ["POST"] [/ng_hidden_login]
+[options-method-non-generic] [javascript] [info] Found on 2 URLs ["POST"] [/ng_hidden_spy]
 [robots-txt-generic] [http] [info] Found on 1 URLs [/robots.txt]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["b77a70c632c0be0cea6bbce3dff8a2317392303b0730327589b3485c4b892dcd"] [/icons/robots.txt]
 [sitemap-detect] [http] [info] Found on 1 URLs [/sitemap.xml]
@@ -219,36 +219,36 @@ This will display the following results on the test GLPI instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 115 targets
+[INF] Running nuclei with tags: [html] against 83 targets
 [INF] Temporary file created: /tmp/swagger.yaml1887317488
-[directory-listing] [http] [info] Found on 65 URLs [/bin/, /css/, /css/includes/, ...]
+[directory-listing] [http] [info] Found on 35 URLs [/bin/, /css/, /css/includes/, ...]
 [form-detect] [http] [info] Found on 3 URLs ["/front/login.php"] [/, /Index, /index]
 [form-detect] [http] [info] Found on 1 URLs ["/public/front/login.php"] [/public/]
 
-[INF] Running nuclei with tags: [generic] against 398 targets
+[INF] Running nuclei with tags: [generic] against 240 targets
 [INF] Temporary file created: /tmp/swagger.yaml3295598526
 [cookie-detect] [http] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/, ///front/locale.php, //front/locale.php, ...]
-[cookies-without-httponly] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/]
-[cookies-without-secure] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/front/login.php]
+[cookies-without-httponly] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/status]
+[cookies-without-secure] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [///front/locale.php]
 [email-detect] [http] [info] Found on 2 URLs ["wowohoo@qq.com"] [//public/lib/fuzzy.min.js, /public/lib/fuzzy.min.js]
 [favicon-detect:glpi] [http] [info] Found on 1 URLs [/pics/favicon.ico]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 390 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [known-error-pages:apache-403] [http] [info] Found on 5 URLs [/js/"+CFG_GLPI.root_doc+e.original.url+", /js/"+CFG_GLPI.root_doc+el.original.url+", /js/"+i+", ...]
 [known-error-pages:apache-404] [http] [info] Found on 1 URLs [/public/front/login.php]
-[open-redirect-detect:parameters] [javascript] [info] Found on 2 URLs ["domain"] [//front/locale.php]
-[options-method-generic] [http] [info] Found on 357 URLs [//js/common.min.js, //js/fileupload.min.js, //js/flatpickr_buttons_plugin.min.js, ...]
-[options-method-non-generic] [javascript] [info] Found on 357 URLs ["POST"] [/css/palettes/clockworkorange.scss]
-[options-method-non-generic] [javascript] [info] Found on 357 URLs ["TRACE"] [/css/palettes/clockworkorange.scss]
-[tech-detect:apache] [http] [info] Found on 392 URLs [/, ///front/locale.php, //front/locale.php, ...]
+[open-redirect-detect:parameters] [javascript] [info] Found on 2 URLs ["domain"] [/front/locale.php]
+[options-method-generic] [http] [info] Found on 208 URLs [//js/common.min.js, //js/fileupload.min.js, //js/flatpickr_buttons_plugin.min.js, ...]
+[options-method-non-generic] [javascript] [info] Found on 208 URLs ["POST"] [/sound/sound_b.ogg]
+[options-method-non-generic] [javascript] [info] Found on 208 URLs ["TRACE"] [/sound/sound_b.ogg]
+[tech-detect:apache] [http] [info] Found on 243 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [tech-detect:php] [http] [info] Found on 30 URLs [/, ///front/locale.php, //front/locale.php, ...]
-[tech-version:apache] [http] [info] Found on 392 URLs ["2.4.59"] [/, ///front/locale.php, //front/locale.php, ...]
-[tech-version:mod_fcgid] [http] [info] Found on 392 URLs ["2.3.10"] [/, ///front/locale.php, //front/locale.php, ...]
-[tech-version:os] [http] [info] Found on 392 URLs ["Win64"] [/, ///front/locale.php, //front/locale.php, ...]
-[tech-version:php] [http] [info] Found on 392 URLs ["8.3.6"] [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:apache] [http] [info] Found on 243 URLs ["2.4.59"] [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:mod_fcgid] [http] [info] Found on 243 URLs ["2.3.10"] [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:os] [http] [info] Found on 243 URLs ["Win64"] [/, ///front/locale.php, //front/locale.php, ...]
+[tech-version:php] [http] [info] Found on 243 URLs ["8.3.6"] [/, ///front/locale.php, //front/locale.php, ...]
 
 [INF] Running nuclei with tags: [javascript] against 64 targets
 [INF] Temporary file created: /tmp/swagger.yaml2318201103
@@ -327,3 +327,20 @@ When access to a route is blocked, but an alternative route works, common checks
 - [ ] `wp-login`/`wp-admin` and CVE bypasses
 - [ ] Exploits are not executed
 - [ ] Jetty (Java), XXX (Python), WordPress (MySQL), etc.
+- [ ] MIA
+
+```
+[open-redirect-detect:parameters] [javascript] [info] Found on 6 URLs ["redirect"] [/////index.php]
+[source-map-js] [http] [low] Found on 1 URLs [/assets/js/bundle.js.map]
+"Yoast SEO:24.5"
+"WordPress Site Editor"
+"WordPress Block Editor"
+SASS/SCSS
+.idea (path exposure, etc.)
+.twig
+```
+
+* [ ] Incorrect
+
+```
+[source-map-js] [http] [low] Found on 8 URLs [//public/lib/leaflet.min.js, //public/lib/photoswipe.min.js, /js/planning.js, ...]```
