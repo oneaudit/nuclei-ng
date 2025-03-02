@@ -19,6 +19,8 @@ type Options struct {
 	Verbose bool
 	// Debug
 	Debug bool
+	// DebugDirPath
+	DebugDirPath string
 	// Version enables showing of tool version
 	Version bool
 }

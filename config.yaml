@@ -1,2 +1,3 @@
 templates-dir: ../nuclei-dast-templates/
 nuclei: ./config-nuclei.yaml
+debug: true

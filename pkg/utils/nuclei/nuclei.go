@@ -15,6 +15,7 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func ExecuteCommand(options *types.Options, tags types.Tag, specification *openapi3.T, paths *openapi3.Paths) (string, error) {
@@ -47,6 +48,7 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 	if tags == types.WordPress {
 		// Load a specific workflow that will gradually enable tags
 		args = append(args, "-w", "workflows/wordpress.yaml")
+		//args = append(args, "-tags", "ignoreall")
 	} else {
 		// Load all templates while filtering them using tags
 		args = append(args,
@@ -68,6 +70,21 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 	//return "", errorutil.New("Executing command: %v", cmd)
 
 	cmdOutput, err := cmd.CombinedOutput()
+
+	if options.Debug {
+		timestamp := time.Now().Format("2006-01-02_15-04-05")
+		fileName := fmt.Sprintf("%s/%s.txt", options.DebugDirPath, timestamp)
+		file, err := os.Create(fileName)
+		if err != nil {
+			return "", errorutil.NewWithErr(err).Msgf("Error creating debug file: %s", fileName)
+		}
+		defer file.Close()
+		_, err = file.Write(cmdOutput)
+		if err != nil {
+			return "", errorutil.NewWithErr(err).Msgf("Error writing to debug file")
+		}
+	}
+
 	if err != nil {
 		if strings.HasSuffix(string(cmdOutput), "no templates provided for scan\n") {
 			return "", nil
