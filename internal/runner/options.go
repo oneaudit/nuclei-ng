@@ -19,9 +19,9 @@ func validateOptions(options *types.Options) error {
 	}
 
 	if options.Debug {
-		debugDir := ".debug"
-		if _, err := os.Stat(debugDir); os.IsNotExist(err) {
-			err := os.Mkdir(debugDir, os.ModePerm)
+		options.DebugDirPath = ".debug"
+		if _, err := os.Stat(options.DebugDirPath); os.IsNotExist(err) {
+			err := os.Mkdir(options.DebugDirPath, os.ModePerm)
 			if err != nil {
 				return errorutil.New("Error creating .debug directory: %s", err.Error())
 			}
