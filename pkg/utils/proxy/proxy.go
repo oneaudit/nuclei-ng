@@ -1,6 +1,7 @@
 package proxy
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"github.com/elazarl/goproxy"
@@ -35,12 +36,6 @@ func CreateProxy(options *types.Options) *goproxy.ProxyHttpServer {
 }
 
 func handleRequest(req *http.Request, _ *goproxy.ProxyCtx) (*http.Request, *http.Response) {
-	for headerName, headerValue := range req.Header {
-		if headerName != "Host" && headerName != "User-Agent" {
-			req.Header.Set(headerName, strings.Join(headerValue, ";"))
-		}
-	}
-
 	if strings.HasSuffix(req.UserAgent(), "(proxy)") {
 		req.Header.Set("User-Agent", defaultUserAgent)
 
@@ -57,9 +52,9 @@ func handleRequest(req *http.Request, _ *goproxy.ProxyCtx) (*http.Request, *http
 					}
 				}
 
-				if resp, ok := value.(*http.Response); ok {
+				if resp, ok := value.(cachedResponse); ok {
 					gologger.Debug().Msgf("Using cache for hash: %s", hash)
-					return req, resp
+					return req, resp.withRequest(req)
 				}
 			} else {
 				cache.Store(hash, nil)
@@ -71,19 +66,17 @@ func handleRequest(req *http.Request, _ *goproxy.ProxyCtx) (*http.Request, *http
 
 		// This is a dummy internal header
 		req.Header.Add("X-Request-Cache", hash)
-	} else {
-		req.Header.Set("User-Agent", req.UserAgent())
 	}
 	return req, nil
 }
 
-func waitForResponse(key string) (*http.Response, error) {
-	responseChan := make(chan *http.Response)
+func waitForResponse(key string) (*cachedResponse, error) {
+	responseChan := make(chan *cachedResponse)
 
 	go func() {
 		for {
 			if value, ok := cache.Load(key); ok {
-				if resp, ok := value.(*http.Response); ok && resp != nil {
+				if resp, ok := value.(*cachedResponse); ok && resp != nil {
 					responseChan <- resp
 					return
 				}
@@ -95,10 +88,40 @@ func waitForResponse(key string) (*http.Response, error) {
 	return <-responseChan, nil
 }
 
+type cachedResponse struct {
+	header http.Header
+	status int
+	body   string
+}
+
+func (c *cachedResponse) withRequest(req *http.Request) *http.Response {
+	resp := &http.Response{}
+	resp.Request = req
+	resp.TransferEncoding = req.TransferEncoding
+	resp.Header = c.header
+	resp.StatusCode = c.status
+	resp.Status = http.StatusText(c.status)
+	buf := bytes.NewBufferString(c.body)
+	resp.ContentLength = int64(buf.Len())
+	resp.Body = io.NopCloser(buf)
+	return resp
+}
+
 func handleResponse(resp *http.Response, _ *goproxy.ProxyCtx) *http.Response {
 	if _, ok := resp.Request.Header["X-Request-Cache"]; ok {
 		hash := resp.Request.Header["X-Request-Cache"][0]
-		cache.Store(hash, resp)
+		var body string
+		if resp.Body != nil {
+			raw, _ := io.ReadAll(resp.Body)
+			body = string(raw)
+		}
+		cachedResp := &cachedResponse{
+			header: resp.Header,
+			status: resp.StatusCode,
+			body:   body,
+		}
+		cache.Store(hash, cachedResp)
+		return cachedResp.withRequest(resp.Request)
 	}
 	return resp
 }
