@@ -2,17 +2,16 @@ package runner
 
 import (
 	"fmt"
-	"github.com/elazarl/goproxy"
 	"github.com/getkin/kin-openapi/openapi3"
 	nucleiinternal "github.com/oneaudit/nuclei-ng/internal/nuclei"
 	"github.com/oneaudit/nuclei-ng/pkg/javascript"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
 	nucleiutil "github.com/oneaudit/nuclei-ng/pkg/utils/nuclei"
 	openapiutil "github.com/oneaudit/nuclei-ng/pkg/utils/openapi"
+	proxytutil "github.com/oneaudit/nuclei-ng/pkg/utils/proxy"
 	"github.com/projectdiscovery/gologger"
 	errorutil "github.com/projectdiscovery/utils/errors"
 	"net/http"
-	"net/url"
 	"os"
 	"sort"
 	"strings"
@@ -42,13 +41,7 @@ func Execute(options *types.Options) error {
 	}
 
 	// Proxy requests
-	proxy := goproxy.NewProxyHttpServer()
-	if options.ProxyHost != "" {
-		proxy.Tr.Proxy = http.ProxyURL(&url.URL{
-			Scheme: "http",
-			Host:   options.ProxyHost,
-		})
-	}
+	proxy := proxytutil.CreateProxy(options)
 	go func() {
 		gologger.Info().Msgf("Starting proxy on :8081...")
 		if err := http.ListenAndServe(":8081", proxy); err != nil {
