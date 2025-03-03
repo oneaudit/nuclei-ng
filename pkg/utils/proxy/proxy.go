@@ -6,15 +6,18 @@ import (
 	"github.com/elazarl/goproxy"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
 	"github.com/projectdiscovery/gologger"
+	"github.com/projectdiscovery/useragent"
 	"io"
 	"net/http"
 	"net/url"
+	"sort"
 	"strings"
 	"sync"
 	"time"
 )
 
 var cache sync.Map
+var defaultUserAgent = useragent.PickRandom().String()
 
 func CreateProxy(options *types.Options) *goproxy.ProxyHttpServer {
 	proxy := goproxy.NewProxyHttpServer()
@@ -31,15 +34,15 @@ func CreateProxy(options *types.Options) *goproxy.ProxyHttpServer {
 	return proxy
 }
 
-func handleRequest(req *http.Request, ctx *goproxy.ProxyCtx) (*http.Request, *http.Response) {
-	requestAgent := req.UserAgent()
-	if strings.HasSuffix(requestAgent, "(proxy)") {
-		// Go-http-client is suspicious...
-		if strings.HasPrefix(requestAgent, "Go-http-client") {
-			// fixme: check how katana/nuclei are generating their user-agent
-			requestAgent = "Mozilla/5.0 (Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+func handleRequest(req *http.Request, _ *goproxy.ProxyCtx) (*http.Request, *http.Response) {
+	for headerName, headerValue := range req.Header {
+		if headerName != "Host" && headerName != "User-Agent" {
+			req.Header.Set(headerName, strings.Join(headerValue, ";"))
 		}
-		req.Header.Set("User-Agent", requestAgent)
+	}
+
+	if strings.HasSuffix(req.UserAgent(), "(proxy)") {
+		req.Header.Set("User-Agent", defaultUserAgent)
 
 		hash, err := computeRequestHash(req)
 		if err != nil {
@@ -55,7 +58,7 @@ func handleRequest(req *http.Request, ctx *goproxy.ProxyCtx) (*http.Request, *ht
 				}
 
 				if resp, ok := value.(*http.Response); ok {
-					println("Using cache for hash:", hash)
+					gologger.Debug().Msgf("Using cache for hash: %s", hash)
 					return req, resp
 				}
 			} else {
@@ -69,7 +72,7 @@ func handleRequest(req *http.Request, ctx *goproxy.ProxyCtx) (*http.Request, *ht
 		// This is a dummy internal header
 		req.Header.Add("X-Request-Cache", hash)
 	} else {
-		req.Header.Set("User-Agent", requestAgent)
+		req.Header.Set("User-Agent", req.UserAgent())
 	}
 	return req, nil
 }
@@ -110,7 +113,18 @@ func computeRequestHash(req *http.Request) (string, error) {
 	}
 
 	// Headers
-	for key, values := range req.Header {
+	var keys []string
+	for key := range req.Header {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+
+	for _, key := range keys {
+		if key == "User-Agent" {
+			continue
+		}
+
+		values := req.Header[key]
 		for _, value := range values {
 			_, err := hasher.Write([]byte(key + ": " + value + "\n"))
 			if err != nil {
