@@ -108,22 +108,23 @@ func (c *cachedResponse) withRequest(req *http.Request) *http.Response {
 }
 
 func handleResponse(resp *http.Response, _ *goproxy.ProxyCtx) *http.Response {
+	var body string
+	if resp.Body != nil {
+		raw, _ := io.ReadAll(resp.Body)
+		body = string(raw)
+	}
+	cachedResp := &cachedResponse{
+		header: resp.Header,
+		status: resp.StatusCode,
+		body:   body,
+	}
+
 	if _, ok := resp.Request.Header["X-Request-Cache"]; ok {
 		hash := resp.Request.Header["X-Request-Cache"][0]
-		var body string
-		if resp.Body != nil {
-			raw, _ := io.ReadAll(resp.Body)
-			body = string(raw)
-		}
-		cachedResp := &cachedResponse{
-			header: resp.Header,
-			status: resp.StatusCode,
-			body:   body,
-		}
 		cache.Store(hash, cachedResp)
-		return cachedResp.withRequest(resp.Request)
 	}
-	return resp
+
+	return cachedResp.withRequest(resp.Request)
 }
 
 func computeRequestHash(req *http.Request) (string, error) {
