@@ -13,6 +13,8 @@ type Options struct {
 	NucleiTemplateDir string
 	// NucleiConfig path with nuclei configuration to use
 	NucleiConfig string
+	// ProxyHost proxy to use for requests
+	ProxyHost string
 	// Silent shows only output
 	Silent bool
 	// Verbose specifies showing verbose output

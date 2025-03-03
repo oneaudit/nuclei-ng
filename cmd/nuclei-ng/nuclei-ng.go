@@ -38,6 +38,7 @@ func readFlags() (*goflags.FlagSet, error) {
 	flagSet.CreateGroup("nuclei", "Nuclei",
 		flagSet.StringVarP(&options.NucleiTemplateDir, "templates-dir", "t", "", "path to the nuclei templates directory"),
 		flagSet.StringVar(&options.NucleiConfig, "nuclei", "", "path to the nuclei configuration file"),
+		flagSet.StringVarP(&options.ProxyHost, "nuclei-proxy", "p", "", "nuclei-ng is using an internal proxy by design, which can forward requests to another proxy."),
 	)
 
 	flagSet.CreateGroup("config", "Configuration",

@@ -29,6 +29,7 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 		"-fuzz-param-frequency", strconv.Itoa(math.MaxInt32 - 1),
 
 		"-j", "-silent", "-omit-raw", "-omit-template", "-no-color",
+		"-proxy", "http://localhost:8081",
 
 		"-config", options.NucleiConfig,
 	}
@@ -48,7 +49,7 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 	if tags == types.WordPress {
 		// Load a specific workflow that will gradually enable tags
 		args = append(args, "-w", "workflows/wordpress.yaml")
-		//args = append(args, "-tags", "ignoreall")
+		args = append(args, "-tags", "ignoreall")
 	} else {
 		// Load all templates while filtering them using tags
 		args = append(args,
@@ -56,9 +57,9 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 			"-tags", string(tags),
 			//"-etags", "generic,html,javascript",
 		)
-		//if tags != types.Generic {
-		//	return "", nil
-		//}
+		if tags != types.JavaScript {
+			return "", nil
+		}
 	}
 
 	//goland:noinspection GoDeferInLoop,GoUnhandledErrorResult
