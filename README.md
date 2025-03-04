@@ -190,8 +190,8 @@ This will display the following results on the test WordPress instance.
 [license-file] [http] [info] Found on 4 URLs [/LICENSE, /LICENSE.txt, /license, /license.txt]
 [open-redirect-detect:detect] [javascript] [low] Found on 1 URLs ["dir"] [//wp-admin/load-styles.php]
 [options-method-generic] [http] [info] Found on 30 URLs [//wp-admin/css/install.css, /LICENSE, /LICENSE.txt, ...]
-[options-method-non-generic] [javascript] [info] Found on 30 URLs ["POST"] [/wp-content/themes/twentytwentyfive/assets/fonts/manrope/manrope]
-[options-method-non-generic] [javascript] [info] Found on 28 URLs ["TRACE"] [/wp-content/themes/twentytwentyfive/assets/fonts/manrope/manrope]
+[options-method-non-generic] [javascript] [info] Found on 30 URLs ["POST"] [/wp-config.bak]
+[options-method-non-generic] [javascript] [info] Found on 28 URLs ["TRACE"] [/wp-config.bak]
 [php-errors] [http] [info] Found on 2 URLs ["Fatal error"] [/wp-settings, /wp-settings.php]
 [php-errors] [http] [info] Found on 1 URLs ["Stack trace:"] [/wp-content/debug.log]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["673fe3c92956f2618d0d11e0a9f0be1023e8a63ca3fbe977816ced034e767534"] [/robots.txt]
@@ -239,7 +239,7 @@ This will display the following results on the test WordPress instance.
 [wordpress-wpjson:routes] [http] [info] Found on 1 URLs ["50 routes"] [/]
 [wordpress-xmlrpc:listmethods] [http] [info] Found on 3 URLs ["80 methods"] [/xmlrpc.php, /xmlrpc.php/xmlrpc.php, /xmlrpc/xmlrpc.php]
 [wordpress-xmlrpc] [http] [info] Found on 4 URLs [//xmlrpc.php, /xmlrpc, /xmlrpc.php]
-[wordpress-xmlrpc:pingback] [http] [medium] Found on 4 URLs [/xmlrpc, /xmlrpc.php]
+[wordpress-xmlrpc:pingback] [http] [medium] Found on 2 URLs [/xmlrpc, /xmlrpc.php]
 ```
 
 This will display the following results on the test GLPI instance.
