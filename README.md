@@ -159,7 +159,7 @@ This will display the following results on the test WordPress instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 69 targets
+[INF] Running nuclei with tags: [html] against 10 targets
 [INF] Temporary file created: /tmp/swagger.yaml2790815807
 [form-detect] [http] [info] Found on 20 URLs ["http://wp.sec2/"] [/.git/, /.git/HEAD, /.git/config, ...]
 [form-detect] [http] [info] Found on 2 URLs ["http://wp.sec2/wp-comments-post.php"] [/2025/02/14/bonjour-tout-le-monde/]
@@ -168,32 +168,36 @@ This will display the following results on the test WordPress instance.
 [html-comments-detect] [javascript] [info] Found on 22 URLs ["<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->"] [/docs/]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- generator="WordPress/6.7.2" -->"] [/wp-links-opml]
 
-[INF] Running nuclei with tags: [generic] against 105 targets
+[INF] Running nuclei with tags: [generic] against 22 targets
 [INF] Temporary file created: /tmp/swagger.yaml4026525154
-[cookies-without-httponly] [javascript] [info] Found on 2 URLs ["wordpress_test_cookie"] [/mysecretlogin/]
-[cookies-without-secure] [javascript] [info] Found on 2 URLs ["wordpress_test_cookie"] [/mysecretlogin/]
-[http-missing-security-headers:content-security-policy] [http] [info] Found on 26 URLs [/, ///wp-admin/maint/repair.php, //wp-admin/load-styles.php, ...]
-[http-missing-security-headers:permissions-policy] [http] [info] Found on 26 URLs [/, ///wp-admin/maint/repair.php, //wp-admin/load-styles.php, ...]
-[http-missing-security-headers:referrer-policy] [http] [info] Found on 26 URLs [/, ///wp-admin/maint/repair.php, //wp-admin/load-styles.php, ...]
-[http-missing-security-headers:strict-transport-security] [http] [info] Found on 26 URLs [/, ///wp-admin/maint/repair.php, //wp-admin/load-styles.php, ...]
-[http-missing-security-headers:x-content-type-options] [http] [info] Found on 26 URLs [/, ///wp-admin/maint/repair.php, //wp-admin/load-styles.php, ...]
-[known-403-page:apache] [http] [info] Found on 8 URLs [/:, /wp-admin/images/, /wp-admin/js/, ...]
+[cookie-detect] [http] [info] Found on 1 URLs ["wordpress_test_cookie"] [/mysecretlogin/]
+[cookies-without-httponly] [javascript] [info] Found on 1 URLs ["wordpress_test_cookie"] [/mysecretlogin/]
+[cookies-without-secure] [javascript] [info] Found on 1 URLs ["wordpress_test_cookie"] [/mysecretlogin/]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 21 URLs [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 21 URLs [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 21 URLs [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 21 URLs [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 21 URLs [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[known-403-page:apache] [http] [info] Found on 2 URLs [/:, /wp-content/themes/twentytwentyfive/]
 [known-404-page:apache] [http] [info] Found on 1 URLs [/wp-json/]
-[known-404-page:wordpress] [http] [info] Found on 5 URLs [///mysecretlogin/, //mysecretlogin/, /404/, /comments/]
-[open-redirect-detect:detect] [javascript] [low] Found on 1 URLs ["dir"] [//wp-admin/load-styles.php]
-[options-method-generic] [http] [info] Found on 5 URLs [/LICENSE, /license, /wp-admin/js/, ...]
-[options-method-non-generic] [javascript] [info] Found on 20 URLs ["POST"] [/wp-content/debug.log]
-[options-method-non-generic] [javascript] [info] Found on 19 URLs ["TRACE"] [/wp-content/debug.log]
-[php-errors] [http] [info] Found on 1 URLs ["Fatal error"] [/wp-settings]
+[known-404-page:wordpress] [http] [info] Found on 3 URLs [/404/, /PAGENOTFOUND, /PAGENOTFOUND/]
+[known-500-page:wordpress] [http] [info] Found on 1 URLs [/wp-config-sample.php]
+[license-file] [http] [info] Found on 1 URLs [/LICENSE]
+[options-method-generic] [http] [info] Found on 6 URLs [/LICENSE, /readme.html, /wp-config.bak, ...]
+[options-method-non-generic] [javascript] [info] Found on 6 URLs ["POST"] [/readme.html]
+[options-method-non-generic] [javascript] [info] Found on 5 URLs ["TRACE"] [/readme.html]
+[php-errors] [http] [info] Found on 1 URLs ["Fatal error"] [/wp-settings.php]
+[php-errors] [http] [info] Found on 1 URLs ["Stack trace:"] [/wp-content/debug.log]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["673fe3c92956f2618d0d11e0a9f0be1023e8a63ca3fbe977816ced034e767534"] [/robots.txt]
-[stacktrace:php] [http] [low] Found on 3 URLs [/wp-settings, /wp-signup, /wp-signup.bak]
-[tech-detect:apache] [http] [info] Found on 18 URLs [//////, //wp-admin/load-styles.php, /LICENSE.txt, ...]
-[tech-detect:php] [http] [info] Found on 8 URLs [//////, //wp-admin/load-styles.php, /mysecretlogin/, ...]
-[tech-version:apache] [http] [info] Found on 17 URLs ["2.4.59"] [/////, ////mysecretlogin/, ///wp-admin/maint/repair.php, ...]
-[tech-version:cms] [http] [info] Found on 1 URLs ["WordPress 6.7.2"] [/////]
-[tech-version:mod_fcgid] [http] [info] Found on 17 URLs ["2.3.10"] [/////, ////mysecretlogin/, ///wp-admin/maint/repair.php, ...]
-[tech-version:os] [http] [info] Found on 17 URLs ["Win64"] [/////, ////mysecretlogin/, ///wp-admin/maint/repair.php, ...]
-[tech-version:php] [http] [info] Found on 17 URLs ["8.3.6"] [/////, ////mysecretlogin/, ///wp-admin/maint/repair.php, ...]
+[stacktrace:php] [http] [low] Found on 1 URLs [/wp-settings.php]
+[tech-detect:apache] [http] [info] Found on 21 URLs [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[tech-detect:gravatar] [http] [info] Found on 1 URLs [/2025/02/14/bonjour-tout-le-monde/]
+[tech-detect:php] [http] [info] Found on 15 URLs [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[tech-version:apache] [http] [info] Found on 21 URLs ["2.4.59"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[tech-version:cms] [http] [info] Found on 3 URLs ["WordPress 6.7.2"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/]
+[tech-version:mod_fcgid] [http] [info] Found on 21 URLs ["2.3.10"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[tech-version:os] [http] [info] Found on 21 URLs ["Win64"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
+[tech-version:php] [http] [info] Found on 21 URLs ["8.3.6"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/, ...]
 
 [INF] Running nuclei with tags: [jsext] against 9 targets
 [javascript-library] [code] [info] Found on 1 URLs ["a11y.min.js==unknown"] [/mysecretlogin/]
@@ -211,25 +215,25 @@ This will display the following results on the test WordPress instance.
 [javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.min.js==6.7.2"] [/wp-admin/js/password-strength-meter.min.js]
 [javascript-library] [javascript] [info] Found on 1 URLs ["user-profile.min.js==6.7.2"] [/wp-admin/js/user-profile.min.js]
 
-[INF] Running nuclei with tags: [wordpress] against 90 targets
+[INF] Running nuclei with tags: [wordpress] against 22 targets
 [INF] Temporary file created: /tmp/swagger.yaml869050629
 [wordpress-config] [http] [info] Found on 1 URLs [/wp-config.bak]
 [wordpress-debug-log] [http] [low] Found on 1 URLs ["3987 bytes"] [/wp-content/debug.log]
 [wordpress-login:login] [http] [info] Found on 1 URLs [/mysecretlogin/]
 [wordpress-login:register] [http] [info] Found on 1 URLs [/mysecretlogin/]
 [wordpress-repair] [http] [low] Found on 1 URLs [/wp-admin/maint/repair.php]
-[wordpress-themes-detect] [http] [info] Found on 8 URLs ["twentytwentyfive"] [/wp-content/themes/twentytwentyfive/, /wp-content/themes/twentytwentyfive/assets/, /wp-content/themes/twentytwentyfive/assets/fonts/, ...]
+[wordpress-themes-detect] [http] [info] Found on 1 URLs ["twentytwentyfive"] [/wp-content/themes/twentytwentyfive/]
 [wordpress-users:author] [http] [info] Found on 1 URLs ["testwp"] [/]
-[wordpress-users:rdf] [http] [info] Found on 12 URLs ["testwp"] [//rdf/, /2025/02/14/bonjour-tout-le-monde/feed/rdf/, /2025/02/14/feed/rdf/, ...]
+[wordpress-users:rdf] [http] [info] Found on 2 URLs ["testwp"] [/2025/02/14/bonjour-tout-le-monde/feed/rdf/, /feed/rdf/]
 [wordpress-users:usernames] [http] [low] Found on 1 URLs ["testwp"] [/]
 [wordpress-users:yoast] [http] [info] Found on 2 URLs ["testwp"] [/author-sitemap.xml]
-[wordpress-version:by_css] [http] [info] Found on 22 URLs ["6.7.2"] [/, //, ////, ...]
-[wordpress-version:by_generator] [http] [info] Found on 23 URLs ["6.7.2"] [/, //, ////, ...]
-[wordpress-version:by_js] [http] [info] Found on 17 URLs ["6.7.2"] [/, //, ////, ...]
+[wordpress-version:by_css] [http] [info] Found on 4 URLs ["6.7.2"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/, /wp-admin/maint/repair.php]
+[wordpress-version:by_generator] [http] [info] Found on 3 URLs ["6.7.2"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/]
+[wordpress-version:by_js] [http] [info] Found on 3 URLs ["6.7.2"] [/, /2025/02/14/bonjour-tout-le-monde/, /404/]
 [wordpress-wpjson:routes] [http] [info] Found on 1 URLs ["50 routes"] [/]
-[wordpress-xmlrpc:listmethods] [http] [info] Found on 3 URLs ["80 methods"] [/xmlrpc.php, /xmlrpc.php/xmlrpc.php, /xmlrpc/xmlrpc.php]
-[wordpress-xmlrpc] [http] [info] Found on 4 URLs [//xmlrpc.php, /xmlrpc, /xmlrpc.php]
-[wordpress-xmlrpc:pingback] [http] [medium] Found on 2 URLs [/xmlrpc, /xmlrpc.php]
+[wordpress-xmlrpc:listmethods] [http] [info] Found on 2 URLs ["80 methods"] [/xmlrpc.php, /xmlrpc.php/xmlrpc.php]
+[wordpress-xmlrpc] [http] [info] Found on 2 URLs [/xmlrpc.php]
+[wordpress-xmlrpc:pingback] [http] [medium] Found on 1 URLs [/xmlrpc.php]
 ```
 
 This will display the following results on the test GLPI instance.
