@@ -18,7 +18,6 @@ import (
 )
 
 var cache sync.Map
-var mu sync.Mutex
 var defaultUserAgent = useragent.PickRandom().String()
 
 func CreateProxy(options *types.Options) *goproxy.ProxyHttpServer {
@@ -87,7 +86,7 @@ func waitForResponse(key string) (*cachedResponse, error) {
 }
 
 type cachedResponse struct {
-	//header http.Header
+	header http.Header
 	status int
 	body   string
 }
@@ -96,8 +95,10 @@ func (c *cachedResponse) withRequest(req *http.Request) *http.Response {
 	resp := &http.Response{}
 	resp.Request = req
 	resp.TransferEncoding = req.TransferEncoding
-	//resp.Header = c.header
 	resp.Header = make(http.Header)
+	for k, v := range c.header {
+		resp.Header[k] = v
+	}
 	resp.StatusCode = c.status
 	resp.Status = http.StatusText(c.status)
 	buf := bytes.NewBufferString(c.body)
@@ -113,7 +114,7 @@ func handleResponse(resp *http.Response, _ *goproxy.ProxyCtx) *http.Response {
 		body = string(raw)
 	}
 	cachedResp := &cachedResponse{
-		//header: resp.Header,
+		header: resp.Header,
 		status: resp.StatusCode,
 		body:   body,
 	}
