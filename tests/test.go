@@ -40,6 +40,7 @@ func main() {
 	http.HandleFunc("/cors", corsHandler)
 	http.HandleFunc("/libs", libsHandler)
 	http.HandleFunc("/aspNetErrorPage", aspNetErrorPage)
+	http.HandleFunc("/?token=in_the_url", func(w http.ResponseWriter, _ *http.Request) { forbidden(w) })
 
 	exposeFolder("tests/static/js/", "/assets/js/", true)
 	exposeFolder("tests/static/composer/", "/", true)
@@ -100,6 +101,9 @@ func notFound(w http.ResponseWriter) {
 
 func aspNetErrorPage(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Server", "Microsoft-IIS/10.0")
+	w.Header().Set("X-AspNet-Version", "18.0.23273.0")
+	w.Header().Set("X-Powered-By", "ASP.NET")
 	w.WriteHeader(http.StatusForbidden)
 	_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html>
