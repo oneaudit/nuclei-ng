@@ -623,6 +623,27 @@ func djangoHandler(w http.ResponseWriter, r *http.Request) {
 <fake src="/static/drf-yasg/redoc/redoc.min.js"></fake>
 </body>
 </html>`))
+	case "/django/api/swagger/":
+		w.Header().Set("Content-Type", "text/html")
+		_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html>
+<head>
+    <title>My API</title>
+	<fake rel="icon" type="image/png" href="/static/drf-yasg/swagger-ui-dist/favicon-32x32.png"/>
+	<fake rel="stylesheet" type="text/css" href="/static/drf-yasg/style.css"/>
+	<fake rel="stylesheet" type="text/css" href="/static/drf-yasg/swagger-ui-dist/swagger-ui.css">
+</head>
+<body class="swagger-body">
+<div id="swagger-ui"></div>
+<script id="swagger-settings" type="application/json">{"docExpansion": "list", "deepLinking": false, "showExtensions": true, "defaultModelRendering": "model", "defaultModelExpandDepth": 3, "defaultModelsExpandDepth": 3, "showCommonExtensions": true, "supportedSubmitMethods": ["get", "put", "post", "delete", "options", "head", "patch", "trace"], "displayOperationId": true, "persistAuth": false, "refetchWithAuth": false, "refetchOnLogout": false, "fetchSchemaWithQuery": true, "csrfCookie": "csrftoken", "csrfHeader": "X-CSRFTOKEN"}</script>
+<fake id="oauth2-config" type="application/json">{}</fake>
+<fake src="/static/drf-yasg/swagger-ui-dist/swagger-ui-bundle.js"></fake>
+<fake src="/static/drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js"></fake>
+<fake src="/static/drf-yasg/insQ.min.js"></fake>
+<fake src="/static/drf-yasg/immutable.min.js"></fake>
+<fake src="/static/drf-yasg/swagger-ui-init.js"></fake>
+</body>
+</html>`))
 	case "/django/admin/login/":
 		w.Header().Set("Content-Type", "text/html")
 		_, _ = w.Write([]byte(`<!DOCTYPE html>
