@@ -40,6 +40,7 @@ func main() {
 	http.HandleFunc("/cors", corsHandler)
 	http.HandleFunc("/libs", libsHandler)
 	http.HandleFunc("/aspNetErrorPage", aspNetErrorPage)
+	http.HandleFunc("/django/", djangoHandler)
 	http.HandleFunc("/?token=in_the_url", func(w http.ResponseWriter, _ *http.Request) { forbidden(w) })
 
 	exposeFolder("tests/static/js/", "/assets/js/", true)
@@ -579,6 +580,112 @@ func corsHandler(w http.ResponseWriter, r *http.Request) {
 		</body>
 		</html>
 	`, origin, r.Header.Get("Cookie"))
+}
+
+func djangoHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/django/":
+		w.Header().Set("Content-Type", "text/html")
+		_, _ = w.Write([]byte(``))
+	case "/django/api/":
+		w.Header().Set("Content-Type", "text/html")
+		_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html>
+<head>
+<title>Hello World - Django REST framework</title>
+</head>
+<body>
+<a class='navbar-brand' rel="nofollow" href='https://www.django-rest-framework.org/'>Django REST framework</a>
+<!-- SNIP -->
+<script type="application/json" id="drf_csrf">
+        {
+          "csrfHeaderName": "X-CSRFTOKEN",
+          "csrfToken": ""
+        }
+      </script>
+      <fake src="/static/rest_framework/js/default.js"></fake>
+  </body>
+</html>`))
+	case "/django/api/redoc/":
+		w.Header().Set("Content-Type", "text/html")
+		_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html>
+<head>
+    <title>My API</title>
+	<fake rel="icon" type="image/png" href="/static/drf-yasg/redoc/redoc-logo.png"/>
+    <fake rel="stylesheet" type="text/css" href="/static/drf-yasg/style.css"/>
+</head>
+<body>
+<div id="redoc-placeholder"></div>
+<script id="redoc-settings" type="application/json">{"lazyRendering": false, "hideHostname": false, "expandResponses": "all", "pathInMiddlePanel": false, "nativeScrollbars": false, "requiredPropsFirst": false, "fetchSchemaWithQuery": true}</script>
+<fake src="/static/drf-yasg/insQ.min.js"></fake>
+<fake src="/static/drf-yasg/redoc-init.js"></fake>
+<fake src="/static/drf-yasg/redoc/redoc.min.js"></fake>
+</body>
+</html>`))
+	case "/django/admin/login/":
+		w.Header().Set("Content-Type", "text/html")
+		_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html>
+<head>
+<title>Log in | Django site admin</title>
+</head>
+<body>
+<div id="site-name">
+<a href="/admin/">Django administration</a>
+<form action="/admin/login/?next=/admin/" method="post" id="login-form">
+<input type="hidden" name="csrfmiddlewaretoken" value="">
+<label for="id_username" class="required">Username:</label>
+<input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+<label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+<input type="hidden" name="next" value="/admin/">
+<input type="submit" value="Log in">
+</form>
+</div>
+</body>
+</html>`))
+	default:
+		w.Header().Set("Content-Type", "text/html")
+		_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Page not found at </title>
+</head>
+<body>
+<main id="info">
+      <p>
+      Using the URLconf defined in <code>myproject.urls</code>,
+      Django tried these URL patterns, in this order:
+      </p>
+      <ol>
+          <li>
+              <code>
+                admin/
+              </code>
+          </li>
+          <li>
+              <code>
+                api/redoc/
+                [name='redoc']
+              </code>
+          </li>
+      </ol>
+      <p>
+          The current path, <code></code>,
+        didn't match any of these.
+      </p>
+  </main>
+  <footer id="explanation">
+    <p>
+      You're seeing this error because you have <code>DEBUG = True</code> in
+      your Django settings file. Change that to <code>False</code>, and Django
+      will display a standard 404 page.
+    </p>
+  </footer>
+</body>
+</html>
+`))
+	}
 }
 
 func libsHandler(w http.ResponseWriter, r *http.Request) {
