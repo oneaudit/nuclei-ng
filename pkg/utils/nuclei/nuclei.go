@@ -46,9 +46,9 @@ func ExecuteCommand(options *types.Options, tags types.Tag, specification *opena
 	args = append(args, "-im", "openapi", "-list", tempFile.Name())
 	args = append(args, "-var", "ServerRoot="+specification.Servers[0].URL)
 
-	if tags == types.WordPress {
+	if tags == types.WordPress || tags == types.Django {
 		// Load a specific workflow that will gradually enable tags
-		args = append(args, "-w", "workflows/wordpress.yaml")
+		args = append(args, "-w", string("workflows/"+tags+".yaml"))
 		//args = append(args, "-tags", "ignoreall")
 	} else {
 		// Load all templates while filtering them using tags
