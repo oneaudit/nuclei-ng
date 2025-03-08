@@ -89,7 +89,7 @@ func exposeFolder(folderToExpose string, exposurePath string, recurse bool) {
 
 func notFound(w http.ResponseWriter) {
 	// If no other handler matches, serve 404
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusNotFound)
 	_, _ = w.Write([]byte(`<html>
 <head><title>404 Not Found</title></head>
@@ -101,7 +101,7 @@ func notFound(w http.ResponseWriter) {
 }
 
 func aspNetErrorPage(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("Server", "Microsoft-IIS/10.0")
 	w.Header().Set("X-AspNet-Version", "18.0.23273.0")
 	w.Header().Set("X-Powered-By", "ASP.NET")
@@ -215,7 +215,7 @@ This error page might contain sensitive information because ASP.NET is configure
 
 func forbidden(w http.ResponseWriter) {
 	// If no other handler matches, serve 404
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusForbidden)
 }
 
@@ -243,6 +243,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		"/cors",
 		"/libs",
 		"/aspNetErrorPage",
+		"/django/",
 	}
 	tmpl, err := template.New("index").Parse(`
 <!DOCTYPE html>
@@ -322,27 +323,27 @@ Contact: security[at]example.com`
 
 func nginxHeaderHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Server", "nginx/1.33.7")
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("Hello, World! #Nginx"))
 }
 
 func apacheHeaderHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Server", "Apache/2.4.41")
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("Hello, World! #Apache"))
 }
 
 func phpHeaderHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("Server", "Apache/2.4.41 (Debian) PHP/7.4.0")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("Hello, World! #PHP"))
 }
 
 func emptyIconsFolder(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("server", "Jetty(12.0.17.v20201231)")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`<a href="robots.txt">old robots.txt file</a>`))
@@ -361,20 +362,20 @@ func nonGenericRobotsTxtHandler(w http.ResponseWriter, _ *http.Request) {
 func inlineCommentHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("X-Powered-By", "PHP/7.4.0")
 	http.SetCookie(w, &http.Cookie{Name: "PHPSESSID", Value: "session_id_here"})
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("<!-- my secret password is: toto123 -->"))
 }
 
 func multilinesCommentHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("<link rel=\"icon\" href=\"/secret.ico\" type=\"image/x-icon\">" +
 		"<!-- \n\n\n\nmy secret password is:\n\n\n\n toto123\n\n-->"))
 }
 
 func simpleFormHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
 	<form action="#" method="GET">
@@ -414,7 +415,7 @@ func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
 
 	default:
 		// Handle non-POST methods
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.WriteHeader(http.StatusNotFound)
 		_, _ = w.Write([]byte(`<html>
 <head><title>404 Not Found</title></head>
@@ -427,7 +428,7 @@ func ngHiddenSpyHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func cookieFormHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
 	<form action="/ng_hidden_login" method="POST">
@@ -444,7 +445,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 		username := r.FormValue("username")
 
 		if username == "" {
-			w.Header().Set("Content-Type", "text/html")
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
 			w.WriteHeader(http.StatusBadRequest)
 			_, _ = w.Write([]byte(`<!doctype html>
 <html lang="en">
@@ -458,7 +459,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 
 		encodedUsername := base64.StdEncoding.EncodeToString([]byte(username))
 		http.SetCookie(w, &http.Cookie{Name: "user", Value: encodedUsername})
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte(fmt.Sprintf("Logged in as: %s. <a href='/empty_page/1337'>Logout</a>", username)))
 	case "OPTIONS":
@@ -470,7 +471,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	default:
 		// Handle non-POST methods
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.WriteHeader(http.StatusNotFound)
 		_, _ = w.Write([]byte(`<html>
 <head><title>404 Not Found</title></head>
@@ -483,7 +484,7 @@ func ngHiddenLoginHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsEventLinkHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("X-Entrypoint", "/empty_page/1234/")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
@@ -492,7 +493,7 @@ func jsEventLinkHandler(w http.ResponseWriter, _ *http.Request) {
 }
 
 func jsEventLinkIdHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
 		<button id="redirectButton">Go to Empty Page 2</button>
@@ -505,7 +506,7 @@ func jsEventLinkIdHandler(w http.ResponseWriter, _ *http.Request) {
 }
 
 func jsExternalLinkIdHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`
 		<button id="redirectButton">Go to Empty Page 4</button>
@@ -515,13 +516,13 @@ func jsExternalLinkIdHandler(w http.ResponseWriter, _ *http.Request) {
 
 func secretJettyDirectory(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/secret/" {
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.WriteHeader(http.StatusNotFound)
 		_, _ = w.Write([]byte(`"404 page not found"`))
 		return
 	}
 
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html lang="en">
@@ -543,7 +544,7 @@ func secretJettyDirectory(w http.ResponseWriter, r *http.Request) {
 }
 
 func emptyPageHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	counterID := r.URL.Path[len("/empty_page/"):]
 	_, _ = w.Write([]byte(fmt.Sprintf("Empty page: %s", counterID)))
@@ -567,7 +568,7 @@ func corsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_, _ = fmt.Fprintf(w, `
 		<!DOCTYPE html>
 		<html>
@@ -585,10 +586,73 @@ func corsHandler(w http.ResponseWriter, r *http.Request) {
 func djangoHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/django/":
-		w.Header().Set("Content-Type", "text/html")
-		_, _ = w.Write([]byte(``))
+		if strings.HasPrefix(r.Host, "localhost") {
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			_, _ = w.Write([]byte(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DisallowedHost 
+       at /</title> 
+</head>
+<body>
+  <pre class="exception_value">Invalid HTTP_HOST header: . You may need to add  to ALLOWED_HOSTS.</pre>
+  <table class="meta">
+    <tr><th scope="row">Django Version:</th><td>5.0.0</td></tr>
+    <tr><th scope="row">Python Version:</th><td>3.09.0</td></tr>
+  </table>
+
+<div id="traceback">
+  <h2>Traceback <span class="commands"><a href="#" onclick="return switchPastebinFriendly(this);">Switch to copy-and-paste view</a></span></h2>
+  <div id="browserTraceback">
+    <ul class="traceback">
+Django Version: 5.0.0
+Python Version: 3.09.0
+Installed Applications:
+[&#x27;django.contrib.admin&#x27;,
+ &#x27;django.contrib.auth&#x27;,
+ &#x27;django.contrib.contenttypes&#x27;,
+ &#x27;django.contrib.sessions&#x27;,
+ &#x27;django.contrib.messages&#x27;,
+ &#x27;django.contrib.staticfiles&#x27;,
+ &#x27;rest_framework&#x27;,
+ &#x27;drf_yasg&#x27;,
+ &#x27;myapp&#x27;]
+
+        <tr>
+          <td>OS</td>
+          <td class="code"><pre>&#x27;Windows_NT&#x27;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ALLOWED_HOSTS</td>
+          <td class="code"><pre>[&#x27;django.sec2&#x27;]</pre></td>
+        </tr>
+
+        <tr>
+          <td>DATABASES</td>
+          <td class="code"><pre>{&#x27;default&#x27;: {&#x27;ATOMIC_REQUESTS&#x27;: False,
+             &#x27;ENGINE&#x27;: &#x27;django.db.backends.sqlite3&#x27;,
+		     </pre></td>
+        </tr>
+</div>
+<p>
+You’re seeing this error because you have <code>DEBUG = True</code> in your
+Django settings file. Change that to <code>False</code>, and Django will
+display a standard page generated by the handler for this status code.
+</p>
+</body>
+</html>`))
+			return
+		}
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = w.Write([]byte(`<input type="hidden" name="csrfmiddlewaretoken" value="">
+<a href="/django/api/">API</a>
+<a href="/django/api/swagger/">Swagger</a>
+<a href="/django/api/redoc/">Redoc</a>
+<a href="/django/install/">Install</a>
+<a href="/django/admin/login/">Admin</a>`))
 	case "/django/api/":
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html>
 <head>
@@ -607,7 +671,7 @@ func djangoHandler(w http.ResponseWriter, r *http.Request) {
   </body>
 </html>`))
 	case "/django/api/redoc/":
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html>
 <head>
@@ -624,7 +688,7 @@ func djangoHandler(w http.ResponseWriter, r *http.Request) {
 </body>
 </html>`))
 	case "/django/api/swagger/":
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html>
 <head>
@@ -645,7 +709,7 @@ func djangoHandler(w http.ResponseWriter, r *http.Request) {
 </body>
 </html>`))
 	case "/django/admin/login/":
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html>
 <head>
@@ -666,7 +730,7 @@ func djangoHandler(w http.ResponseWriter, r *http.Request) {
 </body>
 </html>`))
 	default:
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -710,7 +774,7 @@ func djangoHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func libsHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("Content-Security-Policy", "default-src 'none'")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`<!DOCTYPE html>
