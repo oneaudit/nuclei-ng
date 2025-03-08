@@ -358,27 +358,60 @@ This will display the following results on the test GLPI instance.
 [source-map-js] [http] [low] Found on 8 URLs [//public/lib/leaflet.min.js, //public/lib/photoswipe.min.js, /js/planning.js, ...]
 ```
 
+This will display the following results on the test Django instance.
+
+```
+                     __     _
+   ____  __  _______/ /__  (_)
+  / __ \/ / / / ___/ / _ \/ /
+ / / / / /_/ / /__/ /  __/ /
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.1.2
+
+		github.com/oneaudit
+
+[INF] Running nuclei with tags: [django] against 7 targets
+[INF] Temporary file created: /tmp/swagger.yaml4107642740
+[django-debug] [http] [medium] Found on 5 URLs [/django/, /django/admin/login/, /django/api/, ...]
+[django-debug:database] [http] [medium] Found on 1 URLs ["sqlite3"] [/django/admin/login/]
+[django-debug:django-version] [http] [medium] Found on 1 URLs ["5.0.0"] [/django/admin/login/]
+[django-debug:paths] [http] [medium] Found on 2 URLs ["admin/"] [/django/admin/, /django/install/]
+[django-debug:paths] [http] [medium] Found on 2 URLs ["api/redoc/"] [/django/admin/, /django/install/]
+[django-debug:python-version] [http] [medium] Found on 1 URLs ["3.09.0"] [/django/admin/login/]
+[django-debug:variables] [http] [medium] Found on 1 URLs ["ALLOWED_HOSTS"] [/django/admin/login/]
+[django-debug:variables] [http] [medium] Found on 1 URLs ["DATABASES"] [/django/admin/login/]
+[django-debug:variables] [http] [medium] Found on 1 URLs ["OS"] [/django/admin/login/]
+
+[INF] Running nuclei with tags: [generic] against 7 targets
+[INF] Temporary file created: /tmp/swagger.yaml465723831
+[default-pages:django-install] [http] [low] Found on 1 URLs [/django/]
+[http-missing-security-headers:content-security-policy] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
+[http-missing-security-headers:permissions-policy] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
+[http-missing-security-headers:referrer-policy] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
+[http-missing-security-headers:strict-transport-security] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
+[http-missing-security-headers:x-content-type-options] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
+[known-404-page:django] [http] [info] Found on 4 URLs [/django/PAGENOTFOUND, /django/PAGENOTFOUND/, /django/admin/, /django/install/]
+[known-500-page:django] [http] [info] Found on 1 URLs [/django/admin/login/]
+[server-errors:django] [http] [info] Found on 2 URLs [/django/admin/, /django/install/]
+[tech-detect:django] [http] [info] Found on 1 URLs [/django/admin/login/]
+
+[INF] Running nuclei with tags: [html] against 7 targets
+[INF] Temporary file created: /tmp/swagger.yaml833361855
+[form-detect] [http] [info] Found on 1 URLs ["/django/admin/login/?next=/admin/"] [/django/admin/login/]
+[html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- SNIP -->"] [/django/api/]
+```
+
 ## Current issues
 
 When access to a route is blocked, but an alternative route works, common checks are not executed on the alternative route unless the route is added to the list.
 
-- [ ] Exploits are not executed
 - [ ] Jetty (Java), XXX (Python), WordPress (MySQL), etc.
 - [ ] MIA
 
 ```
-[open-redirect-detect:parameters] [javascript] [info] Found on 6 URLs ["redirect"] [/////index.php]
-[source-map-js] [http] [low] Found on 1 URLs [/assets/js/bundle.js.map]
 "Yoast SEO:24.5"
 "WordPress Site Editor"
 "WordPress Block Editor"
 SASS/SCSS
 .idea (path exposure, etc.)
 .twig
-```
-
-* [ ] Incorrect
-
-```
-[source-map-js] [http] [low] Found on 8 URLs [//public/lib/leaflet.min.js, //public/lib/photoswipe.min.js, /js/planning.js, ...]
 ```
