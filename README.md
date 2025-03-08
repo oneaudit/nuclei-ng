@@ -167,8 +167,8 @@ This will display the following results on the test WordPress instance.
 [form-detect] [http] [info] Found on 3 URLs ["http://wp.sec2/mysecretlogin/"] [/mysecretlogin/]
 [form-detect] [http] [info] Found on 1 URLs ["http://wp.sec2/wp-comments-post.php"] [/2025/02/14/bonjour-tout-le-monde/]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- #respond -->"] [/2025/02/14/bonjour-tout-le-monde/]
-[html-comments-detect] [javascript] [info] Found on 15 URLs ["<!-- / Yoast SEO plugin. -->"] [///mysecretlogin/]
-[html-comments-detect] [javascript] [info] Found on 15 URLs ["<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->"] [///mysecretlogin/]
+[html-comments-detect] [javascript] [info] Found on 15 URLs ["<!-- / Yoast SEO plugin. -->"] [/2025/02/]
+[html-comments-detect] [javascript] [info] Found on 15 URLs ["<!-- This site is optimized with the Yoast SEO plugin v24.5 - https://yoast.com/wordpress/plugins/seo/ -->"] [/2025/02/]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- generator="WordPress/6.7.2" -->"] [/wp-links-opml]
 
 [INF] Running nuclei with tags: [generic] against 90 targets
@@ -183,7 +183,7 @@ This will display the following results on the test WordPress instance.
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 93 URLs [/, /.wp-signup.swp, //, ...]
 [http-missing-security-headers:strict-transport-security] [http] [info] Found on 93 URLs [/, /.wp-signup.swp, //, ...]
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 93 URLs [/, /.wp-signup.swp, //, ...]
-[known-403-page:apache] [http] [info] Found on 11 URLs [/:, /wp-admin/css/, /wp-admin/images/, ...]
+[known-403-page:apache] [http] [info] Found on 12 URLs [/*, /:, /wp-admin/css/, ...]
 [known-404-page:apache] [http] [info] Found on 1 URLs [/wp-json/]
 [known-404-page:wordpress] [http] [info] Found on 7 URLs [///mysecretlogin/, //mysecretlogin/, /404/, ...]
 [known-500-page:wordpress] [http] [info] Found on 6 URLs [/.wp-signup.swp, /wp-config-sample.php, /wp-signup, ...]
@@ -192,9 +192,9 @@ This will display the following results on the test WordPress instance.
 [options-method-generic] [http] [info] Found on 30 URLs [//wp-admin/css/install.css, /LICENSE, /LICENSE.txt, ...]
 [options-method-non-generic] [javascript] [info] Found on 30 URLs ["POST"] [/wp-config.bak]
 [options-method-non-generic] [javascript] [info] Found on 28 URLs ["TRACE"] [/wp-config.bak]
-[php-errors] [http] [info] Found on 2 URLs ["Fatal error"] [/wp-settings, /wp-settings.php]
-[php-errors] [http] [info] Found on 1 URLs ["Stack trace:"] [/wp-content/debug.log]
 [robots-txt-non-generic] [http] [info] Found on 1 URLs ["673fe3c92956f2618d0d11e0a9f0be1023e8a63ca3fbe977816ced034e767534"] [/robots.txt]
+[server-errors:php] [http] [info] Found on 2 URLs [/wp-settings, /wp-settings.php]
+[stacktrace:generic] [http] [low] Found on 1 URLs [/wp-content/debug.log]
 [stacktrace:php] [http] [low] Found on 7 URLs [/.wp-signup.swp, /wp-settings, /wp-settings.php, ...]
 [tech-detect:apache] [http] [info] Found on 98 URLs [/, /.wp-signup.swp, //, ...]
 [tech-detect:gravatar] [http] [info] Found on 1 URLs [/2025/02/14/bonjour-tout-le-monde/]
@@ -204,6 +204,11 @@ This will display the following results on the test WordPress instance.
 [tech-version:mod_fcgid] [http] [info] Found on 98 URLs ["2.3.10"] [/, /.wp-signup.swp, //, ...]
 [tech-version:os] [http] [info] Found on 98 URLs ["Win64"] [/, /.wp-signup.swp, //, ...]
 [tech-version:php] [http] [info] Found on 98 URLs ["8.3.6"] [/, /.wp-signup.swp, //, ...]
+
+[INF] Running nuclei with tags: [javascript] against 2 targets
+[INF] Temporary file created: /tmp/swagger.yaml1590506295
+[javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.min.js==6.7.2"] [/wp-admin/js/password-strength-meter.min.js]
+[javascript-library] [javascript] [info] Found on 1 URLs ["user-profile.min.js==6.7.2"] [/wp-admin/js/user-profile.min.js]
 
 [INF] Running nuclei with tags: [jsext] against 9 targets
 [javascript-library] [code] [info] Found on 1 URLs ["a11y.min.js==unknown"] [/mysecretlogin/]
@@ -215,11 +220,6 @@ This will display the following results on the test WordPress instance.
 [javascript-library] [code] [info] Found on 1 URLs ["user-profile.min.js==unknown"] [/mysecretlogin/]
 [javascript-library] [code] [info] Found on 7 URLs ["view.min.js==unknown"] [/, /2025/, /2025/02/, ...]
 [javascript-library] [code] [info] Found on 1 URLs ["wp-util.min.js==unknown"] [/mysecretlogin/]
-
-[INF] Running nuclei with tags: [javascript] against 2 targets
-[INF] Temporary file created: /tmp/swagger.yaml1590506295
-[javascript-library] [javascript] [info] Found on 1 URLs ["password-strength-meter.min.js==6.7.2"] [/wp-admin/js/password-strength-meter.min.js]
-[javascript-library] [javascript] [info] Found on 1 URLs ["user-profile.min.js==6.7.2"] [/wp-admin/js/user-profile.min.js]
 
 [INF] Running nuclei with tags: [wordpress] against 90 targets
 [INF] Temporary file created: /tmp/swagger.yaml869050629
