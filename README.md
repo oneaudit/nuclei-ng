@@ -255,21 +255,21 @@ This will display the following results on the test GLPI instance.
    ____  __  _______/ /__  (_)
   / __ \/ / / / ___/ / _ \/ /
  / / / / /_/ / /__/ /  __/ /
-/_/ /_/\__,_/\___/_/\___/_/ ng  v1.1.2
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.2.0
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 83 targets
+[INF] Running nuclei with tags: [html] against 76 targets
 [INF] Temporary file created: /tmp/swagger.yaml1887317488
 [directory-listing] [http] [info] Found on 35 URLs [/bin/, /css/, /css/includes/, ...]
-[form-detect] [http] [info] Found on 3 URLs ["/front/login.php"] [/, /Index, /index]
+[form-detect] [http] [info] Found on 7 URLs ["/front/login.php"] [/, //index.php, /Index, ...]
 [form-detect] [http] [info] Found on 1 URLs ["/public/front/login.php"] [/public/]
 
 [INF] Running nuclei with tags: [generic] against 240 targets
 [INF] Temporary file created: /tmp/swagger.yaml3295598526
 [cookie-detect] [http] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/, ///front/locale.php, //front/locale.php, ...]
-[cookies-without-httponly] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/status/application/json.bak]
-[cookies-without-secure] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [//index.php]
+[cookies-without-httponly] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/front/cron.php]
+[cookies-without-secure] [javascript] [info] Found on 22 URLs ["glpi_8c1bab8cdfb8e857ff0e6290f00f8ed5"] [/status.php]
 [email-detect] [http] [info] Found on 2 URLs ["wowohoo@qq.com"] [//public/lib/fuzzy.min.js, /public/lib/fuzzy.min.js]
 [favicon-detect:glpi] [http] [info] Found on 1 URLs [/pics/favicon.ico]
 [http-missing-security-headers:content-security-policy] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
@@ -277,16 +277,15 @@ This will display the following results on the test GLPI instance.
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [http-missing-security-headers:strict-transport-security] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 241 URLs [/, ///front/locale.php, //front/locale.php, ...]
-[known-403-page:apache] [http] [info] Found on 6 URLs [/:, /js/"+CFG_GLPI.root_doc+e.original.url+", /js/"+CFG_GLPI.root_doc+el.original.url+", ...]
+[known-403-page:apache] [http] [info] Found on 7 URLs [/*, /:, /js/"+CFG_GLPI.root_doc+e.original.url+", ...]
 [known-404-page:apache] [http] [info] Found on 3 URLs [/PAGENOTFOUND, /PAGENOTFOUND/, /public/front/login.php]
 [license-file] [http] [info] Found on 2 URLs [/LICENSE, /license]
-[open-redirect-detect:detect] [javascript] [low] Found on 2 URLs ["domain"] [/front/locale.php]
+[open-redirect:detect] [javascript] [low] Found on 2 URLs ["domain"] [/front/locale.php]
 [options-method-generic] [http] [info] Found on 208 URLs [//js/common.min.js, //js/fileupload.min.js, //js/flatpickr_buttons_plugin.min.js, ...]
-[options-method-non-generic] [javascript] [info] Found on 208 URLs ["POST"] [/css/includes/components/_fileupload.scss]
-[options-method-non-generic] [javascript] [info] Found on 208 URLs ["TRACE"] [/css/includes/components/_fileupload.scss]
-[php-errors] [http] [info] Found on 1 URLs ["Fatal error"] [//front/locale.php]
-[php-errors] [http] [info] Found on 2 URLs ["uncaught exception"] [//public/lib/base.min.js, /public/lib/base.min.js]
+[options-method-non-generic] [javascript] [info] Found on 208 URLs ["POST"] [/public/lib/base.min.js]
+[options-method-non-generic] [javascript] [info] Found on 208 URLs ["TRACE"] [/public/lib/base.min.js]
 [readme-file] [http] [info] Found on 1 URLs [/README.md]
+[server-errors:php] [http] [info] Found on 3 URLs [//front/locale.php, //public/lib/base.min.js, /public/lib/base.min.js]
 [stacktrace:php] [http] [low] Found on 10 URLs [///front/locale.php, /status, /status.php, ...]
 [tech-detect:apache] [http] [info] Found on 243 URLs [/, ///front/locale.php, //front/locale.php, ...]
 [tech-detect:php] [http] [info] Found on 30 URLs [/, ///front/locale.php, //front/locale.php, ...]
