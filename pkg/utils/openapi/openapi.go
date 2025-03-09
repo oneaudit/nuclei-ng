@@ -21,8 +21,12 @@ func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.
 	for path, item := range specification.Paths.Map() {
 		// All URLs can use GENERIC templates
 		entries[types.Generic].Set(path, item)
-		entries[types.WordPress].Set(path, item)
-		entries[types.Django].Set(path, item)
+
+		// Add all workflows
+		for _, workflow := range types.AllWorkflows {
+			entries[workflow].Set(path, item)
+		}
+
 		ext := filepath.Ext(path)
 
 		// Files matching the HTML filter can use HTML templates

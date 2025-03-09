@@ -24,7 +24,7 @@ This will display the following results on the test instance.
    ____  __  _______/ /__  (_)
   / __ \/ / / / ___/ / _ \/ /
  / / / / /_/ / /__/ /  __/ /
-/_/ /_/\__,_/\___/_/\___/_/ ng  v1.1.2
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.2.0
 
 		github.com/oneaudit
 
@@ -371,25 +371,24 @@ This will display the following results on the test Django instance.
    ____  __  _______/ /__  (_)
   / __ \/ / / / ___/ / _ \/ /
  / / / / /_/ / /__/ /  __/ /
-/_/ /_/\__,_/\___/_/\___/_/ ng  v1.1.2
+/_/ /_/\__,_/\___/_/\___/_/ ng  v1.2.0
 
 		github.com/oneaudit
 
 [INF] Running nuclei with tags: [django] against 7 targets
 [INF] Temporary file created: /tmp/swagger.yaml4107642740
-[django-debug] [http] [medium] Found on 5 URLs [/django/, /django/admin/login/, /django/api/, ...]
+[django-admin-panel] [http] [info] Found on 2 URLs [/django/admin/login/]
 [django-debug:database] [http] [medium] Found on 1 URLs ["sqlite3"] [/django/admin/login/]
 [django-debug:django-version] [http] [medium] Found on 1 URLs ["5.0.0"] [/django/admin/login/]
-[django-debug:paths] [http] [medium] Found on 2 URLs ["admin/"] [/django/admin/, /django/install/]
-[django-debug:paths] [http] [medium] Found on 2 URLs ["api/redoc/"] [/django/admin/, /django/install/]
+[django-debug:endpoints] [http] [medium] Found on 7 URLs ["admin/"] [/django/PAGENOTFOUND/, /django/admin/, /django/admin/login/PAGENOTFOUND/, ...]
+[django-debug:endpoints] [http] [medium] Found on 7 URLs ["api/redoc/"] [/django/PAGENOTFOUND/, /django/admin/, /django/admin/login/PAGENOTFOUND/, ...]
 [django-debug:python-version] [http] [medium] Found on 1 URLs ["3.09.0"] [/django/admin/login/]
-[django-debug:variables] [http] [medium] Found on 1 URLs ["ALLOWED_HOSTS"] [/django/admin/login/]
-[django-debug:variables] [http] [medium] Found on 1 URLs ["DATABASES"] [/django/admin/login/]
-[django-debug:variables] [http] [medium] Found on 1 URLs ["OS"] [/django/admin/login/]
+[django-debug:variables] [http] [medium] Found on 1 URLs ["3 variables"] [/django/admin/login/]
 
 [INF] Running nuclei with tags: [generic] against 7 targets
 [INF] Temporary file created: /tmp/swagger.yaml465723831
 [default-pages:django-install] [http] [low] Found on 1 URLs [/django/]
+[file-inclusion:detect] [javascript] [low] Found on 1 URLs ["next"] [/django/admin/login/]
 [http-missing-security-headers:content-security-policy] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
 [http-missing-security-headers:permissions-policy] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
 [http-missing-security-headers:referrer-policy] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
