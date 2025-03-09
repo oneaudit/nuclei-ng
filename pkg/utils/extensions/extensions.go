@@ -27,10 +27,10 @@ func IsHTMLFile(extension string) bool {
 		return true
 	}
 
-	for _, htmlExt := range DefaultDenylist {
-		if strings.EqualFold(extension, htmlExt) {
-			return true
+	for _, nonHtmlExtension := range DefaultDenylist {
+		if strings.EqualFold(extension, nonHtmlExtension) {
+			return false
 		}
 	}
-	return false
+	return true
 }
