@@ -50,8 +50,9 @@ This will display the following results on the test instance.
 
 [INF] Running nuclei with tags: [generic] against 64 targets
 [INF] Temporary file created: /tmp/swagger.yaml747212024
-[composer-config:composer.json] [http] [low] Found on 2 URLs [/composer.json, /vendor/composer/installed.json]
-[composer-vendor] [http] [low] Found on 2 URLs [/vendor/autoload.php, /vendor/composer/installed.json]
+[composer:composer.json] [http] [low] Found on 2 URLs [/composer.json, /vendor/composer/installed.json]
+[composer:composer.phar] [http] [medium] Found on 1 URLs [/composer.phar]
+[composer:vendor] [http] [medium] Found on 2 URLs [/vendor/autoload.php, /vendor/composer/installed.json]
 [cookie-detect] [http] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
 [cookie-detect] [http] [info] Found on 1 URLs ["user"] [/ng_hidden_login]
 [cookies-without-httponly] [javascript] [info] Found on 1 URLs ["PHPSESSID"] [/comment]
