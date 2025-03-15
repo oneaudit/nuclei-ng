@@ -17,6 +17,7 @@ We have not modified, and do not intend to modify, the Nuclei source code.
 
 * 😎 Summarized output per template
 * 🗺️ Tagging per URL extension
+* 🐸️ Fetching missing information using `oneaudit:` from templates
 * 🚀 [TODO] Export results in formats similar to Nuclei
 
 We’ve added JavaScript additional utilities within the tool:
