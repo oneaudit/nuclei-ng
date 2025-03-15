@@ -34,7 +34,7 @@ func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.
 			entries[types.HTML].Set(path, item)
 		}
 
-		if strings.HasSuffix(ext, ".js") {
+		if strings.HasSuffix(ext, ".js") || strings.HasSuffix(ext, ".js.map") {
 			if extensions.IsPathCommonJSLibraryFile(path) {
 				// These files must not have been modified, right?
 			} else {

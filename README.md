@@ -11,6 +11,27 @@ nuclei-ng requires **Go 1.22.5+** to install successfully.
 CGO_ENABLED=1 go install github.com/oneaudit/nuclei-ng/cmd/nuclei-ng@latest
 ```
 
+## Features ⭐
+
+We have not modified, and do not intend to modify, the Nuclei source code.
+
+* 😎 Summarized output per template
+* 🗺️ Tagging per URL extension
+* ✨ [TODO] Export results in formats similar to Nuclei
+
+We’ve added JavaScript additional utilities within the tool:
+
+* 🔑 [TODO] JavaScript secret detection using [jsluice](https://github.com/BishopFox/jsluice)
+* 📦 JavaScript version detection for external files
+
+We’ve added an internal proxy server, which enables us to:
+
+* 🤠 [TODO] Replay responses from a CSV file
+* 🧪 Cache responses marked with `(proxy)`
+* 🤖 [TODO] Do not send requests marked with `(request)`
+
+This wrapper is designed to be used with DAST templates. A free, unmaintained public example can be found [here](https://github.com/oneaudit/nuclei-dast-templates).
+
 ## Usage 📚
 
 ```

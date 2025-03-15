@@ -101,10 +101,10 @@ func notFound(w http.ResponseWriter) {
 }
 
 func aspNetErrorPage(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Header().Set("Server", "Microsoft-IIS/10.0")
-	w.Header().Set("X-AspNet-Version", "18.0.23273.0")
-	w.Header().Set("X-Powered-By", "ASP.NET")
+	w.Header().Set("content-type", "text/html; charset=utf-8")
+	w.Header().Set("server", "Microsoft-IIS/10.0")
+	w.Header().Set("x-aspnet-version", "18.0.23273.0")
+	w.Header().Set("x-powered-by", "ASP.NET")
 	w.WriteHeader(http.StatusForbidden)
 	_, _ = w.Write([]byte(`<!DOCTYPE html>
 <html>
@@ -369,6 +369,7 @@ func inlineCommentHandler(w http.ResponseWriter, _ *http.Request) {
 
 func multilinesCommentHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Server", "Payara Server  2.2023.2 #badassfish")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("<link rel=\"icon\" href=\"/secret.ico\" type=\"image/x-icon\">" +
 		"<!-- \n\n\n\nmy secret password is:\n\n\n\n toto123\n\n-->"))

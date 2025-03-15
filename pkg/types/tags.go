@@ -10,18 +10,20 @@ const (
 	JsExt Tag = "jsext"
 
 	Django    Tag = "django"
+	GLPI      Tag = "glpi"
 	PHPBB     Tag = "phpbb"
 	Subrion   Tag = "subrion"
 	Umbraco   Tag = "umbraco"
 	WordPress Tag = "wordpress"
 )
 
-var AllTags = []Tag{
-	Generic, HTML, JavaScript,
-	JsExt,
-	Django, PHPBB, Subrion, Umbraco, WordPress,
-}
+var AllTags = append([]Tag{
+	Generic, HTML, JavaScript, JsExt,
+}, AllWorkflows...)
 
 var AllWorkflows = []Tag{
-	Django, PHPBB, Subrion, Umbraco, WordPress,
+	Django, GLPI,
+	PHPBB,
+	Subrion, Umbraco,
+	WordPress,
 }
