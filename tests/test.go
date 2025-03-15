@@ -217,6 +217,7 @@ func forbidden(w http.ResponseWriter) {
 	// If no other handler matches, serve 404
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusForbidden)
+	_, _ = w.Write([]byte("<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\n<p>You don't have permission to access this resource.</p>\n</body></html>\n"))
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {

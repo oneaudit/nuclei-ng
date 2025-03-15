@@ -22,7 +22,7 @@ We have not modified, and do not intend to modify, the Nuclei source code.
 We’ve added JavaScript additional utilities within the tool:
 
 * 🔑 [TODO] JavaScript secret detection using [jsluice](https://github.com/BishopFox/jsluice)
-* 📦 JavaScript version detection for external files
+* 📦 JavaScript version detection for externally hosted files
 
 We’ve added an internal proxy server, which enables us to:
 
@@ -49,7 +49,7 @@ This will display the following results on the test instance.
 
 		github.com/oneaudit
 
-[INF] Running nuclei with tags: [html] against 56 targets
+[INF] Running nuclei with tags: [html] against 46 targets
 [INF] Temporary file created: /tmp/swagger.yaml1269739532
 [cdn-detect:cdnjs] [http] [info] Found on 1 URLs [/libs]
 [cdn-detect:jquery-cdn] [http] [info] Found on 1 URLs [/libs]
@@ -91,9 +91,8 @@ This will display the following results on the test instance.
 [favicon-detect:Vue] [http] [info] Found on 1 URLs [/favicon.ico]
 [favicon-new:md5] [http] [info] Found on 1 URLs ["b7f5b488d0b802ed63ea4ffefbbb1d6d"] [/secret.ico]
 [favicon-new:mmh3] [http] [info] Found on 1 URLs ["1823185746"] [/secret.ico]
-[file-inclusion:detect] [javascript] [low] Found on 1 URLs ["redirect"] [/re]
 [git-config:config] [http] [medium] Found on 3 URLs [/.git/HEAD, /.git/config, /.git/index]
-[git-config:folder] [http] [medium] Found on 1 URLs [/.git/]
+[git-config:folder] [http] [medium] Found on 4 URLs [/.git/, /empty_page/.git/, /icons/.git/]
 [git-config:ignore] [http] [medium] Found on 1 URLs [/.gitignore]
 [git-config:logs] [http] [medium] Found on 1 URLs [/.git/logs/HEAD]
 [http-missing-security-headers:content-security-policy] [http] [info] Found on 63 URLs [/, /.git/, /.git/HEAD, ...]
@@ -103,8 +102,8 @@ This will display the following results on the test instance.
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 42 URLs [/, /.git/, /.git/logs/, ...]
 [http-suspicious-request-headers] [javascript] [info] Found on 1 URLs ["X-Api-Key: MYS3cr374P1K3y"] [/ng_hidden_spy]
 [http-suspicious-response-headers] [javascript] [info] Found on 1 URLs ["X-Entrypoint: /empty_page/1234/"] [/js-event-link]
+[known-403-page:apache] [http] [info] Found on 3 URLs [/.git/, /assets/js/, /vendor]
 [known-403-page:aspnet] [http] [info] Found on 1 URLs [/aspNetErrorPage]
-[known-403-page:custom] [http] [info] Found on 3 URLs [/.git/, /assets/js/, /vendor]
 [known-404-page:custom] [http] [info] Found on 7 URLs [/.git/logs/, /.well-known/, /PAGENOTFOUND, ...]
 [open-redirect:detect] [javascript] [low] Found on 1 URLs ["redirect"] [/re]
 [open-redirect:exploit] [http] [low] Found on 1 URLs [query:redirect] [GET] [/]
@@ -131,10 +130,11 @@ This will display the following results on the test instance.
 [tech-version:apache] [http] [info] Found on 2 URLs ["2.4.41"] [/apache-v, /php-v]
 [tech-version:aspnet] [http] [info] Found on 1 URLs ["18.0.23273.0"] [/aspNetErrorPage]
 [tech-version:aspnet_framework] [http] [info] Found on 1 URLs ["4.7.03056"] [/aspNetErrorPage]
-[tech-version:iis] [http] [info] Found on 1 URLs ["10.0"] [/aspNetErrorPage]
 [tech-version:jetty] [http] [info] Found on 5 URLs ["12.0.17.v20201231"] [/icons/, /icons/.robots.txt.swp, /icons/robots.bak, ...]
+[tech-version:msiis] [http] [info] Found on 1 URLs ["10.0"] [/aspNetErrorPage]
 [tech-version:nginx] [http] [info] Found on 1 URLs ["1.33.7"] [/nginx-v]
 [tech-version:os] [http] [info] Found on 1 URLs ["Debian"] [/php-v]
+[tech-version:payara-server] [http] [info] Found on 1 URLs ["2.2023.2"] [/comment-long]
 [tech-version:php] [http] [info] Found on 2 URLs ["7.4.0"] [/comment, /php-v]
 [tech-version:python] [http] [info] Found on 2 URLs ["3.10.2"] [/]
 [tech-version:werkzeug] [http] [info] Found on 2 URLs ["1.5.7"] [/]

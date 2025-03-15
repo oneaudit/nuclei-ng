@@ -36,6 +36,10 @@ func CreateProxy(options *types.Options) *goproxy.ProxyHttpServer {
 }
 
 func handleRequest(req *http.Request, _ *goproxy.ProxyCtx) (*http.Request, *http.Response) {
+	if strings.HasSuffix(req.UserAgent(), "(request)") {
+		return req, goproxy.NewResponse(req, goproxy.ContentTypeText, http.StatusOK, "")
+	}
+
 	if strings.HasSuffix(req.UserAgent(), "(proxy)") {
 		req.Header.Set("User-Agent", defaultUserAgent)
 
