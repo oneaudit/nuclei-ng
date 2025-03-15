@@ -17,18 +17,19 @@ We have not modified, and do not intend to modify, the Nuclei source code.
 
 * 😎 Summarized output per template
 * 🗺️ Tagging per URL extension
-* ✨ [TODO] Export results in formats similar to Nuclei
+* 🚀 [TODO] Export results in formats similar to Nuclei
 
 We’ve added JavaScript additional utilities within the tool:
 
 * 🔑 [TODO] JavaScript secret detection using [jsluice](https://github.com/BishopFox/jsluice)
-* 📦 JavaScript version detection for externally hosted files
+* 🔍 JavaScript URL-based version detection for out-of-scope URLs
+* 🐲 [TODO] JavaScript tampering detection
 
 We’ve added an internal proxy server, which enables us to:
 
 * 🤠 [TODO] Replay responses from a CSV file
-* 🧪 Cache responses marked with `(proxy)`
-* 🤖 [TODO] Do not send requests marked with `(request)`
+* 🤖 Cache responses marked with `(proxy)`
+* 🧪 Do not send requests marked with `(request)`
 
 This wrapper is designed to be used with DAST templates. A free, unmaintained public example can be found [here](https://github.com/oneaudit/nuclei-dast-templates).
 
@@ -91,6 +92,7 @@ This will display the following results on the test instance.
 [favicon-detect:Vue] [http] [info] Found on 1 URLs [/favicon.ico]
 [favicon-new:md5] [http] [info] Found on 1 URLs ["b7f5b488d0b802ed63ea4ffefbbb1d6d"] [/secret.ico]
 [favicon-new:mmh3] [http] [info] Found on 1 URLs ["1823185746"] [/secret.ico]
+[file-inclusion:detect] [javascript] [low] Found on 1 URLs ["redirect"] [/re]
 [git-config:config] [http] [medium] Found on 3 URLs [/.git/HEAD, /.git/config, /.git/index]
 [git-config:folder] [http] [medium] Found on 4 URLs [/.git/, /empty_page/.git/, /icons/.git/]
 [git-config:ignore] [http] [medium] Found on 1 URLs [/.gitignore]
