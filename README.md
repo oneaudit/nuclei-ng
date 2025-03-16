@@ -399,6 +399,8 @@ This will display the following results on the test Django instance.
 [django-debug:endpoints] [http] [medium] Found on 7 URLs ["api/redoc/"] [/django/PAGENOTFOUND/, /django/admin/, /django/admin/login/PAGENOTFOUND/, ...]
 [django-debug:python-version] [http] [medium] Found on 1 URLs ["3.09.0"] [/django/admin/login/]
 [django-debug:variables] [http] [medium] Found on 1 URLs ["3 variables"] [/django/admin/login/]
+[tech-detect:django] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
+[tech-detect:python] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
 
 [INF] Running nuclei with tags: [generic] against 7 targets
 [INF] Temporary file created: /tmp/swagger.yaml465723831
@@ -411,7 +413,7 @@ This will display the following results on the test Django instance.
 [http-missing-security-headers:x-content-type-options] [http] [info] Found on 8 URLs [/django/, /django/admin/, /django/admin/login/, ...]
 [known-404-page:django] [http] [info] Found on 4 URLs [/django/PAGENOTFOUND, /django/PAGENOTFOUND/, /django/admin/, /django/install/]
 [known-500-page:django] [http] [info] Found on 1 URLs [/django/admin/login/]
-[server-errors:django] [http] [info] Found on 2 URLs [/django/admin/, /django/install/]
+[server-errors:django] [http] [info] Found on 3 URLs [/django/admin/, /django/admin/login/, /django/install/]
 [tech-detect:django] [http] [info] Found on 1 URLs [/django/admin/login/]
 
 [INF] Running nuclei with tags: [html] against 7 targets
