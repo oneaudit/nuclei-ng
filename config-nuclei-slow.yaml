@@ -1,0 +1,5 @@
+# My Local WordPress is not stable
+# We need a very slow rate
+rate-limit: 10
+timeout: 20
+retries: 1
