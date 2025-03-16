@@ -14,7 +14,7 @@ import (
 
 func CategorizeRoutesByTags(specification *openapi3.T) (map[types.Tag]*openapi3.Paths, error) {
 	var entries = make(map[types.Tag]*openapi3.Paths)
-	for _, tag := range types.AllTags {
+	for _, tag := range types.AllTagsAndWorkflows {
 		entries[tag] = &openapi3.Paths{}
 	}
 

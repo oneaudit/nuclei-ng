@@ -17,13 +17,24 @@ const (
 	WordPress Tag = "wordpress"
 )
 
-var AllTags = append([]Tag{
+var AllTags = []Tag{
 	Generic, HTML, JavaScript, JsExt,
-}, AllWorkflows...)
+}
+
+var AllTagsAndWorkflows = append(append([]Tag{}, AllTags...), AllWorkflows...)
 
 var AllWorkflows = []Tag{
 	Django, GLPI,
 	PHPBB,
 	Subrion, Umbraco,
 	WordPress,
+}
+
+func (t Tag) IsWorkflow() bool {
+	for _, workflow := range AllWorkflows {
+		if t == workflow {
+			return true
+		}
+	}
+	return false
 }

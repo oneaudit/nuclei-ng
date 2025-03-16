@@ -43,6 +43,8 @@ func readFlags() (*goflags.FlagSet, error) {
 
 	flagSet.CreateGroup("config", "Configuration",
 		flagSet.StringVar(&cfgFile, "config", "", "path to the nuclei-ng configuration file"),
+		flagSet.StringSliceVarP(&options.NucleiTags, "tags", "nt", nil, "allowed tags. All tags are allowed if empty.", goflags.CommaSeparatedStringSliceOptions),
+		flagSet.StringSliceVarP(&options.NucleiWorkflows, "workflows", "nw", nil, "allowed workflows. All workflows are allowed if empty.", goflags.CommaSeparatedStringSliceOptions),
 	)
 
 	flagSet.CreateGroup("output", "Output",

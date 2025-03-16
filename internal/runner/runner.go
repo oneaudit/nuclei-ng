@@ -57,6 +57,10 @@ func Execute(options *types.Options) error {
 			continue
 		}
 
+		if !options.IsTagAllowed(tags) {
+			continue
+		}
+
 		gologger.Info().Msgf("Running nuclei with tags: [%v] against %d targets\n", tags, paths.Len())
 
 		var endpointsMap map[string]*nucleiutil.ParsedEvent
