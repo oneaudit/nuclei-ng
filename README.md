@@ -419,19 +419,3 @@ This will display the following results on the test Django instance.
 [form-detect] [http] [info] Found on 1 URLs ["/django/admin/login/?next=/admin/"] [/django/admin/login/]
 [html-comments-detect] [javascript] [info] Found on 1 URLs ["<!-- SNIP -->"] [/django/api/]
 ```
-
-## Current issues
-
-When access to a route is blocked, but an alternative route works, common checks are not executed on the alternative route unless the route is added to the list.
-
-- [ ] Jetty (Java), XXX (Python), WordPress (MySQL), etc.
-- [ ] MIA
-
-```
-"Yoast SEO:24.5"
-"WordPress Site Editor"
-"WordPress Block Editor"
-SASS/SCSS
-.idea (path exposure, etc.)
-.twig
-```
