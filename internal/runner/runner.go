@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/getkin/kin-openapi/openapi3"
 	nucleiinternal "github.com/oneaudit/nuclei-ng/internal/nuclei"
+	"github.com/oneaudit/nuclei-ng/pkg/api"
 	"github.com/oneaudit/nuclei-ng/pkg/javascript"
 	"github.com/oneaudit/nuclei-ng/pkg/types"
 	nucleiutil "github.com/oneaudit/nuclei-ng/pkg/utils/nuclei"
@@ -26,7 +27,7 @@ func Execute(options *types.Options) error {
 		return nil
 	}
 
-	if err := validateOptions(options); err != nil {
+	if err := api.ValidateOptions(options); err != nil {
 		return errorutil.NewWithErr(err).Msgf("could not validate options")
 	}
 

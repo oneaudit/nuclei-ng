@@ -1,4 +1,4 @@
-package runner
+package api
 
 import (
 	"github.com/oneaudit/nuclei-ng/pkg/types"
@@ -7,7 +7,25 @@ import (
 	"os/exec"
 )
 
-func validateOptions(options *types.Options) error {
+func CreateDefaultOptionsFromFile(cfgFile string) (*types.Options, error) {
+	cfgFileOpts := ""
+	cfgOptions := &types.Options{}
+	flagSet := MakeFlagSet(cfgOptions, &cfgFileOpts)
+
+	// Takes precedence over the parameter
+	if cfgFile != "" {
+		cfgFileOpts = cfgFile
+	}
+
+	if cfgFileOpts != "" {
+		if err := flagSet.MergeConfigFile(cfgFileOpts); err != nil {
+			return nil, errorutil.NewWithErr(err).Msgf("could not read config file")
+		}
+	}
+	return cfgOptions, nil
+}
+
+func ValidateOptions(options *types.Options) error {
 	cmd := exec.Command("nuclei", "-version")
 	err := cmd.Run()
 	if err != nil {
@@ -27,6 +45,5 @@ func validateOptions(options *types.Options) error {
 			}
 		}
 	}
-
 	return nil
 }
