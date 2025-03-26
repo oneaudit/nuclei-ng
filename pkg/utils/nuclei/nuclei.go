@@ -110,8 +110,10 @@ type ParsedEvent struct {
 	Count     int                `json:"count"`
 }
 
-func ParseResult(result string) map[string]*ParsedEvent {
-	endpointsMap := make(map[string]*ParsedEvent)
+type EventMap = map[string]*ParsedEvent
+
+func ParseResult(result string) EventMap {
+	endpointsMap := make(EventMap)
 
 	lines := strings.Split(result, "\n")
 	for _, line := range lines {
@@ -178,6 +180,18 @@ func ParseResult(result string) map[string]*ParsedEvent {
 	}
 
 	return endpointsMap
+}
+
+func MergeResults(src EventMap, dest EventMap) {
+	for k, v := range src {
+		if _, ok := dest[k]; !ok {
+			dest[k] = v
+			continue
+		}
+
+		dest[k].Count += v.Count
+		dest[k].Endpoints = append(dest[k].Endpoints, v.Endpoints...)
+	}
 }
 
 func extractEndpoint(result *output.ResultEvent, value *ParsedEvent) string {
